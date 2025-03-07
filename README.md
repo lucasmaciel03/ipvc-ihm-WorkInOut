@@ -1,12 +1,9 @@
 <br />
 <p align="center">
   <div style="display: flex; justify-content: center; align-items: center;">
-    <a style="margin-right: 1em;">
-      <img src="https://www.ipvc.pt/wp-content/uploads/2020/11/logo_ipvc_svg.svg" alt="Logo" width="auto" height="50" style="background-color: white; border-radius: 5px; padding: 10px;">
-    </a>
-    <a>
-      <img src="src/assets/icon/favicon.svg" width="auto" height="100" style="padding: 10px;">
-    </a>
+        <p align="center">
+        <img src="src/assets/icon/favicon.svg" alt="WorkInOut Logo" width="100">
+    </p>
   </div>
 
   <h1 align="center">Instituto Politécnico de Viana do Castelo</h1>
