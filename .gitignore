@@ -1,0 +1,61 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Capacitor/Cordova
+android/
+ios/
+platforms/
+plugins/
+
+# Build artifacts
+www/
+dist/
+.DS_Store
+.idea/
+.vscode/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Ionic specific files
+.vscode/
+*.sourcemaps.js
+
+# Logs
+*.log
+
+# MacOS files
+*.DS_Store
+
+# Editor backups
+*.swp
+*.swo
+*.bak
+
+# Ionic State Files
+.project
+.classpath
+.settings/
+
+# Capacitor config
+capacitor.config.json
+capacitor.config.ts
+
+# Angular specific files
+aot/
+bazel-out/
+coverage/
+es5/
+es2015/
+fesm2015/
+fesm5/
+ivy_ngcc/
+ngcc/
+node_modules/
+.tmp/
+.angular/

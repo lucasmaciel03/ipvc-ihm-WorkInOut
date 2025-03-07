@@ -1,0 +1,7 @@
+{
+  "name": "WorkInOut",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
