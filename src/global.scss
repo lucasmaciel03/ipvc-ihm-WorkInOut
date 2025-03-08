@@ -11,6 +11,7 @@
 
 /* Theme variables */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,7 +42,7 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 :root {
-  --font-title: 'Bebas Neue', sans-serif;
+  --font-title: 'Anton', sans-serif;
   --font-body: 'Poppins', sans-serif;
 }
 

@@ -11,7 +11,7 @@ export class StartPage {
   constructor(private navCtrl: NavController) {}
 
   getStarted() {
-    this.navCtrl.navigateForward('/home');
+    this.navCtrl.navigateForward('/login');
   }
 
   signUp() {
