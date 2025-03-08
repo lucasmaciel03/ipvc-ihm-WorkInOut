@@ -1,0 +1,37 @@
+<ion-content>
+  <div class="start-container">
+    <div class="background-overlay">
+      <ion-img src="assets/workout-bg.jpg" alt="Background" class="background-image"></ion-img>
+      <ion-img src="assets/workout-bg2.jpg" alt="Background" class="background-image"></ion-img>
+      <ion-img src="assets/workout-bg3.jpg" alt="Background" class="background-image"></ion-img>
+    </div>
+
+    <div class="content-container ion-text-center">
+      <div class="main-content">
+        <ion-img src="assets/logo_gradient.svg" alt="Logo" class="logo"></ion-img>
+      </div>
+
+      <div class="title-container">
+        <h1>
+          <div class="title-line">Treina o teu Corpo</div>
+          <div class="title-line">Eleva o teu Espírito</div>
+        </h1>
+        
+        <div class="subtitle">
+          <p>Alcança o teu Melhor</p>
+        </div>
+      </div>
+
+      <div class="bottom-content">
+        <ion-button expand="block" class="get-started-btn" (click)="getStarted()">
+          Get Started
+        </ion-button>
+
+        <ion-text color="subtitle" class="signup-container">
+          Não tens uma conta? 
+          <ion-text color="primary" (click)="signUp()" class="signup-link">Registar</ion-text>
+        </ion-text>
+      </div>
+    </div>
+  </div>
+</ion-content>
