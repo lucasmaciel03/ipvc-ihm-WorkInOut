@@ -3,9 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'start',
-    pathMatch: 'full'
+    path: 'splash',
+    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
   },
   {
     path: 'home',
@@ -19,6 +18,19 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: '',
+    redirectTo: 'splash',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'splash'
+  },
+  {
+    path: 'create-account',
+    loadChildren: () => import('./create-account/create-account.module').then( m => m.CreateAccountPageModule)
+  }
 ];
 
 @NgModule({

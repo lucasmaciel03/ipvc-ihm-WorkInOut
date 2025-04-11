@@ -1,0 +1,219 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>create-account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="signup-container">
+    <div class="signup-content">
+      <!-- Header with back button -->
+      <div class="header">
+        <ion-button fill="clear" class="back-btn" routerLink="/login">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
+        <div class="steps-indicator">
+          <div
+            class="step"
+            [ngClass]="{'active': currentStep >= 1, 'completed': currentStep > 1}"
+          ></div>
+          <div
+            class="step"
+            [ngClass]="{'active': currentStep >= 2, 'completed': currentStep > 2}"
+          ></div>
+          <div class="step" [ngClass]="{'active': currentStep >= 3}"></div>
+        </div>
+      </div>
+
+      <!-- Welcome text -->
+      <div class="welcome-text">
+        <h1>Junta-te a nós! 🏋️‍♂️</h1>
+        <p *ngIf="currentStep === 1">Vamos começar com alguns dados básicos</p>
+        <p *ngIf="currentStep === 2">Quais são os teus objetivos de treino?</p>
+        <p *ngIf="currentStep === 3">Último passo - cria as tuas credenciais</p>
+      </div>
+
+      <!-- Step 1: Personal Details -->
+      <div class="form-container" *ngIf="currentStep === 1">
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-input
+              type="text"
+              [(ngModel)]="userData.name"
+              placeholder="O teu nome completo"
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="calendar-outline" slot="start"></ion-icon>
+            <ion-input
+              type="date"
+              [(ngModel)]="userData.birthdate"
+              placeholder="Data de nascimento"
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="body-outline" slot="start"></ion-icon>
+            <ion-select
+              [(ngModel)]="userData.gender"
+              placeholder="Género"
+              interface="action-sheet"
+            >
+              <ion-select-option value="male">Masculino</ion-select-option>
+              <ion-select-option value="female">Feminino</ion-select-option>
+              <ion-select-option value="other">Outro</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <ion-button expand="block" (click)="nextStep()" class="next-btn">
+          Continuar
+        </ion-button>
+      </div>
+
+      <!-- Step 2: Fitness Goals -->
+      <div class="form-container" *ngIf="currentStep === 2">
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="fitness-outline" slot="start"></ion-icon>
+            <ion-select
+              [(ngModel)]="userData.fitnessLevel"
+              placeholder="Nível de experiência"
+              interface="action-sheet"
+            >
+              <ion-select-option value="beginner">Iniciante</ion-select-option>
+              <ion-select-option value="intermediate"
+                >Intermédio</ion-select-option
+              >
+              <ion-select-option value="advanced">Avançado</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="trophy-outline" slot="start"></ion-icon>
+            <ion-select
+              [(ngModel)]="userData.goal"
+              placeholder="Objetivo principal"
+              interface="action-sheet"
+            >
+              <ion-select-option value="lose-weight"
+                >Perder peso</ion-select-option
+              >
+              <ion-select-option value="gain-muscle"
+                >Ganhar músculo</ion-select-option
+              >
+              <ion-select-option value="keep-fit"
+                >Manter a forma</ion-select-option
+              >
+              <ion-select-option value="improve-performance"
+                >Melhorar performance</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="time-outline" slot="start"></ion-icon>
+            <ion-select
+              [(ngModel)]="userData.frequency"
+              placeholder="Frequência de treino semanal"
+              interface="action-sheet"
+            >
+              <ion-select-option value="1-2">1-2 vezes</ion-select-option>
+              <ion-select-option value="3-4">3-4 vezes</ion-select-option>
+              <ion-select-option value="5+">5+ vezes</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <div class="navigation-buttons">
+          <ion-button fill="outline" (click)="prevStep()" class="prev-btn">
+            Voltar
+          </ion-button>
+          <ion-button expand="block" (click)="nextStep()" class="next-btn">
+            Continuar
+          </ion-button>
+        </div>
+      </div>
+
+      <!-- Step 3: Account Credentials -->
+      <div class="form-container" *ngIf="currentStep === 3">
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-input
+              type="email"
+              [(ngModel)]="userData.email"
+              placeholder="O teu email"
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+            <ion-input
+              [type]="showPassword ? 'text' : 'password'"
+              [(ngModel)]="userData.password"
+              placeholder="Escolhe uma password"
+            ></ion-input>
+            <ion-icon
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+              slot="end"
+              class="password-toggle"
+              (click)="togglePassword()"
+            ></ion-icon>
+          </ion-item>
+        </div>
+
+        <div class="input-group">
+          <ion-item lines="none">
+            <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+            <ion-input
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              [(ngModel)]="userData.confirmPassword"
+              placeholder="Confirma a password"
+            ></ion-input>
+            <ion-icon
+              [name]="showConfirmPassword ? 'eye-off-outline' : 'eye-outline'"
+              slot="end"
+              class="password-toggle"
+              (click)="toggleConfirmPassword()"
+            ></ion-icon>
+          </ion-item>
+        </div>
+
+        <div class="terms-container">
+          <ion-checkbox [(ngModel)]="userData.acceptTerms"></ion-checkbox>
+          <span
+            >Concordo com os <a href="#">Termos e Condições</a> e
+            <a href="#">Política de Privacidade</a></span
+          >
+        </div>
+
+        <div class="navigation-buttons">
+          <ion-button fill="outline" (click)="prevStep()" class="prev-btn">
+            Voltar
+          </ion-button>
+          <ion-button
+            expand="block"
+            [disabled]="!canCreateAccount()"
+            (click)="createAccount()"
+            class="create-btn"
+          >
+            Criar Conta
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

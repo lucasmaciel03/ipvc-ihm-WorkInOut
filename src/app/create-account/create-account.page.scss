@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;600&display=swap");
+
+:host {
+  --ion-color-primary: #ff6600;
+  --ion-color-primary-contrast: #fff;
+  --ion-background-color: #000;
+  --font-title: "Anton", sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --d1: 0.2s;
+  --d2: 0.4s;
+  --d3: 0.6s;
+  --d4: 0.8s;
+  --d5: 1s;
+  --d6: 1.2s;
+}
+
+.signup-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  background-color: #000;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      145deg,
+      rgba(255, 102, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.95) 25%,
+      #000 100%
+    );
+    z-index: 1;
+  }
+}
+
+.signup-content {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 3;
+  animation: fadeIn 0.8s ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .back-btn {
+    --padding-start: 0;
+    --padding-end: 0;
+    --color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    height: 36px;
+    width: 36px;
+
+    ion-icon {
+      font-size: 1.5rem;
+    }
+
+    &:hover {
+      --color: var(--ion-color-primary);
+    }
+  }
+
+  .steps-indicator {
+    display: flex;
+    gap: 8px;
+
+    .step {
+      height: 4px;
+      width: 30px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      transition: all 0.3s ease;
+
+      &.active {
+        background-color: rgba(255, 102, 0, 0.5);
+      }
+
+      &.completed {
+        background-color: var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+.welcome-text {
+  text-align: left;
+  margin-bottom: 2.5rem;
+
+  h1 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-title);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    animation: fadeIn 0.6s ease var(--d1) both;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: 300;
+    animation: fadeIn 0.6s ease var(--d2) both;
+  }
+}
+
+.form-container {
+  animation: fadeIn 0.5s ease;
+
+  .input-group {
+    margin-bottom: 1.5rem;
+    animation: fadeIn 0.6s ease var(--d3) both;
+
+    &:nth-child(2) {
+      animation: fadeIn 0.6s ease var(--d4) both;
+    }
+
+    &:nth-child(3) {
+      animation: fadeIn 0.6s ease var(--d5) both;
+    }
+
+    ion-item {
+      --background: rgba(0, 0, 0, 0.4);
+      --border-radius: 14px;
+      --padding-start: 1rem;
+      --padding-end: 1.5rem;
+      --min-height: 56px;
+      --border-width: 1px;
+      --border-style: solid;
+      --border-color: rgba(255, 102, 0, 0.1);
+      --inner-padding-start: 0.5rem;
+      --inner-padding-end: 0.5rem;
+      --highlight-height: 0;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+
+      &:hover,
+      &:focus-within {
+        --background: rgba(0, 0, 0, 0.5);
+        --border-color: rgba(255, 102, 0, 0.3);
+        transform: translateY(-1px);
+      }
+
+      &:focus-within {
+        --border-color: var(--ion-color-primary);
+        box-shadow: 0 6px 20px rgba(255, 102, 0, 0.2);
+      }
+
+      ion-icon {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.2rem;
+        margin-right: 0.75rem;
+        transition: all 0.3s ease;
+
+        &[slot="end"] {
+          margin: 0 0 0 0.75rem;
+          cursor: pointer;
+
+          &:hover {
+            color: var(--ion-color-primary);
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      &:focus-within ion-icon {
+        color: var(--ion-color-primary);
+      }
+
+      ion-input,
+      ion-select {
+        --padding-start: 0.5rem;
+        --padding-top: 0;
+        --padding-bottom: 0;
+        --placeholder-color: rgba(255, 255, 255, 0.3);
+        --placeholder-opacity: 1;
+        color: #fff;
+        font-size: 0.95rem;
+        font-family: var(--font-body);
+        font-weight: 300;
+        min-height: 24px;
+
+        &:focus {
+          --placeholder-color: rgba(255, 102, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.terms-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.6s ease var(--d6) both;
+
+  span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+
+    a {
+      color: var(--ion-color-primary);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.navigation-buttons {
+  display: flex;
+  gap: 10px;
+
+  .prev-btn {
+    flex: 1;
+    --background: transparent;
+    --background-hover: rgba(255, 102, 0, 0.1);
+    --color: var(--ion-color-primary);
+    --border-color: var(--ion-color-primary);
+
+    &:hover {
+      --border-color: rgba(255, 102, 0, 0.7);
+    }
+  }
+
+  .next-btn,
+  .create-btn {
+    flex: 2;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(255, 102, 0, 0.3);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

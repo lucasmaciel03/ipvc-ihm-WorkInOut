@@ -1,13 +1,181 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      <strong>WorkInOut</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <div class="home-container">
-    <!-- Conteúdo da página home aqui -->
+    <!-- Conteúdo da página atual -->
+    <div *ngIf="selectedTab === 'treinos'">
+      <h2>Os Teus Treinos</h2>
+      <ion-card class="main-card">
+        <ion-card-header>
+          <ion-card-title>Treino de Hoje</ion-card-title>
+          <ion-card-subtitle>Treino de Força</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Completa o teu treino diário para manteres o progresso!</p>
+          <ion-button expand="block" color="primary">Iniciar Treino</ion-button>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-list>
+        <ion-item-sliding *ngFor="let i of [1, 2, 3]">
+          <ion-item>
+            <ion-label>
+              <h3>Treino {{i}}</h3>
+              <p>Treino personalizado</p>
+            </ion-label>
+            <ion-note slot="end" color="primary">Ver</ion-note>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="primary">Editar</ion-item-option>
+            <ion-item-option color="danger">Apagar</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+
+    <div *ngIf="selectedTab === 'progresso'">
+      <h2>O Teu Progresso</h2>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Estatísticas Semanais</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Treinos completados: 3/5</p>
+          <p>Tempo total: 2h 15min</p>
+          <p>Calorias queimadas: 750</p>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Objetivos</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-progress-bar value="0.6"></ion-progress-bar>
+          <p class="ion-margin-top">60% do objetivo semanal alcançado</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="selectedTab === 'perfil'">
+      <h2>O Teu Perfil</h2>
+      <ion-card>
+        <ion-card-header>
+          <ion-avatar class="profile-avatar ion-margin-bottom">
+            <img alt="Foto de perfil" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-card-title>João Silva</ion-card-title>
+          <ion-card-subtitle>Nível: Intermédio</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label>
+                <h3>Altura</h3>
+                <p>175 cm</p>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h3>Peso</h3>
+                <p>70 kg</p>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h3>Objetivo</h3>
+                <p>Ganhar massa muscular</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-button expand="block" color="primary" class="ion-margin-top">Editar Perfil</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="selectedTab === 'search'">
+      <h2>Pesquisa</h2>
+      <ion-searchbar placeholder="Procurar exercícios, treinos..." animated></ion-searchbar>
+      
+      <div class="search-categories">
+        <h4>Categorias Populares</h4>
+        <div class="category-chips">
+          <ion-chip>
+            <ion-label>Força</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-label>Cardio</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-label>Flexibilidade</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-label>Yoga</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+      
+      <div class="recent-searches">
+        <h4>Pesquisas Recentes</h4>
+        <ion-list lines="full">
+          <ion-item>
+            <ion-icon name="time-outline" slot="start"></ion-icon>
+            <ion-label>Treino de braços</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="time-outline" slot="start"></ion-icon>
+            <ion-label>Exercícios para abdominais</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="time-outline" slot="start"></ion-icon>
+            <ion-label>Alongamentos</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
   </div>
 </ion-content>
+
+<div class="custom-tabs">
+  <div class="tab-button" [ngClass]="{'active': selectedTab === 'treinos'}" (click)="selectTab('treinos')">
+    <div class="tab-content">
+      <div class="tab-icon-container">
+        <ion-icon name="home-outline"></ion-icon>
+      </div>
+      <span>Início</span>
+    </div>
+  </div>
+  
+  <div class="tab-button" [ngClass]="{'active': selectedTab === 'progresso'}" (click)="selectTab('progresso')">
+    <div class="tab-content">
+      <div class="tab-icon-container">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+      </div>
+      <span>Progresso</span>
+    </div>
+  </div>
+  
+  <div class="tab-button" [ngClass]="{'active': selectedTab === 'perfil'}" (click)="selectTab('perfil')">
+    <div class="tab-content">
+      <div class="tab-icon-container">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
+      <span>Perfil</span>
+    </div>
+  </div>
+  
+  <div class="tab-button" [ngClass]="{'active': selectedTab === 'search'}" (click)="selectTab('search')">
+    <div class="tab-content">
+      <div class="tab-icon-container">
+        <ion-icon name="search-outline"></ion-icon>
+      </div>
+      <span>Pesquisa</span>
+    </div>
+  </div>
+</div>
