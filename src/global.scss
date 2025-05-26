@@ -44,8 +44,15 @@
 :root {
   --font-title: 'Anton', sans-serif;
   --font-body: 'Poppins', sans-serif;
+  --color-border: #202020;
+  --color-background-input: #181818;
+  --color-background-app: #151515;
+  --color-text: #ffffff;
+  --color-primary: #FF6600;
+  --color-gray: #ccc;
 }
 
 body {
   font-family: var(--font-body);
 }
+

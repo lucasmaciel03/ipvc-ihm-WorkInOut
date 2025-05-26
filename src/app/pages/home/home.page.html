@@ -1,13 +1,54 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+  <!-- Header Section -->
+  <div class="header-container">
+    <div class="user-info">
+      <ion-avatar class="user-avatar">
+        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" alt="Avatar Image">
+      </ion-avatar>
+      <div class="user-text">
+        <p>Let's Get Back 💪</p>
+        <h2>André Lucas Pedro</h2>
+      </div>
+    </div>
+    <ion-button fill="clear" class="notification-button">
+      <ion-icon name="notifications-outline" slot="icon-only" class="icon"></ion-icon>
+    </ion-button>
+  </div>
+
+    <!-- Input de pesquisa -->
+    <div class="input">
+      <ion-searchbar class="search-bar" placeholder="Search"></ion-searchbar>
+    </div>
+
+    <!-- Card de treino principal -->
+    <ion-card class="main-card">
+      <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+        <div class="card-overlay">
+          <h2 class="card-title">Stronger every rep<br>every step.</h2>
+          <ion-button class="start-button" color="light" shape="round">
+            Start Workout <ion-icon name="flame-outline" slot="end"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </ion-card>
+
+    <!-- Divider -->
+    <hr class="divider">
+
+    <!-- Cards de treinos diários-->
+    <div class="daily-card">
+        <h2>Daily Programs</h2>
+        <a>See all</a>
+    </div>
+
+    <!-- Chips de categorias de treino -->
+    <div class="category-chips">
+      <ion-chip class="active-chip">All Type</ion-chip>
+      <ion-chip>Chest</ion-chip>
+      <ion-chip>Arms</ion-chip>
+      <ion-chip>Leg</ion-chip>
+      <ion-chip>Cardio</ion-chip>
+    </div>
+  </div>
 </ion-content>
