@@ -11,7 +11,7 @@ import { RouterModule } from "@angular/router";
   templateUrl: "./create-account.page.html",
   styleUrls: ["./create-account.page.scss"],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, RouterModule]
+  imports: [CommonModule, FormsModule, IonicModule, RouterModule],
 })
 export class CreateAccountPage implements OnInit {
   // Current step in the registration process

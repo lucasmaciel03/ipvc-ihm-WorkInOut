@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { IonicModule } from "@ionic/angular";
+import { FormsModule } from "@angular/forms";
+import { HomePageRoutingModule } from "./home-routing.module";
 
-import { HomePageRoutingModule } from './home-routing.module';
-
+import { HomePage } from "./home.page";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    HomePage, // Import the standalone component instead of declaring it
   ],
-  declarations: [HomePage]
+  declarations: [], // No declarations since HomePage is standalone
 })
 export class HomePageModule {}

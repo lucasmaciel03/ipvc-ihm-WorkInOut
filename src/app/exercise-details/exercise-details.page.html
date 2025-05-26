@@ -1,0 +1,298 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Exercise Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Loading exercise details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <ion-icon name="warning-outline"></ion-icon>
+    <h2>Error</h2>
+    <p>{{ error }}</p>
+    <ion-button (click)="loadExerciseDetails()">Retry</ion-button>
+  </div>
+
+  <!-- Exercise Details -->
+  <div *ngIf="exercise && !loading && !error" class="exercise-details">
+    <!-- Enhanced Image Gallery -->
+    <div
+      class="exercise-images"
+      *ngIf="exercise.images && exercise.images.length > 0"
+    >
+      <div class="image-container">
+        <div
+          class="main-image"
+          [class.fallback-image]="exercise.images[currentImageIndex].is_fallback"
+        >
+          <img
+            [src]="exercise.images[currentImageIndex].image"
+            [alt]="exercise.name"
+            (error)="handleImageError($event, exercise)"
+          />
+
+          <!-- Show a badge for fallback images -->
+          <div
+            class="fallback-badge"
+            *ngIf="exercise.images[currentImageIndex].is_fallback"
+          >
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>Reference image</span>
+          </div>
+        </div>
+
+        <div class="image-controls" *ngIf="exercise.images.length > 1">
+          <ion-button fill="clear" (click)="prevImage()">
+            <ion-icon name="chevron-back"></ion-icon>
+          </ion-button>
+
+          <div class="image-thumbnails">
+            <div
+              *ngFor="let image of exercise.images; let i = index"
+              class="thumbnail"
+              [class.active]="i === currentImageIndex"
+              (click)="currentImageIndex = i"
+            >
+              <img
+                [src]="image.image"
+                [alt]="exercise.name + ' view ' + (i+1)"
+              />
+            </div>
+          </div>
+
+          <ion-button fill="clear" (click)="nextImage()">
+            <ion-icon name="chevron-forward"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="!exercise.images || exercise.images.length === 0"
+      class="no-image"
+    >
+      <ion-icon name="fitness-outline"></ion-icon>
+      <p>No images available for this exercise</p>
+    </div>
+
+    <!-- Add video section after the images section -->
+    <div
+      class="video-section"
+      *ngIf="exercise.videos && exercise.videos.length > 0"
+    >
+      <h3>Exercise Videos</h3>
+
+      <ion-segment
+        [(ngModel)]="currentVideoIndex"
+        (ionChange)="updateCurrentVideo()"
+      >
+        <ion-segment-button
+          *ngFor="let video of exercise.videos; let i = index"
+          [value]="i"
+        >
+          <ion-label>{{ getVideoSource(video) }} {{ i + 1 }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <div class="video-container">
+        <div class="video-wrapper" *ngIf="exercise.videos[currentVideoIndex]">
+          <!-- YouTube videos -->
+          <iframe
+            *ngIf="isYoutubeVideo(exercise.videos[currentVideoIndex])"
+            [src]="getYoutubeEmbedUrl(exercise.videos[currentVideoIndex]) | safe: 'resourceUrl'"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >
+          </iframe>
+
+          <!-- Vimeo videos -->
+          <iframe
+            *ngIf="isVimeoVideo(exercise.videos[currentVideoIndex])"
+            [src]="getVimeoEmbedUrl(exercise.videos[currentVideoIndex]) | safe: 'resourceUrl'"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          >
+          </iframe>
+
+          <!-- Direct video files -->
+          <video
+            *ngIf="isDirectVideo(exercise.videos[currentVideoIndex])"
+            controls
+            [src]="exercise.videos[currentVideoIndex].video | safe: 'resourceUrl'"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <div class="video-info" *ngIf="exercise.videos[currentVideoIndex]">
+        <h4>{{ getVideoTitle(exercise.videos[currentVideoIndex]) }}</h4>
+        <p *ngIf="exercise.videos[currentVideoIndex].description">
+          {{ exercise.videos[currentVideoIndex].description }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Exercise Information with Better Visualization -->
+    <div class="exercise-info">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>
+            <ion-badge color="primary">{{ exercise.category?.name }}</ion-badge>
+          </ion-card-subtitle>
+          <ion-card-title>{{ exercise.name }}</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div class="description-container">
+            <h3>Description</h3>
+            <div
+              [innerHTML]="exercise.description"
+              class="exercise-description"
+            ></div>
+          </div>
+
+          <div class="detail-section">
+            <h3>Primary Muscles</h3>
+            <div class="muscle-tags">
+              <ion-chip *ngFor="let muscle of exercise.muscles" color="primary">
+                <ion-icon name="body-outline"></ion-icon>
+                <ion-label>{{ muscle.name }}</ion-label>
+              </ion-chip>
+              <ion-chip
+                *ngIf="!exercise.muscles || exercise.muscles.length === 0"
+                color="medium"
+              >
+                <ion-icon name="help-circle"></ion-icon>
+                <ion-label>No primary muscles specified</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h3>Secondary Muscles</h3>
+            <div class="muscle-tags">
+              <ion-chip
+                *ngFor="let muscle of exercise.muscles_secondary"
+                color="secondary"
+              >
+                <ion-icon name="body-outline"></ion-icon>
+                <ion-label>{{ muscle.name }}</ion-label>
+              </ion-chip>
+              <ion-chip
+                *ngIf="!exercise.muscles_secondary || exercise.muscles_secondary.length === 0"
+                color="medium"
+              >
+                <ion-icon name="help-circle"></ion-icon>
+                <ion-label>No secondary muscles specified</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h3>Equipment</h3>
+            <div class="equipment-tags">
+              <ion-chip
+                *ngFor="let item of exercise.equipment"
+                color="tertiary"
+              >
+                <ion-icon name="barbell-outline"></ion-icon>
+                <ion-label>{{ item.name }}</ion-label>
+              </ion-chip>
+              <ion-chip
+                *ngIf="!exercise.equipment || exercise.equipment.length === 0"
+                color="medium"
+              >
+                <ion-icon name="checkmark-circle"></ion-icon>
+                <ion-label>No equipment required</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+
+          <!-- Add a visual representation of muscles in the details section -->
+          <div
+            class="detail-section muscle-visualization"
+            *ngIf="exercise.muscles && exercise.muscles.length > 0"
+          >
+            <h3>Muscle Focus</h3>
+
+            <div class="muscle-figure">
+              <div class="figure front">
+                <img src="assets/images/muscle-front.png" alt="Front view" />
+                <!-- Front primary muscles - using ng-container to separate ngFor and ngIf -->
+                <ng-container *ngFor="let muscle of exercise.muscles">
+                  <div
+                    class="muscle-highlight primary"
+                    [class.front]="isFrontMuscle(muscle)"
+                    [style.top]="getMusclePosition(muscle).top"
+                    [style.left]="getMusclePosition(muscle).left"
+                    [style.width]="getMusclePosition(muscle).width"
+                    [style.height]="getMusclePosition(muscle).height"
+                    *ngIf="isFrontMuscle(muscle)"
+                  ></div>
+                </ng-container>
+
+                <!-- Front secondary muscles -->
+                <ng-container
+                  *ngFor="let secMuscle of exercise.muscles_secondary"
+                >
+                  <div
+                    class="muscle-highlight secondary"
+                    [class.front]="isFrontMuscle(secMuscle)"
+                    [style.top]="getMusclePosition(secMuscle).top"
+                    [style.left]="getMusclePosition(secMuscle).left"
+                    [style.width]="getMusclePosition(secMuscle).width"
+                    [style.height]="getMusclePosition(secMuscle).height"
+                    *ngIf="isFrontMuscle(secMuscle)"
+                  ></div>
+                </ng-container>
+              </div>
+
+              <div class="figure back">
+                <img src="assets/images/muscle-back.png" alt="Back view" />
+                <!-- Back primary muscles -->
+                <ng-container *ngFor="let muscle of exercise.muscles">
+                  <div
+                    class="muscle-highlight primary"
+                    [class.back]="!isFrontMuscle(muscle)"
+                    [style.top]="getMusclePosition(muscle).top"
+                    [style.left]="getMusclePosition(muscle).left"
+                    [style.width]="getMusclePosition(muscle).width"
+                    [style.height]="getMusclePosition(muscle).height"
+                    *ngIf="!isFrontMuscle(muscle)"
+                  ></div>
+                </ng-container>
+
+                <!-- Back secondary muscles -->
+                <ng-container
+                  *ngFor="let secMuscle of exercise.muscles_secondary"
+                >
+                  <div
+                    class="muscle-highlight secondary"
+                    [class.back]="!isFrontMuscle(secMuscle)"
+                    [style.top]="getMusclePosition(secMuscle).top"
+                    [style.left]="getMusclePosition(secMuscle).left"
+                    [style.width]="getMusclePosition(secMuscle).width"
+                    [style.height]="getMusclePosition(secMuscle).height"
+                    *ngIf="!isFrontMuscle(secMuscle)"
+                  ></div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

@@ -1,25 +1,17 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { Component } from "@angular/core";
+import { IonicModule } from "@ionic/angular";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
-  standalone: false,
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"],
+  standalone: true,
+  imports: [IonicModule, CommonModule, RouterModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Add schema to support Ionic web components
 })
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private router: Router
-  ) {
-    this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Sempre redirecionar para a splash screen ao iniciar a aplicação
-      this.router.navigateByUrl('/splash', { replaceUrl: true });
-    });
-  }
+  constructor() {}
 }

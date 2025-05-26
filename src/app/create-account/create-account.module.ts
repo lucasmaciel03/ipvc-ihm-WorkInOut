@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { CreateAccountPageRoutingModule } from './create-account-routing.module';
+import { CreateAccountPageRoutingModule } from "./create-account-routing.module";
 
-import { CreateAccountPage } from './create-account.page';
+import { CreateAccountPage } from "./create-account.page";
 
 @NgModule({
   imports: [
@@ -14,9 +14,9 @@ import { CreateAccountPage } from './create-account.page';
     FormsModule,
     IonicModule,
     CreateAccountPageRoutingModule,
-    CreateAccountPage // Import the standalone component instead of declaring it
+    CreateAccountPage, // Import the standalone component instead of declaring it
   ],
   // Remove the declarations array or remove CreateAccountPage from it
-  declarations: []
+  declarations: [],
 })
 export class CreateAccountPageModule {}

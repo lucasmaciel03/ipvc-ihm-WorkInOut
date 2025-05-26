@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;600&display=swap");
+
 // Variáveis de cores
 :root {
   --ion-color-primary: #ff6600;
@@ -11,7 +13,10 @@
 // Estilos gerais
 ion-content {
   --background: #f4f5f8;
-  --padding-bottom: 70px;
+  --padding-bottom: 1rem;
+  --padding-top: 1rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
 }
 
 h2 {
@@ -30,7 +35,8 @@ ion-card {
 }
 
 .main-card {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/workout-bg.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/assets/workout-bg.jpg");
   background-size: cover;
   background-position: center;
   color: white;
@@ -39,8 +45,8 @@ ion-card {
     padding-bottom: 8px;
   }
 
-  ion-card-title, 
-  ion-card-subtitle, 
+  ion-card-title,
+  ion-card-subtitle,
   ion-card-content {
     color: white;
   }
@@ -80,7 +86,7 @@ ion-card-subtitle {
   border-top-right-radius: 20px;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -1px;
     left: 50%;
@@ -235,7 +241,8 @@ ion-searchbar {
   margin-bottom: 16px;
 }
 
-.search-categories, .recent-searches {
+.search-categories,
+.recent-searches {
   margin-bottom: 20px;
 }
 
@@ -267,5 +274,463 @@ ion-chip {
   ion-icon {
     color: #8c8c8c;
     margin-right: 12px;
+  }
+}
+
+:host {
+  --ion-background-color: #f8f8f8;
+  --font-title: "Anton", sans-serif;
+  --font-body: "Poppins", sans-serif;
+}
+
+ion-toolbar {
+  --background: #ff6600;
+  --color: #ffffff;
+}
+
+ion-title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  color: #333;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-left: 3px solid #ff6600;
+  padding-left: 0.7rem;
+}
+
+// Featured exercises
+.featured-exercises {
+  margin: 1rem 0 2rem;
+
+  ion-slides {
+    height: 350px;
+  }
+}
+
+.featured-card {
+  height: 330px;
+  width: 100%;
+  margin: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+
+  .featured-image-container {
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .no-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: #eee;
+
+      ion-icon {
+        font-size: 4rem;
+        color: #ccc;
+      }
+    }
+  }
+
+  ion-card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  ion-card-subtitle {
+    color: #ff6600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  ion-card-content {
+    p {
+      margin-bottom: 1rem;
+      max-height: 60px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .details-btn {
+    margin-top: auto;
+  }
+}
+
+// Muscle categories
+.muscle-card {
+  height: 120px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+
+  ion-card-header {
+    padding: 10px;
+  }
+
+  ion-card-title {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  ion-button {
+    font-size: 0.7rem;
+    --color: #ff6600;
+  }
+}
+
+// Exercise list
+.exercise-card {
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+
+  ion-card-title {
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  ion-card-subtitle {
+    color: #ff6600;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.exercise-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .exercise-image-container {
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+
+    .exercise-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &.fallback-image {
+        background-color: #f8f8f8;
+        opacity: 0.9;
+      }
+    }
+
+    .no-image {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+
+      ion-icon {
+        font-size: 4rem;
+        color: #ccc;
+      }
+    }
+
+    .image-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &:hover .exercise-image {
+    transform: scale(1.05);
+  }
+
+  ion-card-header {
+    padding-bottom: 0;
+
+    ion-card-subtitle {
+      .muscle-tags {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+
+        ion-badge {
+          font-size: 0.7rem;
+          font-weight: normal;
+        }
+      }
+    }
+
+    ion-card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+  }
+
+  ion-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      flex: 1;
+    }
+
+    ion-button {
+      margin-top: auto;
+    }
+  }
+}
+
+.muscle-card {
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+
+  ion-card-title {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .muscle-image {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  ion-button {
+    font-size: 0.8rem;
+  }
+}
+
+// Loading and no results
+.loading-container,
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+
+  ion-spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+  }
+
+  ion-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+// FAB buttons
+ion-fab-button {
+  --box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
+}
+
+// Placeholder content
+.placeholder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+
+  ion-icon {
+    font-size: 5rem;
+    color: #ff6600;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  h2 {
+    font-family: var(--font-title);
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 2rem;
+  }
+}
+
+.api-test-container {
+  padding: 1rem;
+
+  h1 {
+    font-family: var(--font-title);
+    color: #333;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  margin: 1rem 0;
+
+  ion-spinner {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem;
+  }
+
+  ion-icon {
+    font-size: 4rem;
+    color: #f44336;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-family: var(--font-title);
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 1rem;
+  }
+}
+
+.api-section {
+  margin-bottom: 2rem;
+
+  h2 {
+    font-family: var(--font-title);
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+    border-left: 4px solid #ff6600;
+  }
+
+  ion-card {
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+
+    ion-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    ion-card-subtitle {
+      color: #666;
+      font-size: 0.9rem;
+
+      div {
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    ion-card-content {
+      padding-top: 0.5rem;
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+.muscle-images {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+
+    small {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 0.25rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
   }
 }

@@ -1,0 +1,16 @@
+ion-item {
+  --background: transparent;
+  --color: #fff;
+  font-size: 0.9rem;
+  --min-height: 40px;
+
+  ion-icon {
+    color: var(--ion-color-primary);
+  }
+
+  ion-select {
+    width: 100%;
+    max-width: 100%;
+    --placeholder-opacity: 0.7;
+  }
+}

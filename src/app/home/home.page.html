@@ -1,181 +1,196 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
-    <ion-title class="ion-text-center">
-      <strong>WorkInOut</strong>
-    </ion-title>
+  <ion-toolbar>
+    <ion-title> WorkInOut </ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="language-popover-button">
+        <ion-icon name="language-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="home-container">
-    <!-- Conteúdo da página atual -->
-    <div *ngIf="selectedTab === 'treinos'">
-      <h2>Os Teus Treinos</h2>
-      <ion-card class="main-card">
-        <ion-card-header>
-          <ion-card-title>Treino de Hoje</ion-card-title>
-          <ion-card-subtitle>Treino de Força</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <p>Completa o teu treino diário para manteres o progresso!</p>
-          <ion-button expand="block" color="primary">Iniciar Treino</ion-button>
-        </ion-card-content>
-      </ion-card>
-      
-      <ion-list>
-        <ion-item-sliding *ngFor="let i of [1, 2, 3]">
-          <ion-item>
-            <ion-label>
-              <h3>Treino {{i}}</h3>
-              <p>Treino personalizado</p>
-            </ion-label>
-            <ion-note slot="end" color="primary">Ver</ion-note>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item-option color="primary">Editar</ion-item-option>
-            <ion-item-option color="danger">Apagar</ion-item-option>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-    </div>
+<ion-popover trigger="language-popover-button" dismissOnSelect="true">
+  <ng-template>
+    <ion-list>
+      <ion-item button (click)="currentLanguage = 'pt'; changeLanguage()">
+        <ion-label>Português</ion-label>
+        <ion-icon *ngIf="currentLanguage === 'pt'" name="checkmark" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="currentLanguage = 'en'; changeLanguage()">
+        <ion-label>English</ion-label>
+        <ion-icon *ngIf="currentLanguage === 'en'" name="checkmark" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="currentLanguage = 'es'; changeLanguage()">
+        <ion-label>Español</ion-label>
+        <ion-icon *ngIf="currentLanguage === 'es'" name="checkmark" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+</ion-popover>
 
-    <div *ngIf="selectedTab === 'progresso'">
-      <h2>O Teu Progresso</h2>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Estatísticas Semanais</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p>Treinos completados: 3/5</p>
-          <p>Tempo total: 2h 15min</p>
-          <p>Calorias queimadas: 750</p>
-        </ion-card-content>
-      </ion-card>
-      
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Objetivos</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-progress-bar value="0.6"></ion-progress-bar>
-          <p class="ion-margin-top">60% do objetivo semanal alcançado</p>
-        </ion-card-content>
-      </ion-card>
-    </div>
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-    <div *ngIf="selectedTab === 'perfil'">
-      <h2>O Teu Perfil</h2>
-      <ion-card>
-        <ion-card-header>
-          <ion-avatar class="profile-avatar ion-margin-bottom">
-            <img alt="Foto de perfil" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-          <ion-card-title>João Silva</ion-card-title>
-          <ion-card-subtitle>Nível: Intermédio</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list lines="none">
-            <ion-item>
-              <ion-label>
-                <h3>Altura</h3>
-                <p>175 cm</p>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <h3>Peso</h3>
-                <p>70 kg</p>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <h3>Objetivo</h3>
-                <p>Ganhar massa muscular</p>
-              </ion-label>
-            </ion-item>
-          </ion-list>
-          <ion-button expand="block" color="primary" class="ion-margin-top">Editar Perfil</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </div>
+  <div class="page-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item lines="none" class="language-selector">
+            <ion-label>Idioma:</ion-label>
+            <ion-select
+              [(ngModel)]="currentLanguage"
+              (ionChange)="changeLanguage()"
+            >
+              <ion-select-option value="pt-pt"
+                >Português (Portugal)</ion-select-option
+              >
+              <ion-select-option value="pt-br"
+                >Português (Brasil)</ion-select-option
+              >
+              <ion-select-option value="en">English</ion-select-option>
+              <ion-select-option value="es">Español</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-searchbar
+            [(ngModel)]="searchTerm"
+            (ionChange)="searchExercises()"
+            placeholder="Search exercises"
+            animated
+            color="light"
+            [disabled]="loading"
+          ></ion-searchbar>
+        </ion-col>
+      </ion-row>
 
-    <div *ngIf="selectedTab === 'search'">
-      <h2>Pesquisa</h2>
-      <ion-searchbar placeholder="Procurar exercícios, treinos..." animated></ion-searchbar>
-      
-      <div class="search-categories">
-        <h4>Categorias Populares</h4>
-        <div class="category-chips">
-          <ion-chip>
-            <ion-label>Força</ion-label>
-          </ion-chip>
-          <ion-chip>
-            <ion-label>Cardio</ion-label>
-          </ion-chip>
-          <ion-chip>
-            <ion-label>Flexibilidade</ion-label>
-          </ion-chip>
-          <ion-chip>
-            <ion-label>Yoga</ion-label>
-          </ion-chip>
-        </div>
-      </div>
-      
-      <div class="recent-searches">
-        <h4>Pesquisas Recentes</h4>
-        <ion-list lines="full">
-          <ion-item>
-            <ion-icon name="time-outline" slot="start"></ion-icon>
-            <ion-label>Treino de braços</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="time-outline" slot="start"></ion-icon>
-            <ion-label>Exercícios para abdominais</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="time-outline" slot="start"></ion-icon>
-            <ion-label>Alongamentos</ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
-    </div>
+      <!-- Loading State -->
+      <ion-row *ngIf="loading">
+        <ion-col size="12">
+          <div class="loading-container">
+            <ion-spinner name="crescent"></ion-spinner>
+            <p>Loading exercise data...</p>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Error State -->
+      <ion-row *ngIf="apiError">
+        <ion-col size="12">
+          <div class="error-container">
+            <ion-icon name="warning-outline"></ion-icon>
+            <h2>API Error</h2>
+            <p>{{ apiError }}</p>
+            <ion-button (click)="loadData()">Retry</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Exercise Grid with Images -->
+      <ion-row *ngIf="!loading && !apiError">
+        <ion-col size="12">
+          <h2 class="section-title">Featured Exercises</h2>
+        </ion-col>
+
+        <ion-col
+          size="12"
+          size-md="6"
+          size-lg="4"
+          *ngFor="let exercise of exercises"
+        >
+          <ion-card class="exercise-card">
+            <div class="exercise-image-container">
+              <img
+                *ngIf="exercise.images && exercise.images.length"
+                [src]="exercise.images[0].image"
+                [alt]="exercise.name"
+                (error)="handleImageError($event, exercise)"
+                class="exercise-image"
+                [class.fallback-image]="exercise.images[0].is_fallback"
+              />
+              <div
+                *ngIf="!exercise.images || !exercise.images.length"
+                class="no-image"
+              >
+                <ion-icon name="fitness-outline"></ion-icon>
+              </div>
+
+              <!-- Badge for fallback images -->
+              <div
+                class="image-badge"
+                *ngIf="exercise.images && exercise.images.length && exercise.images[0].is_fallback"
+              >
+                <ion-icon name="barbell-outline"></ion-icon>
+              </div>
+            </div>
+
+            <ion-card-header>
+              <ion-card-subtitle>
+                <div class="muscle-tags">
+                  <ion-badge
+                    color="primary"
+                    *ngFor="let id of exercise.muscles.slice(0, 2)"
+                  >
+                    {{ getMuscleNameById(id) }}
+                  </ion-badge>
+                </div>
+              </ion-card-subtitle>
+              <ion-card-title>{{ exercise.name }}</ion-card-title>
+              <ion-card-subtitle
+                *ngIf="exercise.language"
+                class="language-indicator"
+              >
+                Idioma: {{ getLanguageName(exercise.language) }}
+              </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <p [innerHTML]="getShortDescription(exercise.description)"></p>
+              <ion-button
+                expand="block"
+                [routerLink]="['/exercise-details', exercise.id]"
+              >
+                View Details
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <!-- Muscle Groups Section -->
+      <ion-row *ngIf="!loading && !apiError && muscles.length > 0">
+        <ion-col size="12">
+          <h2 class="section-title">Muscle Groups</h2>
+        </ion-col>
+
+        <ion-col
+          size="6"
+          size-md="4"
+          size-lg="3"
+          *ngFor="let muscle of muscles"
+        >
+          <ion-card class="muscle-card">
+            <ion-card-header>
+              <ion-card-title>{{ muscle.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <div class="muscle-image">
+                <img
+                  [src]="muscle.image_url_main || 'assets/muscle-placeholder.png'"
+                  [alt]="muscle.name"
+                />
+              </div>
+              <ion-button expand="block" fill="clear">
+                Browse Exercises
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
-
-<div class="custom-tabs">
-  <div class="tab-button" [ngClass]="{'active': selectedTab === 'treinos'}" (click)="selectTab('treinos')">
-    <div class="tab-content">
-      <div class="tab-icon-container">
-        <ion-icon name="home-outline"></ion-icon>
-      </div>
-      <span>Início</span>
-    </div>
-  </div>
-  
-  <div class="tab-button" [ngClass]="{'active': selectedTab === 'progresso'}" (click)="selectTab('progresso')">
-    <div class="tab-content">
-      <div class="tab-icon-container">
-        <ion-icon name="stats-chart-outline"></ion-icon>
-      </div>
-      <span>Progresso</span>
-    </div>
-  </div>
-  
-  <div class="tab-button" [ngClass]="{'active': selectedTab === 'perfil'}" (click)="selectTab('perfil')">
-    <div class="tab-content">
-      <div class="tab-icon-container">
-        <ion-icon name="person-outline"></ion-icon>
-      </div>
-      <span>Perfil</span>
-    </div>
-  </div>
-  
-  <div class="tab-button" [ngClass]="{'active': selectedTab === 'search'}" (click)="selectTab('search')">
-    <div class="tab-content">
-      <div class="tab-icon-container">
-        <ion-icon name="search-outline"></ion-icon>
-      </div>
-      <span>Pesquisa</span>
-    </div>
-  </div>
-</div>
