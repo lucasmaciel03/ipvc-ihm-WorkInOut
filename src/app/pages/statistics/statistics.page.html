@@ -1,13 +1,91 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>statistics</ion-title>
+<ion-header>
+  <ion-toolbar color="background-app">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/stats" icon="chevron-back-outline" color="light"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="light">My Statistics</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">statistics</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="statistics-content" [fullscreen]="true">
+
+  <!-- Metric selector -->
+<div class="segment-wrapper">
+  <ion-segment [(ngModel)]="selectedMetric" class="metric-segment" mode="md">
+    <ion-segment-button value="calories">
+      <ion-icon name="flame"></ion-icon>
+      <ion-label>Calories</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="heart">
+      <ion-icon name="heart"></ion-icon>
+      <ion-label>Heart Rate</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="bpm">
+      <ion-icon name="pulse"></ion-icon>
+      <ion-label>BPM</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+
+
+  <!-- Chart placeholder (replace with real chart component) -->
+  <div class="chart-wrapper">
+    <span class="chart-placeholder">GRÁFICO AQUI</span>
+  </div>
+
+  <!-- Recent workouts header -->
+  <div class="recent-header ion-padding-horizontal ion-margin-top">
+    <h2 class="ion-no-margin">Recent Workouts</h2>
+    <ion-button routerLink="/tabs/saved" fill="clear" size="small" class="see-all-btn">See&nbsp;All</ion-button>
+  </div>
+
+  <!-- Recent workouts list -->
+  <ion-list lines="none" class="recent-list ion-padding-horizontal">
+    <ion-item *ngFor="let w of recentWorkouts" class="workout-card" lines="none">
+      <ion-label>
+        <div class="card-header">
+          <h3>{{ w.title }}</h3>
+          <ion-note slot="end">{{ w.date | date:'d MMMM y' }}</ion-note>
+        </div>
+
+        <p class="subline">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ w.duration }}</span>
+          <span class="dot">•</span>
+          <span>{{ w.reps }}</span>
+        </p>
+
+        <div class="metrics-row">
+          <div class="metric">
+            <ion-icon name="flame"></ion-icon>
+            <span class="label">Calories</span>
+            <span class="value">{{ w.calories }} Kcal</span>
+          </div>
+          <div class="divider"></div>
+          <div class="metric">
+            <ion-icon name="heart"></ion-icon>
+            <span class="label">Heart Rate</span>
+            <span class="value">{{ w.heartRate }} Bpm</span>
+          </div>
+          <div class="divider"></div>
+          <div class="metric">
+            <ion-icon name="pulse"></ion-icon>
+            <span class="label">Bpm</span>
+            <span class="value">{{ w.bpm }} Bpm</span>
+          </div>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
