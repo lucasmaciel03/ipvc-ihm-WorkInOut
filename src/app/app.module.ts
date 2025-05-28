@@ -7,6 +7,8 @@ import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 
 import { AppRoutingModule } from "./app-routing.module";
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   // Remove AppComponent completely from both imports and bootstrap
   imports: [

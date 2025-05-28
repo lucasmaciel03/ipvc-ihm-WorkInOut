@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
+register();
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
