@@ -1,20 +1,20 @@
 <ion-content [fullscreen]="true">
   <div class="container">
-  <!-- Header Section -->
-  <div class="header-container">
-    <div class="user-info">
-      <ion-avatar class="user-avatar">
-        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" alt="Avatar Image">
-      </ion-avatar>
-      <div class="user-text">
-        <p>Let's Get Back 💪</p>
-        <h2>André Lucas Pedro</h2>
+    <!-- Header Section -->
+    <div class="header-container">
+      <div class="user-info">
+        <ion-avatar class="user-avatar">
+          <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" alt="Avatar Image">
+        </ion-avatar>
+        <div class="user-text">
+          <p>{{ homeData?.user?.status }}</p>
+          <h2>{{ homeData?.user?.name }}</h2>
+        </div>
       </div>
+      <ion-button fill="clear" class="notification-button">
+        <ion-icon name="notifications-outline" slot="icon-only" class="icon"></ion-icon>
+      </ion-button>
     </div>
-    <ion-button fill="clear" class="notification-button">
-      <ion-icon name="notifications-outline" slot="icon-only" class="icon"></ion-icon>
-    </ion-button>
-  </div>
 
     <!-- Input de pesquisa -->
     <div class="input">
@@ -25,9 +25,9 @@
     <ion-card class="main-card">
       <div class="card-background" style="background-image: url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
         <div class="card-overlay">
-          <h2 class="card-title">Stronger every rep<br>every step.</h2>
+          <h2 class="card-title">{{ homeData.highlight.title }}<br>{{ homeData.highlight.title2 }}</h2>
           <ion-button class="start-button" color="light" shape="round">
-            Start Workout <ion-icon name="flame-outline" slot="end"></ion-icon>
+            {{ homeData.highlight.buttonText }}
           </ion-button>
         </div>
       </div>
@@ -43,12 +43,42 @@
     </div>
 
     <!-- Chips de categorias de treino -->
-    <div class="category-chips">
-      <ion-chip class="active-chip">All Type</ion-chip>
-      <ion-chip>Chest</ion-chip>
-      <ion-chip>Arms</ion-chip>
-      <ion-chip>Leg</ion-chip>
-      <ion-chip>Cardio</ion-chip>
-    </div>
+    <swiper-container
+      [slides-per-view]="3.5"
+      space-between="10"
+      free-mode="true"
+      class="category-chips"
+    >
+      <swiper-slide *ngFor="let cat of homeData?.categories">
+        <ion-chip
+          [class.active-chip]="selectedCategory === cat"
+          (click)="selectCategory(cat)"
+        >
+          {{ cat }}
+        </ion-chip>
+      </swiper-slide>
+    </swiper-container>
+
+
+    <!-- Grid de 2 colunas-->
+    <ion-grid style="padding:0px !important; width: 100%;">
+      <ion-row>
+        <ion-col size="6" *ngFor="let workout of homeData?.workouts" style="padding:0px !important;">
+          <div class="program-card" [style.background-image]="'url(' + workout.image + ')'">
+            <div class="card-overlay">
+              <ion-chip class="chip-time">
+                <ion-icon name="stopwatch-outline" class="icon"></ion-icon>
+                <span>{{ workout.duration }}</span>
+              </ion-chip>
+              <div class="text-content">
+                <h3>{{ workout.title }}</h3>
+                <p>{{ workout.description }}</p>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
   </div>
 </ion-content>

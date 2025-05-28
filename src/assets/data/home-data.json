@@ -1,0 +1,48 @@
+{
+  "user": {
+    "name": "André Lucas Pedro",
+    "status": "Let's Get Back 💪",
+    "avatar": "assets/img/avatar.png"
+  },
+  "highlight": {
+    "title": "Stronger every rep ",
+    "title2":"every step.",
+    "buttonText": "Start Workout 🔥",
+    "image": "assets/img/highlight.jpg"
+  },
+  "categories": ["All Type", "Chest", "Arms", "Leg", "Cardio", "Back", "Shoulders", "Abs", "Full Body"],
+  "workouts": [
+    {
+      "id": 1,
+      "title": "Chest Program",
+      "duration": "12 min",
+      "description": "A classic bodyweight exercise routine.",
+      "image": "assets/bicep.png",
+      "type": "Chest"
+    },
+    {
+      "id": 2,
+      "title": "Arms Program",
+      "duration": "12 min",
+      "description": "Isolate the biceps for growth.",
+      "image": "assets/chest.png",
+      "type": "Arms"
+    },
+    {
+      "id": 3,
+      "title": "Leg Program",
+      "duration": "12 min",
+      "description": "Build strength and endurance in your legs.",
+      "image": "assets/chest.png",
+      "type": "Leg"
+    },
+    {
+      "id": 4,
+      "title": "Cardio Program",
+      "duration": "12 min",
+      "description": "Boost your heart health with cardio.",
+      "image": "assets/bicep.png",
+      "type": "Cardio"
+    }
+  ]
+}
