@@ -1,0 +1,85 @@
+.slide-in-modal {
+  --height: 100%;
+  --width: 100%;
+  animation: slideIn 0.3s ease-out forwards;
+  border-radius: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.background-app{
+  background: var(--color-background-app);
+}
+
+.text-white{
+  color: var(--color-text);
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+  position:relative;
+  background: var(--color-background-app);
+}
+
+.circular-chart {
+  width: 220px;
+  height: 220px;
+  transform: rotate(-90deg);
+
+  .circle-bg {
+    fill: none;
+    stroke: var(--color-text);
+    stroke-width: 3.8;
+  }
+
+  .circle {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 3.8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.3s ease;
+  }
+
+  .timer-text {
+    fill: var(--color-text);
+    font-size: 4px;
+    font-weight: bold;
+    text-anchor: middle;
+    alignment-baseline: middle;
+  }
+
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-button{
+  color:var(--color-text);
+  font-size: 24px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+.workout-start-button{
+  position:absolute;
+  bottom: 32px;
+  left: 16px;
+  right: 16px;
+}
