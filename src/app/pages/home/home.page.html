@@ -3,9 +3,9 @@
     <!-- Header Section -->
     <div class="header-container">
       <div class="user-info">
-        <ion-avatar class="user-avatar">
-          <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg" alt="Avatar Image">
-        </ion-avatar>
+        <ion-thumbnail class="user-avatar">
+          <img src="https://ionicframework.com/docs/img/demos/thumbnail.svg" alt="Avatar Image">
+        </ion-thumbnail>
         <div class="user-text">
           <p>{{ homeData?.user?.status }}</p>
           <h2>{{ homeData?.user?.name }}</h2>
@@ -60,11 +60,10 @@
     </swiper-container>
 
 
-    <!-- Grid de 2 colunas-->
     <ion-grid style="padding:0px !important; width: 100%;">
       <ion-row>
         <ion-col size="6" *ngFor="let workout of homeData?.workouts" style="padding:0px !important;">
-          <div class="program-card" [style.background-image]="'url(' + workout.image + ')'">
+          <div class="program-card" [style.background-image]="'url(' + workout.image + ')'" (click)="openWorkout(workout)">
             <div class="card-overlay">
               <ion-chip class="chip-time">
                 <ion-icon name="stopwatch-outline" class="icon"></ion-icon>

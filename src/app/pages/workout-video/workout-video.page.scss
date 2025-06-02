@@ -1,0 +1,144 @@
+.slide-in-modal {
+  --height: 100%;
+  --width: 100%;
+  animation: slideIn 0.3s ease-out forwards;
+  border-radius: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.background-app{
+  background: var(--color-background-app);
+}
+
+.text-white{
+  color: var(--color-text);
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.container{
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height:100%;
+  background-color: var(--color-background-app);
+}
+
+ion-grid{
+  --ion-grid-padding: 0;
+  --ion-grid-margin: 0;
+  width: 100%;
+}
+
+.card-video {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+
+  video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #000;
+  }
+}
+
+.rating-row {
+  padding-top: 0;
+  display: flex;
+  
+  ion-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:0px !important;
+  }
+}
+
+.stars-container {
+  display: flex;
+  gap: 2px;
+  
+  ion-icon {
+    color: var(--color-primary, #FF6600);
+    font-size: 24px;
+  }
+}
+
+.chip-time {
+  align-self: flex-start;
+  --color: var(--color-text);
+  background: var(--color-primary, #FF6600);
+  font-size: 12px;
+  height: 24px;
+  border-radius: 12px;
+  padding: 10 0px;
+  margin:0px;
+}
+
+.icon {
+    color:var(--color-gray) !important;
+}
+
+.difficulty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+  .difficulty-label {
+    font-size: 12px;
+    color: var(--color-text);
+    margin-bottom: 2px;
+  }
+}
+
+.flame-container {
+  display: flex;
+  gap: 2px;
+  
+  ion-icon {
+    color: var(--color-primary, #FF6600);
+    font-size: 18px;
+  }
+}
+
+.divider{
+    margin: 16px 0;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+}
+
+.equipment-image{
+  width:44px;
+  height:44px;
+  border-radius: 14px;
+}
+
+.equipment-row{
+  display:flex;
+  align-items: center;
+  gap:16px;
+}
+
+.workout-start-button{
+  position:absolute;
+  bottom: 32px;
+  left: 16px;
+  right: 16px;
+}
+
+

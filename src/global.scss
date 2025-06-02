@@ -56,3 +56,13 @@ body {
   font-family: var(--font-body);
 }
 
+.continue-btn {
+  --background: var(--color-primary);
+  --color: var(--color-text);
+  font-weight: 600;
+  text-transform: none;
+  height: 48px;
+  --border-radius: 16px;
+  margin: 16px 0 16px;
+}
+
