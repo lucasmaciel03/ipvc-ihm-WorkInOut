@@ -1,0 +1,175 @@
+{
+  "Maintenance": {
+    "Kettlebell Swing": {
+      "video": "https://www.youtube.com/watch?v=YSxHifyI6s8",
+      "average_time": "30 seconds to 1 minute",
+      "equipment": "Kettlebell",
+      "equipment_image": "/assets/img/kettlebell.jpg",
+      "difficulty": "Intermediate",
+      "rating": "4.5",
+      "muscles_worked": ["Glutes", "Core", "Legs", "Shoulders"]
+    },
+    "Goblet Squat": {
+      "video": "https://www.youtube.com/watch?v=MeIiIdhvXT4",
+      "average_time": "45 seconds",
+      "equipment": "Kettlebell or Dumbbell",
+      "equipment_image": "/assets/img/kettlebell.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.6",
+      "muscles_worked": ["Quadriceps", "Glutes", "Core"]
+    },
+    "Push-Up to T-Raise": {
+      "video": "https://www.youtube.com/watch?v=VvcLDBKB77Y",
+      "average_time": "1 minute",
+      "equipment": "Body weight",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Intermediate",
+      "rating": "4.4",
+      "muscles_worked": ["Chest", "Shoulders", "Core"]
+    },
+    "Plank Row": {
+      "video": "https://www.youtube.com/watch?v=-NP3Wke4GLA",
+      "average_time": "45 seconds",
+      "equipment": "Dumbbell",
+      "equipment_image": "/assets/img/dumbbell.jpg",
+      "difficulty": "Advanced",
+      "rating": "4.7",
+      "muscles_worked": ["Back", "Core", "Arms"]
+    },
+    "Plank": {
+      "video": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+      "average_time": "30 seconds",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.8",
+      "muscles_worked": ["Core", "Back"]
+    },
+    "Russian Twist": {
+      "video": "https://www.youtube.com/watch?v=JyUqwkVpsi8",
+      "average_time": "30-45 seconds",
+      "equipment": "Optional weight",
+      "equipment_image": "/assets/img/dumbbell.jpg",
+      "difficulty": "Intermediate",
+      "rating": "4.5",
+      "muscles_worked": ["Obliques", "Core"]
+    },
+    "Bicycle Crunch": {
+      "video": "https://www.youtube.com/watch?v=1we3bh9uhqY",
+      "average_time": "1 minute",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.4",
+      "muscles_worked": ["Core", "Obliques"]
+    },
+    "Dynamic Warm-Up": {
+      "video": "https://www.youtube.com/watch?v=3qyWpJ34dWw",
+      "average_time": "5 minutes",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Easy",
+      "rating": "4.7",
+      "muscles_worked": ["Full Body"]
+    },
+    "Yoga Flow": {
+      "video": "https://www.youtube.com/watch?v=Vw7PdhxPCS4",
+      "average_time": "10-20 minutes",
+      "equipment": "Yoga mat",
+      "equipment_image": "/assets/img/yoga-mat.jpg",
+      "difficulty": "Easy to Intermediate",
+      "rating": "4.9",
+      "muscles_worked": ["Flexibility", "Balance", "Strength"]
+    },
+    "Static Stretch": {
+      "video": "https://www.youtube.com/watch?v=1AGiq77wZ9c",
+      "average_time": "5-10 minutes",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Easy",
+      "rating": "4.8",
+      "muscles_worked": ["Flexibility"]
+    },
+    "Hundred": {
+      "video": "https://www.youtube.com/watch?v=1b98WrRrmUs",
+      "average_time": "1 minute",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Intermediate",
+      "rating": "4.6",
+      "muscles_worked": ["Core"]
+    },
+    "Roll-Up": {
+      "video": "https://www.youtube.com/watch?v=1b98WrRrmUs",
+      "average_time": "1 minute",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.5",
+      "muscles_worked": ["Core", "Flexibility"]
+    },
+    "Single-Leg Stretch": {
+      "video": "https://www.youtube.com/watch?v=1b98WrRrmUs",
+      "average_time": "30-45 seconds",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.4",
+      "muscles_worked": ["Core"]
+    },
+    "Swimming": {
+      "video": "https://www.youtube.com/watch?v=1b98WrRrmUs",
+      "average_time": "1 minute",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.5",
+      "muscles_worked": ["Back", "Glutes", "Shoulders"]
+    },
+    "Run": {
+      "video": "https://www.youtube.com/watch?v=3d8zN7l0nW8",
+      "average_time": "15-30 minutes",
+      "equipment": "Running shoes",
+      "equipment_image": "/assets/img/shoes.jpg",
+      "difficulty": "Moderate",
+      "rating": "4.7",
+      "muscles_worked": ["Legs", "Cardio"]
+    },
+    "Air Squat": {
+      "video": "https://www.youtube.com/watch?v=U3HlEF_E9fo",
+      "average_time": "1 minute",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.6",
+      "muscles_worked": ["Quadriceps", "Glutes", "Core"]
+    },
+    "Push-Up": {
+      "video": "https://www.youtube.com/watch?v=_l3ySVKYVJ8",
+      "average_time": "30 seconds",
+      "equipment": "Body weight",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Intermediate",
+      "rating": "4.8",
+      "muscles_worked": ["Chest", "Triceps", "Shoulders"]
+    },
+    "Glute Bridge": {
+      "video": "https://www.youtube.com/watch?v=m2Zx-57cSok",
+      "average_time": "45 seconds",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Beginner",
+      "rating": "4.7",
+      "muscles_worked": ["Glutes", "Hamstrings", "Core"]
+    },
+    "Superman": {
+      "video": "https://www.youtube.com/watch?v=z6PJMT2y8GQ",
+      "average_time": "30-45 seconds",
+      "equipment": "None",
+      "equipment_image": "/assets/img/bodyweight.jpg",
+      "difficulty": "Easy",
+      "rating": "4.6",
+      "muscles_worked": ["Back", "Glutes"]
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+    "Weight-Loss": {
+        "Jumping Jacks": {
+            "video": "https://www.youtube.com/watch?v=c4DAnQ6DtF8",
+            "average_time": "30 seconds to 1 minute",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.5",
+            "muscles_worked": [
+                "Cardio",
+                "Legs",
+                "Arms"
+            ]
+        },
+        "Mountain Climbers": {
+            "video": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+            "average_time": "45 seconds",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Intermediate",
+            "rating": "4.6",
+            "muscles_worked": [
+                "Core",
+                "Legs",
+                "Arms"
+            ]
+        },
+        "Burpees": {
+            "video": "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+            "average_time": "30 seconds",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Advanced",
+            "rating": "4.7",
+            "muscles_worked": [
+                "Legs",
+                "Chest",
+                "Core"
+            ]
+        },
+        "High-Knee Run": {
+            "video": "https://www.youtube.com/watch?v=OAJ_J3EZkdY",
+            "average_time": "30-45 seconds",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.5",
+            "muscles_worked": [
+                "Legs",
+                "Cardio"
+            ]
+        },
+        "Body-Weight Squat": {
+            "video": "https://www.youtube.com/watch?v=aclHkVaku9U",
+            "average_time": "1 minute",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.6",
+            "muscles_worked": [
+                "Quadriceps",
+                "Glutes",
+                "Core"
+            ]
+        },
+        "Push-Ups": {
+            "video": "https://www.youtube.com/watch?v=_l3ySVKYVJ8",
+            "average_time": "30 seconds",
+            "equipment": "Body weight",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Intermediate",
+            "rating": "4.8",
+            "muscles_worked": [
+                "Chest",
+                "Triceps",
+                "Shoulders"
+            ]
+        },
+        "Walking Lunges": {
+            "video": "https://www.youtube.com/watch?v=wrwwXE_x-pQ",
+            "average_time": "1 minute",
+            "equipment": "Body weight or dumbbells",
+            "equipment_image": "/assets/img/dumbbell.jpg",
+            "difficulty": "Intermediate",
+            "rating": "4.7",
+            "muscles_worked": [
+                "Quadriceps",
+                "Glutes",
+                "Core"
+            ]
+        },
+        "Plank Shoulder Tap": {
+            "video": "https://www.youtube.com/watch?v=ynUw0YsrmSg",
+            "average_time": "30-45 seconds",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Intermediate",
+            "rating": "4.6",
+            "muscles_worked": [
+                "Core",
+                "Shoulders"
+            ]
+        },
+        "Jump Rope": {
+            "video": "https://www.youtube.com/watch?v=1BZMwI2nQ9E",
+            "average_time": "1-3 minutes",
+            "equipment": "Jump rope",
+            "equipment_image": "/assets/img/jumprope.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.7",
+            "muscles_worked": [
+                "Cardio",
+                "Legs"
+            ]
+        },
+        "Bicycle": {
+            "video": "https://www.youtube.com/watch?v=1we3bh9uhqY",
+            "average_time": "1 minute",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.4",
+            "muscles_worked": [
+                "Core",
+                "Obliques"
+            ]
+        },
+        "Stair Sprint": {
+            "video": "https://www.youtube.com/watch?v=ZVwYbLZ1g1g",
+            "average_time": "20-30 seconds",
+            "equipment": "Stairs",
+            "equipment_image": "/assets/img/stairs.jpg",
+            "difficulty": "Intermediate",
+            "rating": "4.5",
+            "muscles_worked": [
+                "Legs",
+                "Cardio"
+            ]
+        },
+        "Shadow-Boxing": {
+            "video": "https://www.youtube.com/watch?v=QZEqB6wUPxQ",
+            "average_time": "2-3 minutes",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.6",
+            "muscles_worked": [
+                "Arms",
+                "Cardio",
+                "Core"
+            ]
+        },
+        "Brisk Walk": {
+            "video": "https://www.youtube.com/watch?v=3d8zN7l0nW8",
+            "average_time": "20-30 minutes",
+            "equipment": "Comfortable shoes",
+            "equipment_image": "/assets/img/shoes.jpg",
+            "difficulty": "Easy",
+            "rating": "4.5",
+            "muscles_worked": [
+                "Legs",
+                "Cardio"
+            ]
+        },
+        "Plank": {
+            "video": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+            "tempo_medio": "30 segundos",
+            "equipamento": "Nenhum",
+            "dificuldade": "Iniciante",
+            "avaliacao": "4.8",
+            "musculos_trabalhados": [
+                "Core",
+                "Costas"
+            ]
+        },
+        "Flutter Kicks": {
+            "video": "https://www.youtube.com/watch?v=K3y2xkYOT2w",
+            "average_time": "30-45 seconds",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Beginner",
+            "rating": "4.6",
+            "muscles_worked": [
+                "Core",
+                "Legs"
+            ]
+        },
+        "Side Plank": {
+            "video": "https://www.youtube.com/watch?v=K2VljzCC16g",
+            "average_time": "30-45 seconds",
+            "equipment": "None",
+            "equipment_image": "/assets/img/bodyweight.jpg",
+            "difficulty": "Intermediate",
+            "rating": "4.7",
+            "muscles_worked": [
+                "Obliques",
+                "Core"
+            ]
+        }
+    }
+}

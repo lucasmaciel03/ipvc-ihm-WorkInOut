@@ -1,0 +1,70 @@
+{
+  "program": "Weight-Loss Blast",
+  "goal": "Fat loss & Conditioning",
+  "level": "Beginner - Intermediate",
+  "workouts": [
+    {
+      "id": 1,
+      "title": "HIIT Ignite",
+      "duration": "22 min",
+      "calories_est": 300,
+      "exercises": [
+        { "name": "Jumping Jacks", "time": "45 s", "rest": "15 s" },
+        { "name": "Mountain Climbers", "time": "45 s", "rest": "15 s" },
+        { "name": "Burpees", "time": "45 s", "rest": "15 s" },
+        { "name": "High-Knee Run", "time": "45 s", "rest": "60 s" }
+      ],
+      "rounds": 4
+    },
+    {
+      "id": 2,
+      "title": "Full-Body Circuit",
+      "duration": "30 min",
+      "calories_est": 380,
+      "exercises": [
+        { "name": "Body-Weight Squat", "reps": 15 },
+        { "name": "Push-Ups", "reps": 12 },
+        { "name": "Walking Lunges", "reps": "12 each leg" },
+        { "name": "Plank Shoulder Tap", "reps": 20 },
+        { "name": "Jump Rope", "time": "60 s" }
+      ],
+      "rounds": 3,
+      "rest_between_rounds": "90 s"
+    },
+    {
+      "id": 3,
+      "title": "Low-Impact Cardio",
+      "duration": "40 min",
+      "calories_est": 400,
+      "equipment": "Elliptical or Bike",
+      "structure": "5 min warm-up • 30 min steady • 5 min cool-down"
+    },
+    {
+      "id": 4,
+      "title": "Stair Sprint Intervals",
+      "duration": "18 min",
+      "calories_est": 250,
+      "structure": "20″ sprint up • walk down • repeat",
+      "rounds": 12
+    },
+    {
+      "id": 5,
+      "title": "Shadow-Boxing Tabata",
+      "duration": "16 min",
+      "calories_est": 220,
+      "format": "20 s all-out • 10 s rest x 8 rounds x 4 Tabatas"
+    },
+    {
+      "id": 6,
+      "title": "Power Walk + Core",
+      "duration": "45 min",
+      "calories_est": 350,
+      "segments": [
+        { "name": "Brisk Walk", "time": "30 min" },
+        { "name": "Plank", "time": "60 s" },
+        { "name": "Flutter Kicks", "reps": 40 },
+        { "name": "Side Plank", "time": "30 s each" }
+      ]
+    }
+  ]
+}
