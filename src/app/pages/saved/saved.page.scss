@@ -1,0 +1,73 @@
+/*********************************
+ *  Saved Page – Estilos         *
+ *********************************/
+.stats-toolbar {
+  --background: var(--color-background-app);
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-height: 48px;
+  --border-width: 0;
+  &::part(native),
+  &::part(toolbar-background) { box-shadow: none; border-bottom: none; }
+}
+
+.stats-toolbar ion-title { font-size: 20px; font-weight: 600; }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--color-background-app);
+  padding: 20px 16px;
+  color: var(--color-text);
+}
+
+/* -------- Segment -------- */
+.saved-segment {
+  width: 100%;
+  margin: 12px 0 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-background-input);
+
+  --indicator-height: 2px;
+  --indicator-color: var(--color-primary);
+
+  ion-segment-button {
+    --min-height: 32px;
+    --color: var(--color-gray);
+    --color-checked: var(--color-primary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    padding: 4px 6px;
+
+    ion-icon { margin-right: 4px; font-size: 16px; }
+    &.segment-button-checked ion-icon { color: var(--color-primary); }
+  }
+}
+
+
+/* Pequeno cartão de artigo */
+.article-card {
+  --background: var(--color-background-input);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  padding: 12px;
+
+  h3 { margin: 0 0 4px; font-size: 1rem; font-weight: 600; }
+  p  { margin: 0; font-size: 0.8rem; color: var(--color-gray); }
+  ion-icon { color: var(--color-gray); }
+}
+
+/* Empty-state */
+.empty-state {
+  text-align: center;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  ion-icon { font-size: 64px; color: var(--color-border); }
+  p        { font-size: 14px; color: var(--color-gray); }
+}

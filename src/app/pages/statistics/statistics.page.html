@@ -1,11 +1,8 @@
 <ion-content [fullscreen]="true" class="statistics-content">
   <div class="container">
-    <!-- Header -->
     <div class="header-container">
       <ion-toolbar color="background-app" class="stats-toolbar">
-        <!-- título vai à esquerda porque tem slot="start" -->
         <ion-title slot="start" color="light">My Statistics</ion-title>
-
         <ion-buttons slot="end">
           <ion-button fill="clear" size="small" color="light">
             <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
@@ -14,7 +11,6 @@
       </ion-toolbar>
     </div>
 
-    <!-- Metric selector -->
     <ion-segment
       [(ngModel)]="selectedMetric"
       class="metric-segment"
@@ -36,15 +32,12 @@
       </ion-segment-button>
     </ion-segment>
 
-    <!-- Chart -->
     <div class="chart-wrapper">
       <span class="chart-placeholder">GRÁFICO AQUI</span>
     </div>
 
-    <!-- Divider -->
     <hr class="divider" />
 
-    <!-- Recent Workouts header -->
     <div class="recent-header">
         <h2>Recent Workouts</h2>
         <a>See all</a>
@@ -52,12 +45,8 @@
 
     
 
-    <!-- Workouts list -->
-    <ion-list lines="none" class="recent-list">
-      <ion-item *ngFor="let w of recentWorkouts"
-                class="workout-card"
-                lines="none">
-
+    <ion-list lines="none" class="workout-list">
+      <ion-item *ngFor="let w of recentWorkouts" class="workout-card" lines="none">
         <ion-label>
           <div class="card-header">
             <h3>{{ w.title }}</h3>
@@ -99,5 +88,5 @@
         </ion-label>
       </ion-item>
     </ion-list>
-  </div> <!-- /.container -->
+  </div> <!--container-->
 </ion-content>

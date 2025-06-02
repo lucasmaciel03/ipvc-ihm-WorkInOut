@@ -1,13 +1,99 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<!-- CONTENT ----------------------------------------------------------------->
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="container">
+    <div class="header-container">
+      <ion-toolbar class="stats-toolbar">
+        <ion-title slot="start" color="light">Perfil</ion-title>
+
+        <ion-buttons slot="end">
+          <ion-button fill="clear" size="small" color="light">
+            <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </div>
+
+    <!-- Avatar + nome -------------------------------------------------------->
+    <div class="avatar-block">
+      <ion-avatar class="user-avatar">
+        <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg"
+             alt="Avatar Image" />
+      </ion-avatar>
+
+      <h2 class="name">André Lucas Pedro</h2>
+      <p class="role">Atleta</p>
+    </div>
+
+    <!-- Mini-stats ----------------------------------------------------------->
+    <div class="stats-card">
+      <div class="stat">
+        <span class="number">35</span>
+        <span class="label">Seguidores</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat">
+        <span class="number">58</span>
+        <span class="label">Workouts</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="stat">
+        <span class="number">3+</span>
+        <span class="label">Anos<br>Experiência</span>
+      </div>
+    </div>
+
+    <!-- Cabeçalho lista ------------------------------------------------------>
+    <div class="recent-header">
+      <h2>Recent Workouts</h2>
+      <a class="link-primary" routerLink="/history">See All</a>
+    </div>
+
+    <!-- Lista de cartões ----------------------------------------------------->
+    <ion-list lines="none" class="recent-list">
+      <ion-item *ngFor="let w of workouts" class="workout-card" lines="none">
+        <ion-label>
+          <div class="card-header">
+            <h3>{{ w.title }}</h3>
+            <ion-note slot="end">{{ w.date | date:'d MMMM y' }}</ion-note>
+          </div>
+
+          <p class="subline">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ w.duration }}</span>
+            <span class="dot">•</span>
+            <span>{{ w.reps }}</span>
+          </p>
+
+          <div class="metrics-row">
+            <div class="metric">
+              <ion-icon name="flame"></ion-icon>
+              <span class="label">Calories</span>
+              <span class="value">{{ w.calories }} Kcal</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="metric">
+              <ion-icon name="heart"></ion-icon>
+              <span class="label">Heart Rate</span>
+              <span class="value">{{ w.heartRate }} Bpm</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="metric">
+              <ion-icon name="pulse"></ion-icon>
+              <span class="label">Bpm</span>
+              <span class="value">{{ w.bpm }} Bpm</span>
+            </div>
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div>
 </ion-content>

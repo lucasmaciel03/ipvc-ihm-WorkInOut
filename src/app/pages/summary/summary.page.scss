@@ -1,14 +1,18 @@
-/*********************************
- *   Summary Page – Estilos      *
- *********************************/
+.header-container { margin-bottom: -1px; }
+
 .stats-toolbar {
   --background: var(--color-background-app);
   --padding-start: 0;
   --padding-end: 0;
   --min-height: 48px;
+  --border-width: 0;
   --inner-border-width: 0;
-}
+  --box-shadow: none;
 
+
+  &::part(native)            { box-shadow: none; }
+  &::part(toolbar-background){ border-bottom: none; box-shadow: none; }
+}
 
 .stats-toolbar ion-title {
   font-size: 20px;
@@ -18,7 +22,7 @@
  .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height:100%;
   background-color: var(--color-background-app);
   padding: 20px 16px;
   color: var(--color-text);
@@ -31,6 +35,7 @@
   object-fit: cover;
   border-radius: 16px;
   margin-bottom: 12px;
+  padding-top: 10px;
 }
 
 /*** Títulos & links ***/
@@ -54,7 +59,7 @@ h3 {
 }
 
 .link-primary {
-  color: var(--color-primary);    /* laranja #FF6600 */
+  color: var(--color-primary);
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
@@ -65,23 +70,23 @@ h3 {
 /************  Stat cards  ************/
 .stat-row {
   display: flex;
-  gap: 0px;            /* espaço entre os dois cartões */
+  gap: 0px;
   width: 100%;
 }
 
 .stat-row .stat-card {
-  flex: 1 1 0;          /* 2 cartões: cada um 50 % */
+  flex: 1 1 0;
 }
 
 .stat-card {
-  --background: var(--color-background-input);   /* #202020 */
+  --background: var(--color-background-input);
   border-radius: 16px;
-  padding: 20px 12px;            /* espaço interno generoso */
+  padding: 20px 12px;
   display: flex;
   flex-direction: column;
-  gap: 16px;                     /* separa header do valor */
-  width: 100%;                   /* cobre a col de 6   */
-  height: 160px;                 /* altura fixa p/ equilíbrio */
+  gap: 16px;
+  width: 100%;
+  height: 160px;
   text-align: center;
 }
 
@@ -93,7 +98,7 @@ h3 {
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
-  color: var(--color-primary);   /* ícone + texto laranja */
+  color: var(--color-primary);
 }
 
 .stat-header ion-icon {
@@ -101,98 +106,30 @@ h3 {
 }
 
 .stat-value {
-  flex: 1;                       /* empurra para baixo */
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;       /* alinha à esquerda como no mock-up */
+  align-items: center;
   line-height: 1.1;
   color: var(--color-text);
 }
 
 .stat-value,
-.stat-value .number {            /* “x138” ou “47” */
+.stat-value .number {
   font-size: 35px;
   font-weight: 700;
 }
 
-.stat-value .unit {              /* “min” */
+.stat-value .unit {
   font-size: 35px;
   font-weight: 600;
-  margin-left: 2px;              /* ligeiro afastamento */
-}
-
-/****  Cards “Recent Bicep Programs”  ****/
-.recent-list {
-  background: transparent;
-  padding: 0;
-
-  ion-item.workout-card {
-    --background: var(--color-background-app);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 7px 5px 9px;
-    margin-bottom: 14px;
-
-    ion-note {
-      font-size: 0.75rem;
-      color: var(--color-gray);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      h3 {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--color-text);
-      }
-    }
-
-    .subline {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin: 4px 0 14px;
-      font-size: 0.75rem;
-      color: var(--color-gray);
-
-      ion-icon { font-size: 14px; }
-      .dot     { font-size: 6px; line-height: 6px; }
-    }
-
-    .metrics-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-    }
-
-    .divider {
-      width: 1px;
-      background: var(--color-border);
-      margin: 0 12px;
-    }
-
-    .metric {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      align-items: flex-start;
-
-      ion-icon   { font-size: 18px; color: var(--color-primary); }
-      .label     { font-size: 0.75rem; color: var(--color-gray); }
-      .value     { font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
-    }
-  }
+  margin-left: 2px;
 }
 
 /************  Divider + Header  ************/
 .divider {
-  margin: 8px 0 8px;          /* espaço acima/abaixo */
+  margin: 8px 0 16px;
   border-top: 1px solid var(--color-border);
   width: 100%;
 }
@@ -201,7 +138,6 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-bottom: 8px;
   color: var(--color-text);
 
   h2 {
@@ -216,4 +152,14 @@ h3 {
     font-weight: 500;
     text-decoration: none;
   }
+}
+
+.continue-btn {
+  --background: var(--color-primary);
+  --color: #000000;
+  font-weight: 600;
+  text-transform: none;
+  height: 48px;
+  --border-radius: 16px;
+  margin: 16px 0 16px;
 }

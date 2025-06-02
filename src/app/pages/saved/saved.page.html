@@ -1,13 +1,95 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>saved</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">saved</ion-title>
+  <div class="container">
+
+    <!-- Header -->
+    <ion-toolbar class="stats-toolbar">
+      <ion-title slot="start" color="light">Saved</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" color="light">
+          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
-  </ion-header>
+
+    <!-- Selector -->
+    <ion-segment mode="md" [(ngModel)]="selectedTab" class="saved-segment">
+      <ion-segment-button value="workouts">
+        <ion-icon name="barbell"></ion-icon>
+        <ion-label>Workouts</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="articles">
+        <ion-icon name="book"></ion-icon>
+        <ion-label>Articles</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Workouts list -->
+    <ng-container *ngIf="selectedTab === 'workouts'; else articleTab">
+      <ion-list lines="none" class="workout-list" *ngIf="savedWorkouts.length; else empty">
+        <ion-item *ngFor="let w of savedWorkouts" class="workout-card" lines="none">
+          <ion-label>
+            <div class="card-header">
+              <h3>{{ w.title }}</h3>
+              <ion-note slot="end">{{ w.date | date:'d MMMM y' }}</ion-note>
+            </div>
+
+            <p class="subline">
+              <ion-icon name="time-outline"></ion-icon>
+              <span>{{ w.duration }}</span>
+              <span class="dot">•</span>
+              <span>{{ w.reps }}</span>
+            </p>
+
+            <div class="metrics-row">
+              <div class="metric">
+                <ion-icon name="flame"></ion-icon>
+                <span class="label">Calories</span>
+                <span class="value">{{ w.calories }} Kcal</span>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="metric">
+                <ion-icon name="heart"></ion-icon>
+                <span class="label">Heart Rate</span>
+                <span class="value">{{ w.heartRate }} Bpm</span>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="metric">
+                <ion-icon name="pulse"></ion-icon>
+                <span class="label">Bpm</span>
+                <span class="value">{{ w.bpm }} Bpm</span>
+              </div>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <!-- Articles list -->
+    <ng-template #articleTab>
+      <ion-list lines="none" class="workout-list" *ngIf="savedArticles.length; else empty">
+        <ion-item *ngFor="let a of savedArticles" lines="none" class="workout-card">
+          <ion-label color="light">
+            <h3>{{ a.title }}</h3>
+            <p>{{ a.subtitle }}</p>
+          </ion-label>
+          <ion-icon slot="end" name="chevron-forward"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ng-template>
+
+    <!-- Empty state -->
+    <ng-template #empty>
+      <div class="empty-state">
+        <ion-icon name="bookmark-outline"></ion-icon>
+        <p>No items saved yet.</p>
+      </div>
+    </ng-template>
+
+  </div>
 </ion-content>
