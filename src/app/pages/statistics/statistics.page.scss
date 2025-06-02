@@ -1,98 +1,122 @@
-.statistics-content {
-  --padding-bottom: 16px;
-  --background: var(--color-background-app);
-  background: var(--color-background-app);
-}
-
-/*–––––––––––– Metric selector –––––––––––*/
-.segment-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.metric-segment {
-  display: inline-flex;
-  margin: 12px auto 24px;
-  max-width: 90%;
-
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  background: var(--color-background-input);
-  padding: 0;
-
-  --indicator-height: 2px;
-  --indicator-color: var(--color-primary);
-
-  ion-segment-button {
-    --min-height: 32px;
-    --color: var(--color-gray);
-    --color-checked: var(--color-primary);
-    text-transform: uppercase;
-
-    padding: 4px 6px;
-
-    border: none;
-    margin: 0;
-    font-size: 0.75rem;
-
-    ion-icon {
-      margin-inline-end: 4px;
-      font-size: 16px;
-      color: var(--color-gray);
-    }
-
-    &.segment-button-checked ion-icon {
-      color: var(--color-primary);
-    }
-  }
-}
-
-
-/*–––––––––––– Chart placeholder –––––––––––*/
-.chart-wrapper {
-  margin: 0 16px;
-  height: 180px;
-  border-radius: 12px;
-  background: var(--color-gray);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .chart-placeholder {
-    color: #000;
-    font-size: 0.9rem;
-  }
-}
-
-/*–––––––––––– Recent header –––––––––––*/
-.recent-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  h2 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  ion-button.see-all-btn {
-    --color: var(--color-primary);
-    font-weight: 600;
-  }
-}
-
-/*–––––––––––– Workouts list –––––––––––*/
-.recent-list {
-  background: transparent;
-  padding: 0 16px;
-
-  ion-item.workout-card {
+  .statistics-content {
+    --padding-bottom: 16px;
     --background: var(--color-background-app);
+    background: var(--color-background-app);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px 16px;          // mesmo gutter da home
+  }
+
+  /* ---------------------------------
+    Toolbar (título à esquerda)
+  ----------------------------------*/
+  .stats-toolbar {
+    --padding-start: 0;          // elimina recuo interno
+    --padding-end: 0;            // idem no lado direito
+    --min-height: 48px;          // opcional: torna-a um pouco mais baixa
+  }
+
+  .stats-toolbar ion-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  /* ---------------------------------
+    Metric selector (full-width)
+  ----------------------------------*/
+  .metric-segment {
+    width: 100%;                 // ocupa toda a linha
+    margin: 12px 0 24px;         // mantém espaçamento vertical
     border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-background-input);
+
+    --indicator-height: 2px;
+    --indicator-color: var(--color-primary);
+
+    ion-segment-button {
+      --min-height: 32px;
+      --color: var(--color-gray);
+      --color-checked: var(--color-primary);
+      padding: 4px 6px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+
+      ion-icon {
+        margin-inline-end: 4px;
+        font-size: 16px;
+        color: var(--color-gray);
+      }
+
+      &.segment-button-checked ion-icon {
+        color: var(--color-primary);
+      }
+    }
+  }
+
+  /* ---------------------------------
+    Chart
+  ----------------------------------*/
+  .chart-wrapper {
+    margin: 0;                   // sem margem lateral extra
+    height: 180px;
     border-radius: 16px;
-    padding: 7px 5px 9px;
-    margin-bottom: 14px;
+    background: var(--color-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .chart-placeholder {
+      color: #000;
+      font-size: 0.9rem;
+    }
+  }
+
+  .divider {
+    margin: 16px 0 8px;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+  }
+
+  /* ---------------------------------
+    Recent Workouts (mesmo de antes)
+  ----------------------------------*/
+  .recent-header{
+      color: var(--color-text);
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding-bottom: 8px;
+
+      h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--color-text);
+      }
+
+      a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+      }
+  }
+
+  .recent-list {
+    background: transparent;
+    padding: 0;
+
+    ion-item.workout-card {
+      --background: var(--color-background-app);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 7px 5px 9px;
+      margin-bottom: 14px;
 
     ion-note {
       font-size: 0.75rem;

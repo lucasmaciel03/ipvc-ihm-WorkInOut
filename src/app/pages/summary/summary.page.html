@@ -1,0 +1,136 @@
+<div class="header-container">
+  <ion-toolbar class="stats-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" color="light" routerLink="/home">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+      <!-- título fica no mesmo slot start, logo a seguir -->
+      <ion-title color="light">Resumo</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</div>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+
+    <!-- Hero -->
+    <ion-img src="assets/img/bicep.jpg" class="hero"></ion-img>
+
+
+    <!-- cabeçalho da secção -->
+    <div class="title-row">
+      <h2>Bicep Program</h2>
+      <!-- clicável; muda texto More/Less -->
+      <a class="link-primary"
+        (click)="toggleMore()">
+        {{ showMore ? 'Less' : 'More' }}
+      </a>
+    </div>
+
+    <!-- 1.ª linha de cards (Calories / Time) -->
+    <div class="stat-row">
+      <!-- CALORIES -->
+      <ion-card class="stat-card">
+        <div class="stat-header">
+          <ion-icon name="flame" class="icon-primary"></ion-icon>
+          <span class="label">CALORIES</span>
+        </div>
+        <div class="stat-value">138<br><span class="unit">Kcal</span></div>
+      </ion-card>
+
+      <!-- TIME -->
+      <ion-card class="stat-card">
+        <div class="stat-header">
+          <ion-icon name="alarm" class="icon-primary"></ion-icon>
+          <span class="label">TIME</span>
+        </div>
+        <div class="stat-value"><span class="number">47</span><span class="unit"> min</span></div>
+      </ion-card>
+    </div>
+
+    <!-- 2.ª linha — só aparece quando showMore == true -->
+    <div class="stat-row" *ngIf="showMore">
+      <!-- REPETIÇÕES -->
+      <ion-card class="stat-card">
+        <div class="stat-header">
+          <ion-icon name="close" class="icon-primary"></ion-icon>
+          <span class="label">REPETIÇÕES</span>
+        </div>
+        <div class="stat-value">x138</div>
+      </ion-card>
+
+      <!-- PESO -->
+      <ion-card class="stat-card">
+        <div class="stat-header">
+          <ion-icon name="barbell" class="icon-primary"></ion-icon>
+          <span class="label">PESO</span>
+        </div>
+        <div class="stat-value">138<br><span class="unit">Kg</span></div>
+      </ion-card>
+    </div>
+
+    <!-- Divider (linha cinza fina) -->
+    <hr class="divider" />
+
+    <!-- Header “Recent Bicep Programs” -->
+    <div class="recent-header">
+      <h2>Recent Bicep Programs</h2>
+      <a class="link-primary" routerLink="/history">See All</a>
+    </div>
+
+    <!-- cards “Recent Bicep Programs” -->
+    <ion-list lines="none" class="recent-list">
+      <ion-item *ngFor="let s of sessions" class="workout-card" lines="none">
+        <ion-label>
+
+          <!--  header (título + data) -->
+          <div class="card-header">
+            <h3>Bicep Program</h3>
+            <ion-note slot="end">{{ s.date | date:'d MMMM y' }}</ion-note>
+          </div>
+
+          <!-- sub-linha tempo + reps (mete os valores que tiveres) -->
+          <p class="subline">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>12 min</span>
+            <span class="dot">•</span>
+            <span>3 × 12 reps</span>
+          </p>
+
+          <!-- métricas -->
+          <div class="metrics-row">
+            <div class="metric">
+              <ion-icon name="flame"></ion-icon>
+              <span class="label">Calories</span>
+              <span class="value">{{ s.calories }} Kcal</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="metric">
+              <ion-icon name="heart"></ion-icon>
+              <span class="label">Heart Rate</span>
+              <span class="value">{{ s.heart }} Bpm</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="metric">
+              <ion-icon name="pulse"></ion-icon>
+              <span class="label">Bpm</span>
+              <span class="value">{{ s.bpmRest }} Bpm</span>
+            </div>
+          </div>
+
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
