@@ -1,0 +1,79 @@
+{
+  "program": "Hypertrophy Builder",
+  "goal": "Muscle gain & Strength",
+  "level": "Intermediate",
+  "split": "Push / Pull / Legs",
+  "workouts": [
+    {
+      "id": 1,
+      "title": "Push Day",
+      "duration": "50 min",
+      "exercises": [
+        { "name": "Barbell Bench Press", "sets": 4, "reps": "8-10", "rest": "90 s" },
+        { "name": "Incline Dumbbell Press", "sets": 3, "reps": "10-12" },
+        { "name": "Overhead Shoulder Press", "sets": 3, "reps": "8-10" },
+        { "name": "Cable Fly", "sets": 3, "reps": "12-15" },
+        { "name": "Triceps Rope Push-Down", "sets": 3, "reps": "12-15" }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Pull Day",
+      "duration": "50 min",
+      "exercises": [
+        { "name": "Deadlift", "sets": 4, "reps": "6-8", "rest": "120 s" },
+        { "name": "Wide-Grip Pull-Up", "sets": 3, "reps": "Max" },
+        { "name": "Bent-Over Row", "sets": 3, "reps": "8-10" },
+        { "name": "Seated Cable Row", "sets": 3, "reps": "10-12" },
+        { "name": "EZ-Bar Curl", "sets": 3, "reps": "10-12" }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Leg Day",
+      "duration": "55 min",
+      "exercises": [
+        { "name": "Back Squat", "sets": 4, "reps": "6-8" },
+        { "name": "Romanian Deadlift", "sets": 3, "reps": "8-10" },
+        { "name": "Leg Press", "sets": 3, "reps": "10-12" },
+        { "name": "Walking DB Lunge", "sets": 3, "reps": "12 each leg" },
+        { "name": "Standing Calf Raise", "sets": 4, "reps": "15-20" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Upper Power",
+      "duration": "45 min",
+      "exercises": [
+        { "name": "Weighted Dip", "sets": 3, "reps": "5-6" },
+        { "name": "Weighted Pull-Up", "sets": 3, "reps": "5-6" },
+        { "name": "Pendlay Row", "sets": 3, "reps": "6-8" },
+        { "name": "Military Press", "sets": 3, "reps": "6-8" }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Arms & Abs Focus",
+      "duration": "35 min",
+      "exercises": [
+        { "name": "Close-Grip Bench", "sets": 3, "reps": "8-10" },
+        { "name": "Cable Curl", "sets": 3, "reps": "10-12" },
+        { "name": "Skull Crusher", "sets": 3, "reps": "10-12" },
+        { "name": "Hammer Curl", "sets": 3, "reps": "12" },
+        { "name": "Hanging Leg Raise", "sets": 3, "reps": "15" }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Dynamic Legs + Plyo",
+      "duration": "45 min",
+      "exercises": [
+        { "name": "Front Squat", "sets": 3, "reps": "8" },
+        { "name": "Box Jump", "sets": 4, "reps": "6" },
+        { "name": "Bulgarian Split Squat", "sets": 3, "reps": "10 each leg" },
+        { "name": "Hip Thrust", "sets": 3, "reps": "10-12" },
+        { "name": "Seated Calf Raise", "sets": 3, "reps": "15-20" }
+      ]
+    }
+  ]
+}

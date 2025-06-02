@@ -1,0 +1,76 @@
+{
+  "program": "Fit-For-Life",
+  "goal": "General fitness & Maintenance",
+  "level": "All levels",
+  "frequency": "3x per week",
+  "workouts": [
+    {
+      "id": 1,
+      "title": "Functional Circuit",
+      "duration": "35 min",
+      "exercises": [
+        { "name": "Kettlebell Swing", "time": "45 s", "rest": "15 s" },
+        { "name": "Goblet Squat", "time": "45 s", "rest": "15 s" },
+        { "name": "Push-Up to T-Raise", "time": "45 s", "rest": "15 s" },
+        { "name": "Plank Row", "time": "45 s", "rest": "60 s" }
+      ],
+      "rounds": 3
+    },
+    {
+      "id": 2,
+      "title": "Cardio & Core",
+      "duration": "40 min",
+      "structure": [
+        { "segment": "Jog / Row / Bike", "time": "20 min", "intensity": "Moderate" },
+        { "segment": "Core Trio", "rounds": 3, "details": [
+            { "name": "Plank", "time": "60 s" },
+            { "name": "Russian Twist", "reps": 20 },
+            { "name": "Bicycle Crunch", "reps": 30 }
+        ]}
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Mobility & Stretch",
+      "duration": "25 min",
+      "equipment": "Mat",
+      "blocks": [
+        { "name": "Dynamic Warm-Up", "time": "5 min" },
+        { "name": "Yoga Flow", "time": "15 min" },
+        { "name": "Static Stretch", "time": "5 min" }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Pilates Core Flow",
+      "duration": "30 min",
+      "equipment": "Mat",
+      "exercises": [
+        { "name": "Hundred", "time": "60 s" },
+        { "name": "Roll-Up", "reps": 10 },
+        { "name": "Single-Leg Stretch", "reps": 15 },
+        { "name": "Swimming", "time": "45 s" }
+      ],
+      "rounds": 3
+    },
+    {
+      "id": 5,
+      "title": "Steady-State Cardio",
+      "duration": "45 min",
+      "equipment": "Treadmill or Outdoor",
+      "intensity": "65 % HR-max continuous"
+    },
+    {
+      "id": 6,
+      "title": "Body-Weight Tune-Up",
+      "duration": "28 min",
+      "exercises": [
+        { "name": "Air Squat", "time": "45 s", "rest": "15 s" },
+        { "name": "Push-Up", "time": "45 s", "rest": "15 s" },
+        { "name": "Glute Bridge", "time": "45 s", "rest": "15 s" },
+        { "name": "Superman", "time": "45 s", "rest": "60 s" }
+      ],
+      "rounds": 4
+    }
+  ]
+}
