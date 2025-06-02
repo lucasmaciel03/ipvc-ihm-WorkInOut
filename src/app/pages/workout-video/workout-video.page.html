@@ -1,0 +1,77 @@
+<ion-header translucent="true" class="background-app">
+  <ion-toolbar color="background-app">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref="/tabs/home" icon="chevron-back-outline" color="light"></ion-back-button>
+    </ion-buttons>
+
+
+    <ion-title color="light">Workout</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="background-app">
+  <div class="container">
+    <ion-grid>
+      <ion-row class="nopadding">
+        <ion-col size="12" class="nopadding">
+          <ion-card class="card-video nopadding">
+            <video controls autoplay>
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-text class="text-white"><h3>Bicep Program</h3></ion-text>
+      </ion-row>      
+      <ion-row class="rating-row">
+        <ion-col size="12">          
+          <div class="stars-container">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </div>
+          <ion-chip class="chip-time">
+            <ion-icon name="stopwatch-outline" class="icon"></ion-icon>
+            <span>1 hora</span>
+          </ion-chip>
+          <div class="difficulty-container">
+            <span class="difficulty-label">Dificuldade</span>
+            <div class="flame-container">
+              <ion-icon name="flame"></ion-icon>
+              <ion-icon name="flame"></ion-icon>
+              <ion-icon name="flame-outline"></ion-icon>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <hr class="divider">
+
+      <ion-text class="text-white"><h3>Equipamento necessário</h3></ion-text>
+      <ion-row class="equipment-row">
+        <img src="assets/chest.png" alt="image" class="equipment-image">
+        <ion-text><p class="text-white">Halteres</p></ion-text>
+      </ion-row>
+      <ion-row class="equipment-row">
+        <img src="assets/chest.png" alt="image" class="equipment-image">
+        <ion-text><p class="text-white">Barra W ou Reta</p></ion-text>
+      </ion-row>
+      <ion-row class="equipment-row">
+        <img src="assets/chest.png" alt="image" class="equipment-image">
+        <ion-text><p class="text-white">Banco de musculação</p></ion-text>
+      </ion-row>
+      
+      <ion-button class="workout-start-button continue-btn" expand="block">COMEÇAR</ion-button>
+    </ion-grid>
+  </div>
+</ion-content>

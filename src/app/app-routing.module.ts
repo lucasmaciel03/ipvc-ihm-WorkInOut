@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },   {
+  },
+  {
+    path: 'workout-video',
+    loadChildren: () => import('./pages/workout-video/workout-video.module').then( m => m.WorkoutVideoPageModule)
+  },
+  {
     path: 'summary',
     loadChildren: () => import('./pages/summary/summary.module').then( m => m.SummaryPageModule)
   },

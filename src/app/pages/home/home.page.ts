@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+import { WorkoutVideoPage } from '../workout-video/workout-video.page';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,7 @@ export class HomePage implements OnInit {
   homeData:any;
   selectedCategory = 'All Type';
 ;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private modalCtrl:ModalController) { }
 
   ngOnInit() {
     this.http.get('assets/data/home-data.json').subscribe(data => {
@@ -28,5 +30,16 @@ export class HomePage implements OnInit {
 
   selectCategory(cat: string) {
     this.selectedCategory = cat;
+  }
+
+  async openWorkout(program:any){
+    const modal = await this.modalCtrl.create({
+      component: WorkoutVideoPage,
+      componentProps:{program},
+      cssClass:'slide-in-modal',
+      showBackdrop: true,
+    });
+
+    await modal.present();
   }
 }
