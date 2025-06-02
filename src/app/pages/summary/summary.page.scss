@@ -1,14 +1,18 @@
-/*********************************
- *   Summary Page – Estilos      *
- *********************************/
+.header-container { margin-bottom: -1px; }
+
 .stats-toolbar {
   --background: var(--color-background-app);
   --padding-start: 0;
   --padding-end: 0;
   --min-height: 48px;
+  --border-width: 0;
   --inner-border-width: 0;
-}
+  --box-shadow: none;
 
+
+  &::part(native)            { box-shadow: none; }
+  &::part(toolbar-background){ border-bottom: none; box-shadow: none; }
+}
 
 .stats-toolbar ion-title {
   font-size: 20px;
@@ -18,7 +22,7 @@
  .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height:100%;
   background-color: var(--color-background-app);
   padding: 20px 16px;
   color: var(--color-text);
@@ -31,6 +35,7 @@
   object-fit: cover;
   border-radius: 16px;
   margin-bottom: 12px;
+  padding-top: 10px;
 }
 
 /*** Títulos & links ***/
@@ -126,6 +131,7 @@ h3 {
 .recent-list {
   background: transparent;
   padding: 0;
+  margin-bottom: 0px;
 
   ion-item.workout-card {
     --background: var(--color-background-app);
@@ -216,4 +222,14 @@ h3 {
     font-weight: 500;
     text-decoration: none;
   }
+}
+
+.continue-btn {
+  --background: var(--color-primary);
+  --color: #000000;
+  font-weight: 600;
+  text-transform: none;
+  height: 48px;
+  --border-radius: 16px;
+  margin: 0px 0 16px;
 }

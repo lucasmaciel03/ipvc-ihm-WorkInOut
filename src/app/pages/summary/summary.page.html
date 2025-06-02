@@ -1,24 +1,21 @@
-<div class="header-container">
-  <ion-toolbar class="stats-toolbar">
-    <ion-buttons slot="start">
-      <ion-button fill="clear" color="light" routerLink="/home">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
-      <!-- título fica no mesmo slot start, logo a seguir -->
-      <ion-title color="light">Resumo</ion-title>
-    </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button fill="clear" size="small" color="light">
-        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-  </ion-toolbar>
-</div>
-
 <ion-content [fullscreen]="true">
-  <div class="container">
+  <div class="container"><!-- agora abraça TUDO: header + conteúdo -->
+
+    <!-- HEADER -->
+    <ion-toolbar class="stats-toolbar">
+      <ion-buttons slot="start">
+        <ion-button fill="clear" color="light" routerLink="/home">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-title color="light">Resumo</ion-title>
+      </ion-buttons>
+
+      <ion-buttons slot="end">
+        <ion-button fill="clear" size="small" color="light">
+          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
 
     <!-- Hero -->
     <ion-img src="assets/img/bicep.jpg" class="hero"></ion-img>
@@ -128,9 +125,12 @@
               <span class="value">{{ s.bpmRest }} Bpm</span>
             </div>
           </div>
-
         </ion-label>
       </ion-item>
     </ion-list>
+
+    <ion-button expand="block" class="continue-btn" href="/tabs/stats" routerDirection="forward">
+      Continuar
+    </ion-button>
   </div>
 </ion-content>

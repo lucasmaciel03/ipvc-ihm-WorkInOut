@@ -1,0 +1,155 @@
+.header-container {
+  width: 100%;
+  margin-bottom: -1px;
+}
+
+.stats-toolbar {
+  --background: var(--color-background-app);
+  --padding-start: 0;
+  --padding-end: 0;
+  --min-height: 48px;
+  --border-width: 0;
+  --inner-border-width: 0;
+  --box-shadow: none;
+}
+
+.stats-toolbar ion-title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* ---------- Layout base ---------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-background-app);
+  padding: 20px 16px;
+  color: var(--color-text);
+}
+
+/* ---------- Avatar + Nome ---------- */
+.avatar-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 12px 0 24px;
+  text-align: center;
+
+  .user-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .name { font-size: 20px; font-weight: 600; margin: 0; }
+  .role { font-size: 12px; color: var(--color-gray); margin: 0; }
+}
+
+/* ---------- Stats card ---------- */
+.stats-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 0;
+  margin-bottom: 32px;
+
+  .stat {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .number { font-size: 18px; font-weight: 600; color: var(--color-text); }
+    .label  { font-size: 10px; color: var(--color-gray); line-height: 1.2; }
+  }
+
+  .divider {
+    width: 1px;
+    background: var(--color-border);
+  }
+}
+
+/* ---------- Recent header ---------- */
+.recent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 8px;
+
+  h2 { margin: 0; font-size: 20px; font-weight: 600; }
+
+  .link-primary {
+    color: var(--color-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+}
+
+/* ---------- Cartões workout ---------- */
+.recent-list {
+  background: transparent;
+  padding: 0;
+  margin-bottom: 80px;               /* espaço p/ TabBar */
+
+  ion-item.workout-card {
+    --background: var(--color-background-app);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 7px 5px 9px;
+    margin-bottom: 14px;
+
+    ion-note { font-size: 0.75rem; color: var(--color-gray); }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      h3 { margin: 0; font-size: 1rem; font-weight: 600; color: var(--color-text); }
+    }
+
+    .subline {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 4px 0 14px;
+      font-size: 0.75rem;
+      color: var(--color-gray);
+
+      ion-icon { font-size: 14px; }
+      .dot     { font-size: 6px; line-height: 6px; }
+    }
+
+    .metrics-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .divider {
+      width: 1px;
+      background: var(--color-border);
+      margin: 0 12px;
+    }
+
+    .metric {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: flex-start;
+
+      ion-icon { font-size: 18px; color: var(--color-primary); }
+      .label   { font-size: 0.75rem; color: var(--color-gray); }
+      .value   { font-size: 0.9rem; font-weight: 600; color: var(--color-text); }
+    }
+  }
+}
