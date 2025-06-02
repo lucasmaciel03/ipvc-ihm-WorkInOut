@@ -45,11 +45,8 @@
 
     
 
-    <ion-list lines="none" class="recent-list">
-      <ion-item *ngFor="let w of recentWorkouts"
-                class="workout-card"
-                lines="none">
-
+    <ion-list lines="none" class="workout-list">
+      <ion-item *ngFor="let w of recentWorkouts" class="workout-card" lines="none">
         <ion-label>
           <div class="card-header">
             <h3>{{ w.title }}</h3>

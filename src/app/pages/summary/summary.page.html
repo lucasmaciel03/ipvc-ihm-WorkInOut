@@ -82,12 +82,10 @@
       <a class="link-primary" routerLink="/history">See All</a>
     </div>
 
-    <!-- cards “Recent Bicep Programs” -->
-    <ion-list lines="none" class="recent-list">
+    <!--cards-->
+    <ion-list lines="none" class="workout-list">
       <ion-item *ngFor="let s of sessions" class="workout-card" lines="none">
         <ion-label>
-
-          <!--  header (título + data) -->
           <div class="card-header">
             <h3>Bicep Program</h3>
             <ion-note slot="end">{{ s.date | date:'d MMMM y' }}</ion-note>
