@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { WorkoutSummaryPage } from '../workout-summary/workout-summary.page';
 
 @Component({
   selector: 'app-workout-timer',
@@ -60,6 +61,22 @@ export class WorkoutTimerPage implements OnInit, OnDestroy {
   dismiss() {
     clearInterval(this.interval);
     this.modalCtrl.dismiss();
+  }
+
+  async openSummary(){
+    clearInterval(this.interval);
+    const modal = await this.modalCtrl.create({
+      component: WorkoutSummaryPage,
+      cssClass: 'slide-in-modal workout-summary-sheet',
+      showBackdrop: true,
+      componentProps: {
+        duration: this.duration,
+        remainingSeconds: this.remainingSeconds
+      },
+      breakpoints: [0, 0.35, 0.5, 0.75],
+      initialBreakpoint: 0.75
+    });
+    await modal.present();
   }
 
 }

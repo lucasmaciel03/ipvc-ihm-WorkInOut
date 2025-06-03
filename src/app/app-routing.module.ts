@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'workout-timer',
     loadChildren: () => import('./pages/workout-timer/workout-timer.module').then( m => m.WorkoutTimerPageModule)
   },
+  {
+    path: 'workout-summary',
+    loadChildren: () => import('./pages/workout-summary/workout-summary.module').then( m => m.WorkoutSummaryPageModule)
+  },
 
  
 ];
