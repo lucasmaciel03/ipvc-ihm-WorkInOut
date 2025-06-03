@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true" class="get-started-content">
+  <img src="assets/bg_image.jpg" class="background-image" alt="Background" />
+  <div class="content-overlay">
+    <div class="main-content">
+      <div class="text-container">
+        <h1 class="primary-text" [class.animate-in]="animationsLoaded">TREINA O TEU CORPO</h1>
+        <h1 class="secondary-text" [class.animate-in]="animationsLoaded">ELEVA O TEU ESPÍRITO</h1>
+        <p class="tagline" [class.animate-in]="animationsLoaded">Alcança o teu melhor</p>
+      </div>
+      
+      <div class="buttons-container" [class.animate-in]="animationsLoaded">
+        <ion-button expand="block" class="start-button" (click)="goToTabs()" [class.pulse]="animationsLoaded">COMEÇAR</ion-button>
+      </div>
+      
+      <div class="register-text" [class.animate-in]="animationsLoaded">
+        <span>Não tens conta? </span>
+        <a (click)="goToRegister()">Registar</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

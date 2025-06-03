@@ -1,0 +1,64 @@
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="content-overlay">
+    <div class="login-container">
+      <div class="welcome-container" [class.animate-in]="animationsLoaded">
+        <h1 class="welcome-title">ESTÁS DE VOLTA! <span class="emoji">💪</span></h1>
+        <p class="welcome-subtitle">Pronto para mais um treino épico? <span class="emoji">🔥</span></p>
+      </div>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form" [class.animate-in]="animationsLoaded">
+        <div class="input-container">
+          <div class="input-wrapper">
+            <ion-icon name="mail-outline"></ion-icon>
+            <ion-input 
+              type="email" 
+              formControlName="email"
+              placeholder="O teu email"
+              inputmode="email"
+            ></ion-input>
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')">
+            Email é obrigatório
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')">
+            Email inválido
+          </div>
+        </div>
+        
+        <div class="input-container">
+          <div class="input-wrapper">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input 
+              [type]="showPassword ? 'text' : 'password'" 
+              formControlName="password"
+              placeholder="A tua password"
+            ></ion-input>
+            <div class="password-toggle" (click)="togglePasswordVisibility(); $event.stopPropagation()">
+              <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
+            Password é obrigatória
+          </div>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="login-btn"
+          [disabled]="!loginForm.valid"
+        >
+          Entrar
+        </button>
+      </form>
+      
+      <div class="footer-links" [class.animate-in]="animationsLoaded">
+        <a (click)="forgotPassword()" class="forgot-link">Esqueceste-te da tua password?</a>
+        
+        <div class="register-container">
+          <span>Não tens conta?</span>
+          <a (click)="goToRegister()" class="register-link">Registar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,444 @@
+.register-content {
+  --background: var(--color-background-app);
+  
+  .back-nav {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    
+    .back-btn {
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      color: var(--color-text);
+      padding: 0;
+      cursor: pointer;
+      font-family: var(--font-body);
+      
+      ion-icon {
+        font-size: 1.5rem;
+        margin-right: 4px;
+        color: var(--color-gray);
+      }
+      
+      span {
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+      
+      &:hover {
+        ion-icon, span {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+  
+  .register-container {
+    padding: 2.5rem 1.5rem 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  // Estilos para a barra de progresso
+  .progress-container {
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    
+    .progress-bar {
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+      
+      .progress {
+        height: 100%;
+        background-color: var(--color-primary);
+        transition: width 0.3s ease;
+      }
+    }
+    
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--color-text);
+      
+      .current-step {
+        font-weight: 600;
+      }
+      
+      .total-steps {
+        opacity: 0.7;
+      }
+    }
+  }
+  
+  // Estilos para os formulários
+  .form-step {
+    margin-bottom: 1rem;
+    animation: fadeIn 0.3s ease;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    .welcome-title {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      
+      .emoji {
+        font-size: 2rem;
+        margin-left: 0.5rem;
+        vertical-align: middle;
+      }
+    }
+    
+    h1 {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    
+    .step-description {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-gray);
+      margin-bottom: 3rem;
+      
+      .emoji {
+        font-size: 1rem;
+        vertical-align: middle;
+      }
+    }
+    
+    // Novo estilo para os campos de entrada
+    .input-container {
+      margin-bottom: 1.5rem;
+      
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background-color: var(--color-background-input);
+        border-radius: 8px;
+        padding: 0 16px;
+        height: 56px;
+        
+        ion-icon {
+          color: var(--color-gray);
+          font-size: 1.5rem;
+          margin-right: 12px;
+        }
+        
+        ion-input {
+          --color: var(--color-text);
+          --placeholder-color: var(--color-gray);
+          --padding-start: 0;
+          --padding-end: 0;
+          font-family: var(--font-body);
+          width: 100%;
+          --placeholder-opacity: 0.7;
+          --highlight-color-focused: var(--color-primary);
+          --highlight-color-valid: var(--color-primary);
+          --highlight-color-invalid: #ff4961;
+        }
+        
+        .password-toggle {
+          position: absolute;
+          right: 16px;
+          font-size: 1.3rem;
+          color: var(--color-gray);
+          cursor: pointer;
+          z-index: 20;
+          padding: 10px;
+          margin: -10px;
+        }
+      }
+    }
+    
+    // Estilos para os campos da última página
+    .physical-info-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+      
+      .info-field {
+        display: flex;
+        flex-direction: column;
+        
+        label {
+          font-family: var(--font-body);
+          font-size: 0.9rem;
+          color: var(--color-text);
+          margin-bottom: 6px;
+          font-weight: 500;
+        }
+        
+        .input-field {
+          position: relative;
+          display: flex;
+          align-items: center;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          height: 48px;
+          overflow: hidden;
+          
+          ion-input {
+            --color: var(--color-text);
+            --placeholder-color: var(--color-gray);
+            --padding-start: 16px;
+            --padding-end: 16px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            width: 100%;
+            --placeholder-opacity: 0.7;
+            --highlight-color-focused: var(--color-primary);
+            --highlight-color-valid: var(--color-primary);
+            --highlight-color-invalid: #ff4961;
+          }
+          
+          .unit {
+            position: absolute;
+            right: 16px;
+            color: var(--color-gray);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+          }
+        }
+        
+        .select-field {
+          position: relative;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          height: 48px;
+          overflow: hidden;
+          
+          ion-select {
+            --color: var(--color-text);
+            --placeholder-color: var(--color-gray);
+            --padding-start: 16px;
+            --padding-end: 40px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            width: 100%;
+            height: 100%;
+            --placeholder-opacity: 0.7;
+          }
+          
+          .select-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-gray);
+            font-size: 1.25rem;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+    
+    .error-message {
+      color: #ff4961;
+      font-size: 0.8rem;
+      margin: 0.5rem 0 1rem 1rem;
+      font-family: var(--font-body);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .title-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      position: relative;
+      
+      .objectives-title,
+      .personal-info-title {
+        font-family: var(--font-title);
+        font-size: 2rem;
+        color: var(--color-text);
+        text-transform: capitalize;
+        margin: 0;
+        line-height: 1;
+      }
+      
+      .title-emoji {
+        font-size: 4rem;
+        line-height: 1;
+        margin-left: 0.5rem;
+      }
+    }
+    
+    // Estilos para os cards de objetivos
+    .objectives-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      
+      .objective-card {
+        background-color: var(--color-background-input);
+        border-radius: 20px;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+        
+        .objective-content {
+          z-index: 2;
+          
+          h3 {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin: 0 0 0.4rem 0;
+          }
+          
+          p {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--color-gray);
+            margin: 0;
+          }
+        }
+        
+        .objective-icon {
+          z-index: 2;
+          
+          .emoji {
+            font-size: 2rem;
+          }
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, var(--color-primary) 0%, transparent 100%);
+          opacity: 0;
+          z-index: 1;
+          transition: opacity 0.3s ease;
+        }
+        
+        &.selected {
+          box-shadow: 0 0 0 2px var(--color-primary);
+          
+          &::after {
+            opacity: 0.15;
+          }
+          
+          .objective-content {
+            h3 {
+              color: var(--color-primary);
+            }
+          }
+        }
+        
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+  
+  // Estilos para os botões de navegação
+  .nav-buttons-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .previous-step-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding: 10px;
+    cursor: pointer;
+    
+    ion-icon {
+      margin-right: 4px;
+      font-size: 1.25rem;
+    }
+    
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+  
+  .next-step-btn {
+    margin-bottom: 1rem;
+    background: #ff6600;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    height: 48px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+    width: 100%;
+    max-width: 425px;
+    padding: 0 24px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    
+    &:hover {
+      background: #ff7722;
+    }
+    
+    &:active {
+      background: #e55c00;
+      transform: scale(0.98);
+    }
+  }
+  
+  ion-button:not([fill="outline"], .continue-button) {
+    --background: var(--color-primary);
+    --background-activated: var(--color-primary);
+    --background-hover: var(--color-primary);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

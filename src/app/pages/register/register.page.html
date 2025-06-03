@@ -1,0 +1,253 @@
+
+
+<ion-content [fullscreen]="true" class="register-content">
+  <div class="back-nav">
+    <button class="back-btn" (click)="goBack()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+      <span>Início</span>
+    </button>
+  </div>
+  <div class="register-container">
+    <!-- Progresso do registo -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="(currentStep / totalSteps) * 100"></div>
+      </div>
+      <div class="step-indicator">
+        <span class="current-step">Passo {{ currentStep }}</span>
+        <span class="total-steps">de {{ totalSteps }}</span>
+      </div>
+    </div>
+
+    <!-- Formulário Passo 1: Dados básicos -->
+    <div class="form-step" *ngIf="currentStep === 1">
+      <h1 class="welcome-title">BEM-VINDO <span class="emoji">👋</span></h1>
+      <p class="step-description">Pronto para uma nova jornada? <span class="emoji">🔥</span></p>
+      
+      <form [formGroup]="step1Form">
+        <div class="input-container">
+          <div class="input-wrapper">
+            <ion-icon name="person-outline"></ion-icon>
+            <ion-input type="text" placeholder="O teu nome" formControlName="name"></ion-input>
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('name')?.touched && step1Form.get('name')?.hasError('required')">
+            Nome é obrigatório
+          </div>
+        </div>
+        
+        <div class="input-container">
+          <div class="input-wrapper">
+            <ion-icon name="mail-outline"></ion-icon>
+            <ion-input type="email" placeholder="O teu email" formControlName="email"></ion-input>
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('email')?.touched && step1Form.get('email')?.hasError('required')">
+            Email é obrigatório
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('email')?.touched && step1Form.get('email')?.hasError('email')">
+            Email inválido
+          </div>
+        </div>
+        
+        <div class="input-container">
+          <div class="input-wrapper">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input [type]="showPassword ? 'text' : 'password'" placeholder="A tua password" formControlName="password"></ion-input>
+            <div class="password-toggle" (click)="togglePasswordVisibility(); $event.stopPropagation()">
+              <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('password')?.touched && step1Form.get('password')?.hasError('required')">
+            Password é obrigatória
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('password')?.touched && step1Form.get('password')?.hasError('minlength')">
+            Password deve ter no mínimo 6 caracteres
+          </div>
+        </div>
+        
+        <div class="input-container">
+          <div class="input-wrapper">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <ion-input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirma a tua password" formControlName="confirmPassword"></ion-input>
+            <div class="password-toggle" (click)="toggleConfirmPasswordVisibility(); $event.stopPropagation()">
+              <ion-icon [name]="showConfirmPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+            </div>
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('confirmPassword')?.touched && step1Form.get('confirmPassword')?.hasError('required')">
+            Confirmação de password é obrigatória
+          </div>
+          <div class="error-message" *ngIf="step1Form.get('confirmPassword')?.touched && step1Form.get('confirmPassword')?.hasError('passwordMismatch')">
+            As passwords não coincidem
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Formulário Passo 2: Objetivos -->
+    <div class="form-step" *ngIf="currentStep === 2">
+      <div class="title-container">
+        <h1 class="objectives-title">Quais os Teus objetivos?</h1>
+        <div class="title-emoji">🎯</div>
+      </div>
+      
+      <form [formGroup]="step2Form">
+        <div class="objectives-container">
+          <div 
+            class="objective-card" 
+            [class.selected]="step2Form.get('objective')?.value === 'perder-peso'"
+            (click)="selectObjective('perder-peso')">
+            <div class="objective-content">
+              <h3>Perder Peso</h3>
+              <p>Queimar Calorias e Tonificar o Corpo</p>
+            </div>
+            <div class="objective-icon">
+              <span class="emoji">🔥</span> <!-- Fogo -->
+            </div>
+          </div>
+          
+          <div 
+            class="objective-card" 
+            [class.selected]="step2Form.get('objective')?.value === 'ganhar-musculo'"
+            (click)="selectObjective('ganhar-musculo')">
+            <div class="objective-content">
+              <h3>Ganhar Músculo</h3>
+              <p>Aumentar massa e força</p>
+            </div>
+            <div class="objective-icon">
+              <span class="emoji">🏋️</span> <!-- Pessoa levantando peso -->
+            </div>
+          </div>
+          
+          <div 
+            class="objective-card" 
+            [class.selected]="step2Form.get('objective')?.value === 'ficar-em-forma'"
+            (click)="selectObjective('ficar-em-forma')">
+            <div class="objective-content">
+              <h3>Ficar em Forma</h3>
+              <p>Sentir-se mais saudável</p>
+            </div>
+            <div class="objective-icon">
+              <span class="emoji">🧘</span> <!-- Pessoa meditando -->
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Formulário Passo 3: Dados físicos -->
+    <div class="form-step" *ngIf="currentStep === 3">
+      <div class="title-container">
+        <h1 class="personal-info-title">Fala-nos um pouco<br>Sobre ti</h1>
+        <div class="title-emoji">👱‍♂️</div>
+      </div>
+      
+      <form [formGroup]="step3Form">
+        <div class="physical-info-container">
+          <div class="info-field">
+            <label>Altura</label>
+            <div class="input-field">
+              <ion-input 
+                type="number" 
+                formControlName="height"
+                placeholder="198"
+                inputmode="numeric"
+                class="custom-input"
+              ></ion-input>
+              <span class="unit">cm</span>
+            </div>
+            <div class="error-message" *ngIf="step3Form.get('height')?.touched && step3Form.get('height')?.errors?.['required']">
+              A altura é obrigatória
+            </div>
+          </div>
+          
+          <div class="info-field">
+            <label>Peso</label>
+            <div class="input-field">
+              <ion-input 
+                type="number" 
+                formControlName="weight"
+                placeholder="90"
+                inputmode="numeric"
+                class="custom-input"
+              ></ion-input>
+              <span class="unit">kg</span>
+            </div>
+            <div class="error-message" *ngIf="step3Form.get('weight')?.touched && step3Form.get('weight')?.errors?.['required']">
+              O peso é obrigatório
+            </div>
+          </div>
+          
+          <div class="info-field">
+            <label>Idade</label>
+            <div class="input-field">
+              <ion-input 
+                type="number" 
+                formControlName="age"
+                placeholder="32"
+                inputmode="numeric"
+                class="custom-input"
+              ></ion-input>
+            </div>
+            <div class="error-message" *ngIf="step3Form.get('age')?.touched && step3Form.get('age')?.errors?.['required']">
+              A idade é obrigatória
+            </div>
+          </div>
+          
+          <div class="info-field">
+            <label>Género</label>
+            <div class="select-field">
+              <ion-select 
+                formControlName="gender" 
+                placeholder="Selecionar" 
+                interface="popover" 
+                class="custom-select"
+              >
+                <ion-select-option value="masculino">Masculino</ion-select-option>
+                <ion-select-option value="feminino">Feminino</ion-select-option>
+                <ion-select-option value="outro">Outro</ion-select-option>
+                <ion-select-option value="nao_especificado">Não Mencionar</ion-select-option>
+              </ion-select>
+              <ion-icon name="chevron-down-outline" class="select-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Botões de navegação -->
+    <div class="nav-buttons-container">
+      <!-- Botão de voltar ao passo anterior (apenas para passos > 1) -->
+      <button 
+        *ngIf="currentStep > 1" 
+        class="previous-step-btn"
+        (click)="previousStep()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <span>Voltar atrás</span>
+      </button>
+      
+      <!-- Botões de continuar/completar -->
+      <button 
+        *ngIf="currentStep === 1" 
+        class="next-step-btn"
+        [disabled]="!devMode && !step1Form.valid"
+        (click)="nextStep()">
+        CONTINUAR
+      </button>
+      
+      <button 
+        *ngIf="currentStep > 1 && currentStep < totalSteps" 
+        class="next-step-btn"
+        [disabled]="!devMode && currentStep === 2 && !step2Form.valid"
+        (click)="nextStep()">
+        CONTINUAR
+      </button>
+      
+      <button 
+        *ngIf="currentStep === totalSteps" 
+        class="next-step-btn finish-btn"
+        [disabled]="!devMode && !step3Form.valid"
+        (click)="nextStep()">
+        TERMINAR
+      </button>
+    </div>
+  </div>
+</ion-content>
