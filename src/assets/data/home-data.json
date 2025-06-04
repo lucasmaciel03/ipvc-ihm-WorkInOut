@@ -20,7 +20,12 @@
       "image": "assets/chest.png",
       "type": "Chest",
       "calories": 150,
-      "equipment":["Halteres", "Barra", "Banco de Supino"]
+      "equipment":[
+        {"name":"Tapete", "image":"assets/img/tapete.jpg"}
+      ],
+      "difficulty": 3,
+      "rating": 5,
+      "video":"assets/video/chest.mp4"
     },
     {
       "id": 2,
@@ -30,7 +35,13 @@
       "image": "assets/bicep.png",
       "type": "Arms",
       "calories": 120,
-      "equipment":["Halteres", "Barra"]
+      "equipment":[
+        {"name":"Halteres", "image":"assets/img/haltere.jpg"},
+        {"name":"Barra", "image":"assets/img/barra.jpg"}
+      ],
+      "difficulty": 2,
+       "rating": 4,
+       "video":"assets/video/bicep2.mp4"
     },
     {
       "id": 3,
@@ -40,7 +51,14 @@
       "image": "assets/img/legs.jpg",
       "type": "Leg",
       "calories": 245,
-      "equipment":["Cadeira Extensora", "Smith Machine", "Leg Press"]
+      "equipment":[
+        {"name":"Cadeira Extensora", "image":"assets/img/extensora.jpg"},
+        {"name":"Smith Machine", "image":"assets/img/smith.jpg"},
+        {"name":"Leg Press", "image":"assets/img/legpress.jpg"}
+      ],
+      "difficulty": 3,
+      "rating": 4,
+      "video":"assets/video/leg_press.mp4"
     },
     {
       "id": 4,
@@ -50,7 +68,14 @@
       "image": "assets/img/cardio.jpg",
       "type": "Cardio",
       "calories": 200,
-      "equipment":["Bicicleta", "Passadeira", "Elíptica"]
+      "equipment":[
+        {"name":"Bicicleta", "image":"assets/img/bike.jpg"},
+        {"name":"Passadeira", "image":"assets/img/passadeira.jpg"},
+        {"name":"Elíptica", "image":"assets/img/elitica.jpg"}
+      ],
+      "difficulty": 1,
+      "rating": 2,
+      "video":"assets/video/cardio.mp4"
     },
     {
       "id":5,
@@ -60,7 +85,13 @@
       "image": "assets/img/abs.jpg",
       "type": "Core",
       "calories": 100,
-      "equipment":["Colchão", "Bola de Pilates"]
+      "equipment":[
+        {"name":"Tapete", "image":"assets/img/tapete.jpg"},
+        {"name":"Bola de Pilates", "image":"assets/img/bola.jpg"}
+      ],
+      "difficulty": 1,
+      "rating": 3,
+      "video":"assets/video/abs.mp4"
     },
     {
       "id": 6,
@@ -70,17 +101,30 @@
       "image": "assets/img/back.jpg",
       "type": "Back",
       "calories": 180,
-      "equipment":["Barra", "Polia Pull Up", "Máquina de Remada"]
+      "equipment":[
+        {"name":"Barra", "image":"assets/img/barra.jpg"},
+        {"name":"Polia Pull Up", "image":"assets/img/polia.jpg"},
+        {"name":"Máquina de Remada", "image":"assets/img/remada.jpg"}
+      ],
+      "difficulty": 3,
+      "rating": 3,
+      "video":"assets/video/back.mp4"
     },
     {
       "id": 7,
       "title": "Bicep Focus",
       "duration": "12 min",
-      "description": "Enfoca os bíceps com curls intensos e controlados.",
+      "description": "Enfoca os bíceps com cvideos intensos e controlados.",
       "image": "assets/img/bicep.jpg",
       "type": "Arms",
       "calories": 130,
-      "equipment": ["Halteres", "Corda"]
+      "equipment":[
+        {"name":"Halteres", "image":"assets/img/haltere.jpg"},
+        {"name":"Corda", "image":"assets/img/corda.jpg"}
+      ],
+      "difficulty": 2,
+      "rating": 5,
+      "video":"assets/video/bicep1.mp4"
     },
     {
       "id": 8,
@@ -90,7 +134,14 @@
       "image": "assets/img/chest.jpg",
       "type": "Chest",
       "calories": 160,
-      "equipment": ["Crossover", "Barra", "Banco de Supino"]
+      "equipment":[
+        {"name":"Crossover", "image":"assets/img/crossover.jpg"},
+        {"name":"Barra", "image":"assets/img/barra.jpg"},
+        {"name":"Banco de Supino", "image":"assets/img/banco.jpg"}
+      ],
+      "difficulty": 3,
+      "rating": 4,
+      "video":"assets/video/supino.mp4"
     },
     {
       "id": 9,
@@ -100,7 +151,14 @@
       "image": "assets/img/shoulder.jpg",
       "type": "Shoulder",
       "calories": 140,
-      "equipment": ["Halteres", "Barra", "Máquina de Ombros"]
+      "equipment":[
+        {"name":"Halteres", "image":"assets/img/haltere.jpg"},
+        {"name":"Barra", "image":"assets/img/barra.jpg"},
+        {"name":"Máquina de Ombros", "image":"assets/img/shoulder.png"}
+      ],
+      "difficulty": 2,
+      "rating": 3,
+      "video":"assets/video/shoulder.mp4"
     }
   ]
 }

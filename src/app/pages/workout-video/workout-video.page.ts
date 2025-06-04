@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { WorkoutTimerPage } from '../workout-timer/workout-timer.page';
 
 @Component({
@@ -10,9 +10,13 @@ import { WorkoutTimerPage } from '../workout-timer/workout-timer.page';
 })
 export class WorkoutVideoPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) {}
+  program : any;
+
+  constructor(private modalCtrl: ModalController, private navParams: NavParams) {}
 
   ngOnInit() {
+    this.program = this.navParams.get('program');
+    console.log('Recebido:', this.program);
   }
 
   closeModal() {
@@ -24,10 +28,14 @@ export class WorkoutVideoPage implements OnInit {
       component: WorkoutTimerPage,
       cssClass: 'slide-in-modal',
       showBackdrop: true,
-      componentProps:{duration}
+      componentProps:{ duration }
     });
 
     await modal.present();
+  }
+
+  parseDuration(duration:string): number {
+    return parseInt(duration)
   }
 
 }
