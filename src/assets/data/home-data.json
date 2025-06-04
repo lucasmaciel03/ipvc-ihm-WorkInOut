@@ -17,32 +17,90 @@
       "title": "Chest Program",
       "duration": "12 min",
       "description": "A classic bodyweight exercise routine.",
-      "image": "assets/bicep.png",
-      "type": "Chest"
+      "image": "assets/chest.png",
+      "type": "Chest",
+      "calories": 150,
+      "equipment":["Halteres", "Barra", "Banco de Supino"]
     },
     {
       "id": 2,
-      "title": "Arms Program",
+      "title": "Bicep Program",
       "duration": "12 min",
       "description": "Isolate the biceps for growth.",
-      "image": "assets/chest.png",
-      "type": "Arms"
+      "image": "assets/bicep.png",
+      "type": "Arms",
+      "calories": 120,
+      "equipment":["Halteres", "Barra"]
     },
     {
       "id": 3,
       "title": "Leg Program",
       "duration": "12 min",
       "description": "Build strength and endurance in your legs.",
-      "image": "assets/chest.png",
-      "type": "Leg"
+      "image": "assets/img/legs.jpg",
+      "type": "Leg",
+      "calories": 245,
+      "equipment":["Cadeira Extensora", "Smith Machine", "Leg Press"]
     },
     {
       "id": 4,
       "title": "Cardio Program",
       "duration": "12 min",
       "description": "Boost your heart health with cardio.",
-      "image": "assets/bicep.png",
-      "type": "Cardio"
+      "image": "assets/img/cardio.jpg",
+      "type": "Cardio",
+      "calories": 200,
+      "equipment":["Bicicleta", "Passadeira", "Elíptica"]
+    },
+    {
+      "id":5,
+      "title": "Abs Core Blast",
+      "duration": "10 min",
+      "description": "Sculpte o abdómen com exercícios de prancha e crunch.",
+      "image": "assets/img/abs.jpg",
+      "type": "Core",
+      "calories": 100,
+      "equipment":["Colchão", "Bola de Pilates"]
+    },
+    {
+      "id": 6,
+      "title": "Back Builder",
+      "duration": "14 min",
+      "description": "Fortalece a região dorsal com puxadas e remadas.",
+      "image": "assets/img/back.jpg",
+      "type": "Back",
+      "calories": 180,
+      "equipment":["Barra", "Polia Pull Up", "Máquina de Remada"]
+    },
+    {
+      "id": 7,
+      "title": "Bicep Focus",
+      "duration": "12 min",
+      "description": "Enfoca os bíceps com curls intensos e controlados.",
+      "image": "assets/img/bicep.jpg",
+      "type": "Arms",
+      "calories": 130,
+      "equipment": ["Halteres", "Corda"]
+    },
+    {
+      "id": 8,
+      "title": "Chest Power Press",
+      "duration": "15 min",
+      "description": "Treino completo para peitoral com supino e flexões.",
+      "image": "assets/img/chest.jpg",
+      "type": "Chest",
+      "calories": 160,
+      "equipment": ["Crossover", "Barra", "Banco de Supino"]
+    },
+    {
+      "id": 9,
+      "title": "Shoulder Strength",
+      "duration": "12 min",
+      "description": "Desenvolve ombros fortes e definidos com elevações laterais.",
+      "image": "assets/img/shoulder.jpg",
+      "type": "Shoulder",
+      "calories": 140,
+      "equipment": ["Halteres", "Barra", "Máquina de Ombros"]
     }
   ]
 }
