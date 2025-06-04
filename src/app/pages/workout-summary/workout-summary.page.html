@@ -5,7 +5,7 @@
       <div class="step-content">
         <h2>Quantas repetições?</h2>
         <ion-range min="0" max="50" [(ngModel)]="reps" snaps step="1" pin class="step-range"></ion-range>
-        <ion-button expand="block" (click)="nextStep()" class="continue-btn">Continuar</ion-button>
+        <ion-button expand="block" (click)="nextStep()" class="continue-btn">CONTINUAR</ion-button>
       </div>
     </div>
 
@@ -13,7 +13,7 @@
       <div class="step-content">
         <h2>Peso (Kg)</h2>
         <ion-range min="0" max="200" [(ngModel)]="weight" snaps step="1" pin class="step-range"></ion-range>
-        <ion-button expand="block" (click)="finish()" class="continue-btn">Terminar</ion-button>
+        <ion-button expand="block" (click)="finish()" class="continue-btn">TERMINAR</ion-button>
       </div>
     </div>
 
@@ -21,8 +21,8 @@
       <h2 class="text-white">Treino de {{ muscleGroup }} completo!</h2>
       <p>Deseja continuar ou terminar?</p>
       <div class="finish-buttons">
-        <ion-button expand="block" class="btn" style="width:100%;" (click)="continueTraining()">Continuar</ion-button>
-        <ion-button expand="block" class="continue-btn" style="width:100%;" (click)="finishSession()">Terminar</ion-button>
+        <ion-button expand="block" class="btn" style="width:100%;" (click)="continueTraining()">CONTINUAR</ion-button>
+        <ion-button expand="block" class="continue-btn" style="width:100%;" (click)="finishSession()">TERMINAR</ion-button>
       </div>
     </div>
   </div>
