@@ -1,23 +1,28 @@
 <ion-content [fullscreen]="true" class="sheet-modal-content" scroll-y="false">
   <div class="summary-container">
-    <div *ngIf="step === 1" class="step-container">
-      <h2>Quantas repetições?</h2>
-      <ion-range min="0" max="50" [(ngModel)]="reps" snaps step="1" pin class="step-range"></ion-range>
-      <ion-button expand="block" (click)="nextStep()" class="continue-btn">Continuar</ion-button>
+
+    <div class="step-container" *ngIf="step === 1">
+      <div class="step-content">
+        <h2>Quantas repetições?</h2>
+        <ion-range min="0" max="50" [(ngModel)]="reps" snaps step="1" pin class="step-range"></ion-range>
+        <ion-button expand="block" (click)="nextStep()" class="continue-btn">Continuar</ion-button>
+      </div>
     </div>
 
-    <div *ngIf="step === 2" class="step-container">
-      <h2>Peso (Kg)</h2>
-      <ion-range min="0" max="200" [(ngModel)]="weight" snaps step="1" pin class="step-range"></ion-range>
-      <ion-button expand="block" (click)="finish()" class="continue-btn">Terminar</ion-button>
+    <div class="step-container" *ngIf="step === 2">
+      <div class="step-content">
+        <h2>Peso (Kg)</h2>
+        <ion-range min="0" max="200" [(ngModel)]="weight" snaps step="1" pin class="step-range"></ion-range>
+        <ion-button expand="block" (click)="finish()" class="continue-btn">Terminar</ion-button>
+      </div>
     </div>
 
     <div *ngIf="step === 3" class="finish-step">
       <h2 class="text-white">Treino de {{ muscleGroup }} completo!</h2>
       <p>Deseja continuar ou terminar?</p>
       <div class="finish-buttons">
-        <ion-button expand="block" class="continue-btn" style="width:100%;">Continuar</ion-button>
-        <ion-button expand="block" class="continue-btn" style="width:100%;">Terminar</ion-button>
+        <ion-button expand="block" class="btn" style="width:100%;" (click)="continueTraining()">Continuar</ion-button>
+        <ion-button expand="block" class="continue-btn" style="width:100%;" (click)="finishSession()">Terminar</ion-button>
       </div>
     </div>
   </div>

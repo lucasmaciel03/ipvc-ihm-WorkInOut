@@ -74,7 +74,7 @@ export class WorkoutTimerPage implements OnInit, OnDestroy {
         remainingSeconds: this.remainingSeconds
       },
       breakpoints: [0, 0.35, 0.5, 0.75],
-      initialBreakpoint: 0.75
+      initialBreakpoint: 0.45
     });
     await modal.present();
   }

@@ -1,17 +1,7 @@
-.header-container {
-  width: 100%;
-  margin-bottom: -1px;
+.background-app{
+  background: var(--color-background-app);
 }
 
-.stats-toolbar {
-  --background: var(--color-background-app);
-  --padding-start: 0;
-  --padding-end: 0;
-  --min-height: 48px;
-  --border-width: 0;
-  --inner-border-width: 0;
-  --box-shadow: none;
-}
 
 .stats-toolbar ion-title {
   font-size: 20px;

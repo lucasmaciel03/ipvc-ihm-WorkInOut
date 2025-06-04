@@ -38,6 +38,7 @@
   width: 220px;
   height: 220px;
   transform: rotate(-90deg);
+  margin-top:calc(50% - 56px);
 
   .circle-bg {
     fill: none;
@@ -73,7 +74,7 @@
 .control-button{
   color:var(--color-text);
   font-size: 24px;
-  background: var(--color-primary);
+  background: var(--color-primary) !important;
   border-radius: 50%;
 }
 
