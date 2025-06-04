@@ -11,6 +11,20 @@
     "image": "assets/img/highlight.jpg"
   },
   "categories": ["All Type", "Chest", "Arms", "Leg", "Cardio", "Back", "Shoulders", "Abs", "Full Body"],
+  "daily_workout":{
+    "title":"Daily Workout",
+    "duration":"15 min",
+    "image":"",
+    "type":"Tricep",
+    "calories":120,
+    "equipment":[
+      {"name":"Dumbbell", "image":"assets/img/haltere.jpg"},
+      {"name":"Bar", "image":"assets/img/barra.jpg"}
+    ],
+    "difficulty":2,
+    "rating":4,
+    "video":"assets/video/tricep.mp4"
+  },
   "workouts": [
     {
       "id": 1,
@@ -21,7 +35,7 @@
       "type": "Chest",
       "calories": 150,
       "equipment":[
-        {"name":"Tapete", "image":"assets/img/tapete.jpg"}
+        {"name":"Exercise mat", "image":"assets/img/tapete.jpg"}
       ],
       "difficulty": 3,
       "rating": 5,
@@ -36,8 +50,8 @@
       "type": "Arms",
       "calories": 120,
       "equipment":[
-        {"name":"Halteres", "image":"assets/img/haltere.jpg"},
-        {"name":"Barra", "image":"assets/img/barra.jpg"}
+        {"name":"Dumbbell", "image":"assets/img/haltere.jpg"},
+        {"name":"Bar", "image":"assets/img/barra.jpg"}
       ],
       "difficulty": 2,
        "rating": 4,
@@ -52,7 +66,7 @@
       "type": "Leg",
       "calories": 245,
       "equipment":[
-        {"name":"Cadeira Extensora", "image":"assets/img/extensora.jpg"},
+        {"name":"Extension chair", "image":"assets/img/extensora.jpg"},
         {"name":"Smith Machine", "image":"assets/img/smith.jpg"},
         {"name":"Leg Press", "image":"assets/img/legpress.jpg"}
       ],
@@ -69,9 +83,9 @@
       "type": "Cardio",
       "calories": 200,
       "equipment":[
-        {"name":"Bicicleta", "image":"assets/img/bike.jpg"},
-        {"name":"Passadeira", "image":"assets/img/passadeira.jpg"},
-        {"name":"Elíptica", "image":"assets/img/elitica.jpg"}
+        {"name":"Bike", "image":"assets/img/bike.jpg"},
+        {"name":"Treadmills", "image":"assets/img/passadeira.jpg"},
+        {"name":"Elliptical Machine", "image":"assets/img/elitica.jpg"}
       ],
       "difficulty": 1,
       "rating": 2,
@@ -81,13 +95,13 @@
       "id":5,
       "title": "Abs Core Blast",
       "duration": "10 min",
-      "description": "Sculpte o abdómen com exercícios de prancha e crunch.",
+      "description": "Sculpt your abs with plank and crunch exercises.",
       "image": "assets/img/abs.jpg",
       "type": "Core",
       "calories": 100,
       "equipment":[
-        {"name":"Tapete", "image":"assets/img/tapete.jpg"},
-        {"name":"Bola de Pilates", "image":"assets/img/bola.jpg"}
+        {"name":"Exercise mat", "image":"assets/img/tapete.jpg"},
+        {"name":"Fitness ball", "image":"assets/img/bola.jpg"}
       ],
       "difficulty": 1,
       "rating": 3,
@@ -97,14 +111,14 @@
       "id": 6,
       "title": "Back Builder",
       "duration": "14 min",
-      "description": "Fortalece a região dorsal com puxadas e remadas.",
+      "description": "Strengthens the back with pull-ups and rowing.",
       "image": "assets/img/back.jpg",
       "type": "Back",
       "calories": 180,
       "equipment":[
-        {"name":"Barra", "image":"assets/img/barra.jpg"},
-        {"name":"Polia Pull Up", "image":"assets/img/polia.jpg"},
-        {"name":"Máquina de Remada", "image":"assets/img/remada.jpg"}
+        {"name":"Bar", "image":"assets/img/barra.jpg"},
+        {"name":"Pulley Pull Up", "image":"assets/img/polia.jpg"},
+        {"name":"Seated Row Machine", "image":"assets/img/remada.jpg"}
       ],
       "difficulty": 3,
       "rating": 3,
@@ -114,13 +128,13 @@
       "id": 7,
       "title": "Bicep Focus",
       "duration": "12 min",
-      "description": "Enfoca os bíceps com cvideos intensos e controlados.",
+      "description": "Focuses on the biceps with intense, controlled cvideos.",
       "image": "assets/img/bicep.jpg",
       "type": "Arms",
       "calories": 130,
       "equipment":[
-        {"name":"Halteres", "image":"assets/img/haltere.jpg"},
-        {"name":"Corda", "image":"assets/img/corda.jpg"}
+        {"name":"Dumbbell", "image":"assets/img/haltere.jpg"},
+        {"name":"Rope", "image":"assets/img/corda.jpg"}
       ],
       "difficulty": 2,
       "rating": 5,
@@ -130,14 +144,14 @@
       "id": 8,
       "title": "Chest Power Press",
       "duration": "15 min",
-      "description": "Treino completo para peitoral com supino e flexões.",
+      "description": "Complete chest workout with bench press and push-ups.",
       "image": "assets/img/chest.jpg",
       "type": "Chest",
       "calories": 160,
       "equipment":[
         {"name":"Crossover", "image":"assets/img/crossover.jpg"},
-        {"name":"Barra", "image":"assets/img/barra.jpg"},
-        {"name":"Banco de Supino", "image":"assets/img/banco.jpg"}
+        {"name":"Bar", "image":"assets/img/barra.jpg"},
+        {"name":"Bench Press", "image":"assets/img/banco.jpg"}
       ],
       "difficulty": 3,
       "rating": 4,
@@ -147,14 +161,14 @@
       "id": 9,
       "title": "Shoulder Strength",
       "duration": "12 min",
-      "description": "Desenvolve ombros fortes e definidos com elevações laterais.",
+      "description": "Develops strong, defined shoulders with lateral raises.",
       "image": "assets/img/shoulder.jpg",
       "type": "Shoulder",
       "calories": 140,
       "equipment":[
-        {"name":"Halteres", "image":"assets/img/haltere.jpg"},
-        {"name":"Barra", "image":"assets/img/barra.jpg"},
-        {"name":"Máquina de Ombros", "image":"assets/img/shoulder.png"}
+        {"name":"Dumbbell", "image":"assets/img/haltere.jpg"},
+        {"name":"Bar", "image":"assets/img/barra.jpg"},
+        {"name":"Shoulder Machine", "image":"assets/img/shoulder.png"}
       ],
       "difficulty": 2,
       "rating": 3,

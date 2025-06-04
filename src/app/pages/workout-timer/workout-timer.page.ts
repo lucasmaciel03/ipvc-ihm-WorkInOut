@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { WorkoutSummaryPage } from '../workout-summary/workout-summary.page';
 
 @Component({
@@ -15,10 +15,12 @@ export class WorkoutTimerPage implements OnInit, OnDestroy {
   remainingSeconds: number = 0;
   interval: any;
   paused = false;
+  program : any;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private navParams: NavParams) { }
 
   ngOnInit() {
+    this.program = this.navParams.get('program');
     this.totalSeconds = this.duration * 60; //converte minutos em segundos
     this.remainingSeconds = this.totalSeconds;
     this.startTimer();

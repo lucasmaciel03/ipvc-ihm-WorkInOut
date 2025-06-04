@@ -5,7 +5,7 @@
     </ion-buttons>
 
 
-    <ion-title color="light">Workout</ion-title>
+    <ion-title color="light">{{program?.title}}</ion-title>
 
     <ion-buttons slot="end">
       <ion-button fill="clear" size="small" color="light">
@@ -48,6 +48,6 @@
       </ion-button>
     </div>
 
-    <ion-button class="workout-start-button continue-btn" expand="block" (click)="openSummary()">TERMINAR</ion-button>
+    <ion-button class="workout-start-button continue-btn" expand="block" (click)="openSummary()">FINISH</ion-button>
   </div>
 </ion-content>

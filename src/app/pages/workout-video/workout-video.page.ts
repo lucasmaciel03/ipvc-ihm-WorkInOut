@@ -28,7 +28,7 @@ export class WorkoutVideoPage implements OnInit {
       component: WorkoutTimerPage,
       cssClass: 'slide-in-modal',
       showBackdrop: true,
-      componentProps:{ duration }
+      componentProps:{ duration, program:this.program }
     });
 
     await modal.present();
