@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: 'summary',
     loadChildren: () => import('./pages/summary/summary.module').then( m => m.SummaryPageModule)
-  },  {
+  },
+  {
     path: 'workout-timer',
     loadChildren: () => import('./pages/workout-timer/workout-timer.module').then( m => m.WorkoutTimerPageModule)
   },
