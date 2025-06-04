@@ -1,13 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>workout-timer</ion-title>
+<ion-header translucent="true" class="background-app">
+  <ion-toolbar color="background-app">
+    <ion-buttons slot="start" (click)="dismiss()">
+      <ion-back-button defaultHref="/tabs/home" icon="chevron-back-outline" color="light"></ion-back-button>
+    </ion-buttons>
+
+
+    <ion-title color="light">Workout</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">workout-timer</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="timer-container">
+    <svg viewBox="0 0 36 36" class="circular-chart">
+      <path
+        class="circle-bg"
+        d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <path
+        class="circle"
+        [attr.stroke-dasharray]="progress + ', 100'"
+        d="M18 2.0845
+          a 15.9155 15.9155 0 0 1 0 31.831
+          a 15.9155 15.9155 0 0 1 0 -31.831"
+      />
+      <g transform="rotate(90, 18, 18)">
+        <text x="18" y="20.5" class="timer-text">{{ formattedTime }}</text>
+      </g>
+    </svg>
+
+    <div class="controls">
+      <ion-button fill="clear" size="small" (click)="rewind()" class="control-button">
+        <ion-icon slot="icon-only" name="play-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button shape="round" size="large" (click)="togglePause()" class="control-button">
+        <ion-icon slot="icon-only" [name]="paused ? 'play-outline' : 'pause-outline'"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" size="small" (click)="forward()" class="control-button">
+        <ion-icon slot="icon-only" name="play-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <ion-button class="workout-start-button continue-btn" expand="block" (click)="openSummary()">TERMINAR</ion-button>
+  </div>
 </ion-content>

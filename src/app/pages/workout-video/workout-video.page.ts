@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { WorkoutTimerPage } from '../workout-timer/workout-timer.page';
 
 @Component({
   selector: 'app-workout-video',
@@ -16,6 +17,17 @@ export class WorkoutVideoPage implements OnInit {
 
   closeModal() {
     this.modalCtrl.dismiss();
+  }
+
+  async openTimer(duration:number){
+    const modal = await this.modalCtrl.create({
+      component: WorkoutTimerPage,
+      cssClass: 'slide-in-modal',
+      showBackdrop: true,
+      componentProps:{duration}
+    });
+
+    await modal.present();
   }
 
 }

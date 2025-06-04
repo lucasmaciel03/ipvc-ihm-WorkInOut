@@ -1,0 +1,86 @@
+.slide-in-modal {
+  --height: 100%;
+  --width: 100%;
+  animation: slideIn 0.3s ease-out forwards;
+  border-radius: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.workout-summary-sheet {
+  --border-radius: 24px 24px 0 0;
+  --background: var(--ion-color-dark);
+  padding: 16px;
+}
+
+.background-app{
+  background: var(--color-background-app);
+}
+
+.sheet-modal-content {
+  --padding-bottom: env(safe-area-inset-bottom);
+  --background: var(--ion-color-dark);
+}
+
+.summary-container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-text);
+  gap: 32px;
+  background: var(--color-background-app);
+  height:100%;
+}
+
+.step-container{
+  width: 100%;
+
+  ion-range{
+    --bar-background: var(--color-background-input);
+    --bar-background-active: var(--color-primary);
+    --knob-background: var(--color-primary);
+    --knob-border-color: var(--color-primary);
+    --knob-size: 24px;
+    --pin-background: var(--color-primary); 
+  }
+
+  h2 {
+    text-align:center;
+  }
+}
+
+
+
+.finish-step {
+  text-align: center;
+  width: 100%;
+
+  h2 {
+    color: var(--color-text);
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--color-gray);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .finish-buttons {
+    width:100%;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-direction: row;
+  }
+}
+
