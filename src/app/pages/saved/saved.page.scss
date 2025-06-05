@@ -1,17 +1,9 @@
 /*********************************
  *  Saved Page – Estilos         *
  *********************************/
-.stats-toolbar {
-  --background: var(--color-background-app);
-  --padding-start: 0;
-  --padding-end: 0;
-  --min-height: 48px;
-  --border-width: 0;
-  &::part(native),
-  &::part(toolbar-background) { box-shadow: none; border-bottom: none; }
+.background-app{
+  background: var(--color-background-app);
 }
-
-.stats-toolbar ion-title { font-size: 20px; font-weight: 600; }
 
 .container {
   display: flex;

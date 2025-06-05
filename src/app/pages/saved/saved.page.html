@@ -1,17 +1,17 @@
+<ion-header translucent="true" class="background-app">
+  <ion-toolbar color="background-app">
+    <ion-title color="light">Saved</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <div class="container">
-
-    <!-- Header -->
-    <ion-toolbar class="stats-toolbar">
-      <ion-title slot="start" color="light">Saved</ion-title>
-
-      <ion-buttons slot="end">
-        <ion-button fill="clear" size="small" color="light">
-          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-
     <!-- Selector -->
     <ion-segment mode="md" [(ngModel)]="selectedTab" class="saved-segment">
       <ion-segment-button value="workouts">

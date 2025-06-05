@@ -1,16 +1,17 @@
+<ion-header translucent="true" class="background-app">
+  <ion-toolbar color="background-app">
+    <ion-title color="light">My Statistics</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true" class="statistics-content">
   <div class="container">
-    <div class="header-container">
-      <ion-toolbar color="background-app" class="stats-toolbar">
-        <ion-title slot="start" color="light">My Statistics</ion-title>
-        <ion-buttons slot="end">
-          <ion-button fill="clear" size="small" color="light">
-            <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </div>
-
     <ion-segment
       [(ngModel)]="selectedMetric"
       class="metric-segment"
