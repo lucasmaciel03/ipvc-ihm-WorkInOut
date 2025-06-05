@@ -6,6 +6,12 @@
     overflow-y: auto;
 }
 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
 
 .user-info {
     display: flex;
