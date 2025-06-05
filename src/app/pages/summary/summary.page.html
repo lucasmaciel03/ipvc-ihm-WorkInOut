@@ -1,21 +1,17 @@
+<ion-header translucent="true" class="background-app">
+  <ion-toolbar color="background-app">
+    <ion-title color="light">Summary</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="small" color="light">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <div class="container"><!-- agora abraça TUDO: header + conteúdo -->
-
-    <!-- HEADER -->
-    <ion-toolbar class="stats-toolbar">
-      <ion-buttons slot="start">
-        <ion-button fill="clear" color="light" routerLink="/home">
-          <ion-icon name="chevron-back-outline"></ion-icon>
-        </ion-button>
-        <ion-title color="light">Resumo</ion-title>
-      </ion-buttons>
-
-      <ion-buttons slot="end">
-        <ion-button fill="clear" size="small" color="light">
-          <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
+  <div class="container">
 
     <!-- Hero -->
     <ion-img src="assets/img/bicep.jpg" class="hero"></ion-img>
@@ -23,7 +19,7 @@
 
     <!-- cabeçalho da secção -->
     <div class="title-row">
-      <h2>Bicep Program</h2>
+      <h2>{{title}}</h2>
       <!-- clicável; muda texto More/Less -->
       <a class="link-primary"
         (click)="toggleMore()">
@@ -39,7 +35,7 @@
           <ion-icon name="flame" class="icon-primary"></ion-icon>
           <span class="label">CALORIES</span>
         </div>
-        <div class="stat-value">138<br><span class="unit">Kcal</span></div>
+        <div class="stat-value">{{calories}}<br><span class="unit">Kcal</span></div>
       </ion-card>
 
       <!-- TIME -->
@@ -48,7 +44,7 @@
           <ion-icon name="alarm" class="icon-primary"></ion-icon>
           <span class="label">TIME</span>
         </div>
-        <div class="stat-value"><span class="number">47</span><span class="unit"> min</span></div>
+        <div class="stat-value"><span class="number">{{duration}}</span><span class="unit"> min</span></div>
       </ion-card>
     </div>
 
@@ -60,7 +56,7 @@
           <ion-icon name="close" class="icon-primary"></ion-icon>
           <span class="label">REPETIÇÕES</span>
         </div>
-        <div class="stat-value">x138</div>
+        <div class="stat-value">x{{reps}}</div>
       </ion-card>
 
       <!-- PESO -->
@@ -69,7 +65,7 @@
           <ion-icon name="barbell" class="icon-primary"></ion-icon>
           <span class="label">PESO</span>
         </div>
-        <div class="stat-value">138<br><span class="unit">Kg</span></div>
+        <div class="stat-value">{{weight}}<br><span class="unit">Kg</span></div>
       </ion-card>
     </div>
 
@@ -128,7 +124,7 @@
     </ion-list>
 
     <ion-button expand="block" class="continue-btn" href="/tabs/stats" routerDirection="forward">
-      Continuar
+      CONTINUE
     </ion-button>
   </div>
 </ion-content>

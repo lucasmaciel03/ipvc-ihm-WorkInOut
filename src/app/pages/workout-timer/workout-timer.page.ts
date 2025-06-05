@@ -72,8 +72,11 @@ export class WorkoutTimerPage implements OnInit, OnDestroy {
       cssClass: 'slide-in-modal workout-summary-sheet',
       showBackdrop: true,
       componentProps: {
-        duration: this.duration,
-        remainingSeconds: this.remainingSeconds
+        program: this.program,
+        title: this.program?.title,        
+        calories: 250,                    
+        duration: this.duration,          
+        completedAt: new Date().toISOString()
       },
       breakpoints: [0, 0.35, 0.5, 0.75],
       initialBreakpoint: 0.45

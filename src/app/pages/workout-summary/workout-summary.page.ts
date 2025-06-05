@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { SummaryPage } from '../summary/summary.page';
 
 @Component({
@@ -15,10 +15,20 @@ export class WorkoutSummaryPage implements OnInit {
   reps = 15;
   weight = 15;
   muscleGroup: string = 'Bicep';
+  program : any;
+  title: string = '';
+  duration: number = 0;
+  calories: number = 0;
+  completedAt: string = '';
 
-  constructor(private modalCtrl: ModalController, private navCtrl: NavController) { }
+  constructor(private modalCtrl: ModalController, private navParams: NavParams) { }
 
   ngOnInit() {
+    this.program = this.navParams.get('program');
+    this.title = this.navParams.get('title');
+    this.duration = this.navParams.get('duration');
+    this.calories = this.navParams.get('calories');
+    this.completedAt = this.navParams.get('completedAt');
   }
 
   nextStep() {
@@ -46,7 +56,16 @@ export class WorkoutSummaryPage implements OnInit {
       const modal = await this.modalCtrl.create({
         component: SummaryPage,
         cssClass: 'slide-in-modal final-summary-modal',
-        showBackdrop: true
+        showBackdrop: true,
+        componentProps: {
+          title: this.title,
+          duration: this.duration,
+          calories: this.calories,
+          completedAt: this.completedAt,
+          reps: this.reps,
+          weight: this.weight,
+          muscleGroup: this.muscleGroup
+        }
       });
       await modal.present();
     }, 300);
