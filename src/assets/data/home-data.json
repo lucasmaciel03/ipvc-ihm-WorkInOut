@@ -10,7 +10,7 @@
     "buttonText": "Start Workout 🔥",
     "image": "assets/img/highlight.jpg"
   },
-  "categories": ["All Type", "Chest", "Arms", "Leg", "Cardio", "Back", "Shoulders", "Abs", "Full Body"],
+  "categories": ["All Type", "Chest", "Arms", "Leg", "Cardio", "Back", "Shoulder", "Abs", "Full Body"],
   "daily_workout":{
     "title":"Daily Workout",
     "duration":"15 min",

@@ -13,7 +13,8 @@ import { WorkoutVideoPage } from '../workout-video/workout-video.page';
 export class HomePage implements OnInit {
   homeData:any;
   selectedCategory = 'All Type';
-;
+  searchTerm: string = '';
+
   constructor(private http: HttpClient, private modalCtrl:ModalController) { }
 
   ngOnInit() {
@@ -30,6 +31,23 @@ export class HomePage implements OnInit {
 
   selectCategory(cat: string) {
     this.selectedCategory = cat;
+  }
+
+  filteredWorkouts(){
+    if(!this.homeData?.workouts) return [];
+
+    return this.homeData.workouts.filter((w:any) => {
+      const matchCategory = this.selectedCategory === 'All Type' || w.type === this.selectedCategory;
+      const matchSearch = !this.searchTerm ||
+      w.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      w.description.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+      return matchCategory && matchSearch;
+    })
+  }
+
+  onSearch(event: any) {
+    this.searchTerm = event.detail.value || '';
   }
 
   async openWorkout(program:any){
