@@ -24,13 +24,64 @@
 
   <!-- Search Bar -->
   <ion-searchbar
-    placeholder="Search"
+    placeholder="Pesquisar programas"
     class="custom-searchbar"
     mode="md"
+    [(ngModel)]="searchTerm"
+    (ionInput)="onSearchInput($event)"
+    (ionClear)="clearSearch()"
+    debounce="300"
+    animated="true"
+    showCancelButton="focus"
   ></ion-searchbar>
 
-  <!-- Hero Section -->
-  <div class="hero-section">
+  <!-- Search Results (conditional display) -->
+  <div class="search-results" *ngIf="searchTerm && searchTerm.length > 1">
+    <div class="search-header">
+      <h3>Resultados da pesquisa</h3>
+      <ion-button fill="clear" size="small" (click)="clearSearch()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="results-list" *ngIf="filteredPrograms.length > 0">
+      <div
+        class="result-card"
+        *ngFor="let program of filteredPrograms"
+        (click)="openWorkoutDetail(program)"
+      >
+        <div
+          class="result-image"
+          [style.background-image]="'url(' + program.imagem_programa + ')'"
+        ></div>
+        <div class="result-info">
+          <h4>{{ program.nome_programa }}</h4>
+          <p class="result-desc">
+            {{ program.descricao | slice:0:60 }}{{ program.descricao.length > 60
+            ? '...' : '' }}
+          </p>
+          <div class="result-meta">
+            <span class="duration"
+              ><ion-icon name="alarm-outline"></ion-icon> {{ program.tempo_total
+              }}
+            </span>
+            <span class="exercises"
+              ><ion-icon name="barbell-outline"></ion-icon> {{
+              program.total_exercicios }} exercícios</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-results" *ngIf="filteredPrograms.length === 0">
+      <ion-icon name="search-outline"></ion-icon>
+      <p>Nenhum programa encontrado para "{{ searchTerm }}"</p>
+    </div>
+  </div>
+
+  <!-- Hero Section (hide when searching) -->
+  <div class="hero-section" *ngIf="!searchTerm || searchTerm.length <= 1">
     <div class="hero-content">
       <h1>Stronger every rep<br />every step.</h1>
       <ion-button class="start-workout-btn" (click)="startWorkoutGuide()">
@@ -39,11 +90,12 @@
     </div>
   </div>
 
-  <!-- Daily Program Section -->
+  <!-- Daily Program Section (hide when searching) -->
   <div
     class="section"
     #programSection
     [class.highlight-section]="showSelectionGuide"
+    *ngIf="!searchTerm || searchTerm.length <= 1"
   >
     <div class="section-header">
       <h2>Daily Program</h2>
