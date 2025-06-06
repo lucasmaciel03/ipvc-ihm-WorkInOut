@@ -77,11 +77,11 @@
         </div>
 
         <div class="equipment-needed">
-          <h3>Equipamentos necessários:</h3>
+          <h3 class="section-title">Equipamentos necessários</h3>
           <div class="equipment-list">
-            <div *ngFor="let equip of currentExercise?.equipamentos" class="equipment-item">
-              <ion-icon name="barbell-outline"></ion-icon>
-              <span>{{ equip }}</span>
+            <div *ngFor="let equip of getEquipments()" class="equipment-item">
+              <img [src]="equip.image" [alt]="equip.name">
+              <span>{{ equip.name }}</span>
             </div>
           </div>
         </div>

@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+interface Equipment {
+  image: string;
+  name: string;
+}
+
 interface Exercise {
   nome: string;
   video?: string;
@@ -110,6 +115,18 @@ export class WorkoutDetailModalComponent implements OnInit {
 
   closeModal() {
     this.modalCtrl.dismiss();
+  }
+
+  getEquipments(): Equipment[] {
+    if (!this.currentExercise) return [];
+    
+    const equipamentos = this.currentExercise.equipamentos || [];
+    const imagens = this.currentExercise.imagem_equipamentos || [];
+    
+    return equipamentos.map((name, index) => ({
+      name: name,
+      image: imagens[index] || ''
+    }));
   }
 
   private validateProgramData() {

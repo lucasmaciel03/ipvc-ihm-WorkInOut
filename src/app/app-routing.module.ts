@@ -12,12 +12,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'app/home',  // Temporariamente redirecionando direto para home
+    redirectTo: 'auth/welcome',
     pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'app/home',  // Temporariamente redirecionando direto para home
+    redirectTo: 'auth/welcome',
     pathMatch: 'full'
   }
 ];
