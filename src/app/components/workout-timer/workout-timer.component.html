@@ -1,0 +1,19 @@
+<div class="timer-container">
+  <div class="progress-ring">
+    <div class="time">{{ time }}</div>
+  </div>
+
+  <div class="controls">
+    <div class="control-button" (click)="skipBackward()">
+      <ion-icon name="play-back" class="control-icon"></ion-icon>
+    </div>
+
+    <div class="play-pause-btn" (click)="toggleTimer()">
+      <ion-icon [name]="isPaused ? 'play' : 'pause'" class="control-icon"></ion-icon>
+    </div>
+
+    <div class="control-button" (click)="skipForward()">
+      <ion-icon name="play-forward" class="control-icon"></ion-icon>
+    </div>
+  </div>
+</div>

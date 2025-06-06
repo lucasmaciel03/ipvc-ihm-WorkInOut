@@ -10,7 +10,7 @@
  */
 
 /* Theme variables */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -41,10 +41,54 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 :root {
-  --font-title: 'Bebas Neue', sans-serif;
+  --font-title: 'Anton', sans-serif;
   --font-body: 'Poppins', sans-serif;
+  --ion-background-color: #151515;
+  --ion-background-color-rgb: 21, 21, 21;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
 }
 
 body {
   font-family: var(--font-body);
 }
+
+h1, h2, h3, h4, h5, h6,
+ion-title {
+  font-family: var(--font-title);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+ion-card-title {
+  font-family: var(--font-title);
+  text-transform: uppercase;
+}
+
+p, span, ion-label, ion-text {
+  font-family: var(--font-body);
+}
+
+/* Typography Utility Classes */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-regular { font-weight: var(--font-weight-regular); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+
+.font-title { font-family: var(--font-title); }
+.font-body { font-family: var(--font-body); }

@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ program?.nome_programa }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="!showTimer">
+    <div class="video-container">
+      <div class="youtube-container">
+        <iframe
+          [src]="getYouTubeEmbedUrl(currentExercise?.video)"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      
+      <!-- Botões de navegação -->
+      <div class="exercise-navigation">
+        <ion-button fill="clear" [disabled]="!hasPreviousExercise" (click)="previousExercise()">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" [disabled]="!hasNextExercise" (click)="nextExercise()">
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="workout-info">
+      <div class="main-info">
+        <div class="exercise-header">
+          <h1>{{ currentExercise?.nome }}</h1>
+          <div class="exercise-counter">
+            {{ currentExerciseIndex + 1 }}/{{ program?.exercicios?.length }}
+          </div>
+        </div>
+
+        <div class="exercise-meta">
+          <!-- Avaliação -->
+          <div class="meta-item">
+            <ion-icon name="star" class="meta-icon"></ion-icon>
+            <span>{{ currentExercise?.avaliacao }}</span>
+          </div>
+
+          <!-- Tempo médio -->
+          <div class="meta-item">
+            <ion-icon name="time-outline" class="meta-icon"></ion-icon>
+            <span>{{ currentExercise?.tempo_medio }}</span>
+          </div>
+
+          <!-- Dificuldade -->
+          <div class="meta-item">
+            <span class="difficulty-label">{{ currentExercise?.dificuldade }}</span>
+            <div class="flames">
+              <ion-icon name="flame" class="flame-icon" *ngFor="let flame of getDifficultyFlames(currentExercise?.dificuldade)"></ion-icon>
+              <ion-icon name="flame-outline" class="flame-icon" *ngFor="let flame of getRemainingFlames(currentExercise?.dificuldade)"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="muscles-worked">
+          <h3>Músculos trabalhados:</h3>
+          <ion-chip *ngFor="let musculo of currentExercise?.musculos_trabalhados">
+            {{ musculo }}
+          </ion-chip>
+        </div>
+
+        <div class="equipment-needed">
+          <h3>Equipamentos necessários:</h3>
+          <div class="equipment-list">
+            <div *ngFor="let equip of currentExercise?.equipamentos" class="equipment-item">
+              <ion-icon name="barbell-outline"></ion-icon>
+              <span>{{ equip }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <app-workout-timer
+    *ngIf="showTimer"
+    [duration]="program?.duration || 1500"
+    (timerComplete)="onTimerComplete()"
+  ></app-workout-timer>
+</ion-content>
+
+<app-workout-set-input
+  (setCompleted)="onSetCompleted($event)"
+  (dismissed)="onSetDismissed()"
+></app-workout-set-input>
+
+<app-workout-complete
+  *ngIf="showComplete"
+  [workoutName]="'Treino de Bicep'"
+  (continue)="onWorkoutContinue()"
+  (finish)="onWorkoutFinish()"
+></app-workout-complete>
+
+<ion-footer *ngIf="!showSummary">
+  <ion-toolbar>
+    <ion-button expand="block" color="primary" class="start-button" (click)="startWorkout()" *ngIf="!showTimer">
+      COMEÇAR
+    </ion-button>
+    <ion-button expand="block" color="primary" class="start-button" (click)="finishWorkout()" *ngIf="showTimer">
+      TERMINAR
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+<app-workout-summary *ngIf="showSummary" (dismiss)="closeModal()"></app-workout-summary>

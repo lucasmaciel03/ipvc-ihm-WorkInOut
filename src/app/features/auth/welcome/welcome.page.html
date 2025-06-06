@@ -1,0 +1,25 @@
+<ion-content>
+  <div class="background-container">
+    <div *ngFor="let image of images; let i = index" 
+         class="background-image" 
+         [style.background-image]="'url(' + image + ')'" 
+         [class.active]="i === currentImageIndex">
+    </div>
+    <div class="overlay"></div>
+  </div>
+
+  <div class="content ion-padding">
+    <div class="main-text">
+      <h1>TREINA O TEU CORPO</h1>
+      <h2>ELEVA O TEU ESPÍRITO</h2>
+      <p>Alcança o teu melhor</p>
+    </div>
+
+    <div class="buttons">
+      <ion-button expand="block" class="start-button" routerLink="/auth/login">COMEÇAR</ion-button>
+      <div class="register-link">
+        Não tens conta? <a routerLink="/auth/register">Registar</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

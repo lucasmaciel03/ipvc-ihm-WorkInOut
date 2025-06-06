@@ -1,0 +1,61 @@
+<div class="set-input-container" [class.visible]="isVisible">
+  <div class="set-input-content">
+    <!-- Etapa 1: Número de Séries -->
+    <ng-container *ngIf="currentStep === 'sets'">
+      <h2>Quantas séries?</h2>
+      
+      <div class="input-slider">
+        <ion-button fill="clear" (click)="updateTotalSets(totalSets - 1)">
+          <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+
+        <div class="value-display">
+          <span class="value">{{ totalSets }}</span>
+        </div>
+
+        <ion-button fill="clear" (click)="updateTotalSets(totalSets + 1)">
+          <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+    </ng-container>
+
+    <!-- Etapa 2: Repetições e Peso -->
+    <ng-container *ngIf="currentStep === 'reps-weight'">
+      <h2>Série {{ currentSet }} de {{ totalSets }}</h2>
+      
+      <h3>Repetições</h3>
+      <div class="input-slider">
+        <ion-button fill="clear" (click)="updateRepetitions(currentRepetitions - 1)">
+          <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+
+        <div class="value-display">
+          <span class="value">{{ currentRepetitions }}</span>
+        </div>
+
+        <ion-button fill="clear" (click)="updateRepetitions(currentRepetitions + 1)">
+          <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+
+      <h3>Peso (kg)</h3>
+      <div class="input-slider">
+        <ion-button fill="clear" (click)="updateWeight(currentWeight - 2.5)">
+          <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+
+        <div class="value-display">
+          <span class="value">{{ currentWeight }}</span>
+        </div>
+
+        <ion-button fill="clear" (click)="updateWeight(currentWeight + 2.5)">
+          <ion-icon name="chevron-forward-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+    </ng-container>
+
+    <ion-button expand="block" color="primary" (click)="onContinue()">
+      {{ currentStep === 'sets' ? 'CONTINUAR' : (currentSet === totalSets ? 'TERMINAR' : 'PRÓXIMA SÉRIE') }}
+    </ion-button>
+  </div>
+</div>

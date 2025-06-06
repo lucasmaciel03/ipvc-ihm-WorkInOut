@@ -1,0 +1,177 @@
+:host {
+  position: fixed;
+  inset: 0;
+  background: var(--ion-background-color);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+}
+
+ion-content {
+  --background: var(--ion-background-color);
+}
+
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+  }
+}
+
+.hero-section {
+  position: relative;
+  height: 200px;
+  margin: -16px -16px 24px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+
+  .hero-content {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    h1 {
+      color: white;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .more-btn {
+      --color: var(--ion-color-primary);
+      font-weight: 500;
+    }
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+
+  .stat-card {
+    background: #1c1c1e;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+
+    ion-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #8e8e93;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      color: white;
+      font-size: 32px;
+      font-weight: 600;
+
+      span {
+        font-size: 16px;
+        margin-left: 4px;
+      }
+    }
+  }
+}
+
+.recent-section {
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    h2 {
+      color: white;
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .see-all-btn {
+      --color: var(--ion-color-primary);
+      font-weight: 500;
+      font-size: 14px;
+    }
+  }
+
+  .workout-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .workout-card {
+      background: #1c1c1e;
+      border-radius: 16px;
+      padding: 16px;
+
+      .workout-info {
+        margin-bottom: 16px;
+
+        h3 {
+          color: white;
+          margin: 0 0 8px;
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .workout-meta {
+          display: flex;
+          gap: 16px;
+          color: #8e8e93;
+          font-size: 14px;
+
+          .duration {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            ion-icon {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+
+      .workout-stats {
+        display: flex;
+        gap: 24px;
+        margin-bottom: 12px;
+
+        .stat {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #8e8e93;
+          font-size: 14px;
+
+          ion-icon {
+            font-size: 16px;
+            color: var(--ion-color-primary);
+          }
+        }
+      }
+
+      .workout-date {
+        color: #8e8e93;
+        font-size: 12px;
+      }
+    }
+  }
+}

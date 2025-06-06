@@ -1,0 +1,304 @@
+{
+    "Ganhar Músculo": {
+      "descricao": "Programas focados em hipertrofia muscular com exercícios progressivos e intensos",
+      "Peito": [
+        {
+          "nome_programa": "Força no Peito do PT João",
+          "imagem_programa": "/assets/images/forca-peito-joao.png",
+          "descricao": "Programa intensivo de força focado em exercícios compostos para desenvolvimento máximo do peitoral",
+          "tempo_total": "55 minutos",
+          "total_exercicios": 3,
+          "calorias_estimadas": 450,
+          "tags": ["força", "hipertrofia", "peito", "intermediário"],
+          "pre_requisitos": {
+            "nivel_minimo": "Iniciante",
+            "equipamentos_necessarios": ["Barra", "Banco", "Halteres"],
+            "conhecimento_previo": ["Técnica básica de supino", "Aquecimento adequado"]
+          },
+          "exercicios": [
+            {
+              "nome": "Supino Plano com Barra",
+              "video": "https://www.youtube.com/watch?v=rT7DgCr-3pg",
+              "tempo_medio": "4 séries de 8 repetições",
+              "equipamentos": ["Barra", "Banco Plano"],
+              "imagem_equipamentos": ["/assets/img/barbell.jpg", "/assets/img/bench.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.8",
+              "musculos_trabalhados": ["Peito", "Tríceps"]
+            },
+            {
+              "nome": "Supino Inclinado com Halteres",
+              "video": "https://www.youtube.com/watch?v=8iPEnn-ltC8",
+              "tempo_medio": "4 séries de 10 repetições",
+              "equipamentos": ["Halteres", "Banco Inclinado"],
+              "imagem_equipamentos": ["/assets/img/dumbbell.jpg", "/assets/img/incline-bench.jpg"],
+              "dificuldade": "Avançado",
+              "avaliacao": "4.7",
+              "musculos_trabalhados": ["Peito Superior", "Ombros", "Tríceps"]
+            },
+            {
+              "nome": "Flexão de Braços",
+              "video": "https://www.youtube.com/watch?v=IODxDxX7oi4",
+              "tempo_medio": "3 séries de 15 repetições",
+              "equipamentos": ["Peso Corporal"],
+              "imagem_equipamentos": ["/assets/img/bodyweight.jpg"],
+              "dificuldade": "Iniciante",
+              "avaliacao": "4.5",
+              "musculos_trabalhados": ["Peito", "Tríceps", "Ombros"]
+            }
+          ]
+        },
+        {
+          "nome_programa": "Peito Explosivo",
+          "imagem_programa": "/assets/img/peito-explosivo.jpg",
+          "descricao": "Treino focado em movimentos explosivos e potência muscular para desenvolvimento avançado do peitoral",
+          "tempo_total": "60 minutos",
+          "total_exercicios": 4,
+          "calorias_estimadas": 500,
+          "tags": ["explosão", "potência", "peito", "avançado"],
+          "pre_requisitos": {
+            "nivel_minimo": "Intermediário",
+            "equipamentos_necessarios": ["Polia", "Banco", "Halteres"],
+            "conhecimento_previo": ["Técnica avançada de supino", "Controle de movimento explosivo"]
+          },
+          "exercicios": [
+            {
+              "nome": "Crossover na Polia",
+              "video": "https://www.youtube.com/watch?v=taI4XduLpTk",
+              "tempo_medio": "3 séries de 12 repetições",
+              "equipamentos": ["Polia Crossover"],
+              "imagem_equipamentos": ["/assets/img/cable-crossover.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.6",
+              "musculos_trabalhados": ["Peito"]
+            },
+            {
+              "nome": "Flexão com Batida de Mãos",
+              "video": "https://www.youtube.com/watch?v=0t-NAum5kG4",
+              "tempo_medio": "3 séries de 10 repetições",
+              "equipamentos": ["Peso Corporal"],
+              "imagem_equipamentos": ["/assets/img/bodyweight.jpg"],
+              "dificuldade": "Avançado",
+              "avaliacao": "4.4",
+              "musculos_trabalhados": ["Peito", "Core"]
+            },
+            {
+              "nome": "Peck Deck",
+              "video": "https://www.youtube.com/watch?v=U7nBlFqUw7c",
+              "tempo_medio": "3 séries de 12 repetições",
+              "equipamentos": ["Máquina Peck Deck"],
+              "imagem_equipamentos": ["/assets/img/peck-deck.jpg"],
+              "dificuldade": "Iniciante",
+              "avaliacao": "4.5",
+              "musculos_trabalhados": ["Peito"]
+            }
+          ]
+        }
+      ],
+      "Bíceps": [
+        {
+          "nome_programa": "Bíceps de Ferro",
+          "imagem_programa": "/assets/img/biceps-ferro.jpg",
+          "descricao": "Programa focado no desenvolvimento dos bíceps com exercícios variados",
+          "tempo_total": "45 minutos",
+          "total_exercicios": 3,
+          "calorias_estimadas": 350,
+          "tags": ["força", "hipertrofia", "bíceps", "intermediário"],
+          "pre_requisitos": {
+            "nivel_minimo": "Iniciante",
+            "equipamentos_necessarios": ["Barra", "Halteres", "Máquina Scott"],
+            "conhecimento_previo": ["Técnica básica de rosca", "Aquecimento adequado"]
+          },
+          "exercicios": [
+            {
+              "nome": "Rosca Direta com Barra",
+              "video": "https://www.youtube.com/watch?v=kwG2ipFRgfo",
+              "tempo_medio": "4 séries de 10 repetições",
+              "equipamentos": ["Barra"],
+              "imagem_equipamentos": ["/assets/img/barbell.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.7",
+              "musculos_trabalhados": ["Bíceps"]
+            },
+            {
+              "nome": "Rosca Martelo com Halteres",
+              "video": "https://www.youtube.com/watch?v=zC3nLlEvin4",
+              "tempo_medio": "3 séries de 12 repetições",
+              "equipamentos": ["Halteres"],
+              "imagem_equipamentos": ["/assets/img/dumbbell.jpg"],
+              "dificuldade": "Iniciante",
+              "avaliacao": "4.6",
+              "musculos_trabalhados": ["Bíceps", "Antebraço"]
+            },
+            {
+              "nome": "Rosca Scott na Máquina",
+              "video": "https://www.youtube.com/watch?v=Qd8tSL1B1y0",
+              "tempo_medio": "3 séries de 10 repetições",
+              "equipamentos": ["Máquina Rosca Scott"],
+              "imagem_equipamentos": ["/assets/img/scott-machine.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.5",
+              "musculos_trabalhados": ["Bíceps"]
+            }
+          ]
+        }
+      ],
+      "Costas": [
+        {
+          "nome_programa": "Costas de Titânio",
+          "imagem_programa": "/assets/img/costas-titanio.jpg",
+          "tempo_total": "60 minutos",
+          "exercicios": [
+            {
+              "nome": "Puxada na Polia Alta",
+              "video": "https://www.youtube.com/watch?v=CAwf7n6Luuc",
+              "tempo_medio": "4 séries de 12 repetições",
+              "equipamentos": ["Polia Alta", "Barra de Puxada"],
+              "imagem_equipamentos": ["/assets/img/lat-pulldown.jpg", "/assets/img/lat-bar.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.6",
+              "musculos_trabalhados": ["Costas", "Bíceps"]
+            },
+            {
+              "nome": "Remada Curvada com Barra",
+              "video": "https://www.youtube.com/watch?v=vT2GjY_Umpw",
+              "tempo_medio": "4 séries de 10 repetições",
+              "equipamentos": ["Barra"],
+              "imagem_equipamentos": ["/assets/img/barbell.jpg"],
+              "dificuldade": "Avançado",
+              "avaliacao": "4.7",
+              "musculos_trabalhados": ["Costas", "Bíceps"]
+            },
+            {
+              "nome": "Pull-Up",
+              "video": "https://www.youtube.com/watch?v=eGo4IYlbE5g",
+              "tempo_medio": "3 séries de 8 repetições",
+              "equipamentos": ["Barra Fixa"],
+              "imagem_equipamentos": ["/assets/img/pull-up-bar.jpg"],
+              "dificuldade": "Avançado",
+              "avaliacao": "4.8",
+              "musculos_trabalhados": ["Costas", "Bíceps"]
+            }
+          ]
+        }
+      ],
+      "Pernas": [
+        {
+          "nome_programa": "Pernas de Aço",
+          "imagem_programa": "/assets/img/pernas-aco.jpg",
+          "tempo_total": "70 minutos",
+          "exercicios": [
+            {
+              "nome": "Agachamento Livre",
+              "video": "https://www.youtube.com/watch?v=Dy28eq2PjcM",
+              "tempo_medio": "4 séries de 10 repetições",
+              "equipamentos": ["Barra"],
+              "imagem_equipamentos": ["/assets/img/barbell.jpg"],
+              "dificuldade": "Avançado",
+              "avaliacao": "4.9",
+              "musculos_trabalhados": ["Quadríceps", "Glúteos", "Core"]
+            },
+            {
+              "nome": "Leg Press",
+              "video": "https://www.youtube.com/watch?v=IZxyjW7MPJQ",
+              "tempo_medio": "4 séries de 12 repetições",
+              "equipamentos": ["Máquina Leg Press"],
+              "imagem_equipamentos": ["/assets/img/leg-press.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.7",
+              "musculos_trabalhados": ["Quadríceps", "Glúteos"]
+            },
+            {
+              "nome": "Afundos com Halteres",
+              "video": "https://www.youtube.com/watch?v=wrwwXE_x-pQ",
+              "tempo_medio": "3 séries de 10 repetições por perna",
+              "equipamentos": ["Halteres"],
+              "imagem_equipamentos": ["/assets/img/dumbbell.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.6",
+              "musculos_trabalhados": ["Quadríceps", "Glúteos", "Isquiotibiais"]
+            }
+          ]
+        }
+      ],
+      "Core": [
+        {
+          "nome_programa": "Core de Ferro",
+          "imagem_programa": "/assets/img/core-ferro.jpg",
+          "tempo_total": "40 minutos",
+          "exercicios": [
+            {
+              "nome": "Prancha",
+              "video": "https://www.youtube.com/watch?v=pSHjTRCQxIw",
+              "tempo_medio": "3 séries de 1 minuto",
+              "equipamentos": ["Peso Corporal"],
+              "imagem_equipamentos": ["/assets/img/bodyweight.jpg"],
+              "dificuldade": "Iniciante",
+              "avaliacao": "4.8",
+              "musculos_trabalhados": ["Core", "Costas"]
+            },
+            {
+              "nome": "Crunch Abdominal",
+              "video": "https://www.youtube.com/watch?v=Xyd_fa5zoEU",
+              "tempo_medio": "3 séries de 20 repetições",
+              "equipamentos": ["Peso Corporal"],
+              "imagem_equipamentos": ["/assets/img/bodyweight.jpg"],
+              "dificuldade": "Iniciante",
+              "avaliacao": "4.6",
+              "musculos_trabalhados": ["Core"]
+            },
+            {
+              "nome": "Ab Wheel Rollout",
+              "video": "https://www.youtube.com/watch?v=8c1fG5GppFg",
+              "tempo_medio": "3 séries de 10 repetições",
+              "equipamentos": ["Roda Abdominal"],
+              "imagem_equipamentos": ["/assets/img/ab-wheel.jpg"],
+              "dificuldade": "Avançado",
+              "avaliacao": "4.7",
+              "musculos_trabalhados": ["Core"]
+            }
+          ]
+        }
+      ],
+      "Ombros": [
+        {
+          "nome_programa": "Ombros de Aço",
+          "imagem_programa": "/assets/img/ombros-aco.jpg",
+          "tempo_total": "45 minutos",
+          "exercicios": [
+            {
+              "nome": "Desenvolvimento com Halteres",
+              "video": "https://www.youtube.com/watch?v=B-aVuyhvLHU",
+              "tempo_medio": "4 séries de 10 repetições",
+              "equipamentos": ["Halteres"],
+              "imagem_equipamentos": ["/assets/img/dumbbell.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.8",
+              "musculos_trabalhados": ["Ombros"]
+            },
+            {
+              "nome": "Elevação Lateral",
+              "video": "https://www.youtube.com/watch?v=kDqklk1ZESo",
+              "tempo_medio": "3 séries de 12 repetições",
+              "equipamentos": ["Halteres"],
+              "imagem_equipamentos": ["/assets/img/dumbbell.jpg"],
+              "dificuldade": "Iniciante",
+              "avaliacao": "4.7",
+              "musculos_trabalhados": ["Ombros"]
+            },
+            {
+              "nome": "Face Pull",
+              "video": "https://www.youtube.com/watch?v=rep-qVOkqgk",
+              "tempo_medio": "3 séries de 15 repetições",
+              "equipamentos": ["Polia Baixa", "Corda"],
+              "imagem_equipamentos": ["/assets/img/low-pulley.jpg", "/assets/img/rope.jpg"],
+              "dificuldade": "Intermédio",
+              "avaliacao": "4.6",
+              "musculos_trabalhados": ["Ombros", "Costas"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+  

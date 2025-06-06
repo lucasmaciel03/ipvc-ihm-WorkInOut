@@ -1,0 +1,65 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Header -->
+  <div class="header">
+    <div class="user-info">
+      <ion-avatar>
+        <img alt="Profile" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&h=120&q=80" />
+      </ion-avatar>
+      <div class="welcome-text">
+        <p class="greeting">Let's Get Back 💪</p>
+        <h2 class="name">André Lucas Pedro</h2>
+      </div>
+    </div>
+    <ion-button fill="clear" class="notifications-btn" size="small">
+      <ion-icon slot="icon-only" name="notifications-outline" size="small"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Search Bar -->
+  <ion-searchbar placeholder="Search" class="custom-searchbar" mode="md"></ion-searchbar>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Stronger every rep<br>every step.</h1>
+      <ion-button class="start-workout-btn">
+        Start Workout 🔥
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Daily Program Section -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Daily Program</h2>
+      <ion-button fill="clear" class="see-all-btn" color="primary">See All</ion-button>
+    </div>
+
+    <!-- Program Categories -->
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChange($event)" scrollable mode="md" class="program-categories">
+      <ion-segment-button value="all">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button *ngFor="let group of muscleGroups" [value]="group">
+        <ion-label>{{ group }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Loading Skeleton -->
+    <ion-skeleton-text *ngIf="loading" [animated]="true" style="width: 100%; height: 200px;"></ion-skeleton-text>
+
+    <!-- Program Cards -->
+    <swiper-container *ngIf="!loading" [slidesPerView]="'auto'" [spaceBetween]="16" class="program-slides">
+      <swiper-slide *ngFor="let program of programs">
+        <div class="program-card" (click)="openWorkoutDetail(program)" [style.background-image]="'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + program.imagem_programa + ')'">
+          <div class="duration">
+            <ion-icon name="alarm-outline"></ion-icon>
+            {{ program.tempo_total }}
+          </div>
+          <h3>{{ program.nome_programa }}</h3>
+          <p>{{ program.descricao | slice:0:30 }}...</p>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</ion-content>
