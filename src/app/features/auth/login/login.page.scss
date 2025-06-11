@@ -1,39 +1,309 @@
-.back-button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
+.login-content {
+  --background: #151515;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-form {
-  ion-item {
-    --background: rgba(255, 255, 255, 0.1);
-    --border-color: rgba(255, 255, 255, 0.2);
-    --border-radius: 8px;
-    --padding-start: 16px;
-    margin-bottom: 16px;
+.back-button {
+  margin-top: 16px;
+  margin-bottom: 24px;
 
-    &.item-has-focus {
-      --border-color: #ff6600;
+  ion-button {
+    --padding-start: 0;
+    --padding-end: 0;
+
+    ion-icon {
+      font-size: 24px;
     }
+  }
+}
 
-    ion-label {
-      color: rgba(255, 255, 255, 0.8);
-    }
+.login-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+}
 
-    ion-input {
-      color: white;
+.login-header {
+  margin-bottom: 48px;
+
+  h1 {
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    line-height: 1.2;
+
+    .emoji {
+      font-size: 32px;
     }
   }
 
-  ion-button {
-    --background: #ff6600;
-    --background-activated: #e65c00;
-    --border-radius: 8px;
-    font-family: var(--font-title);
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    height: 48px;
-    margin-top: 24px;
+  p {
+    color: #ffffff;
+    font-size: 20px;
+    margin: 0;
+    opacity: 0.9;
+
+    .emoji {
+      font-size: 18px;
+    }
+  }
+}
+
+.input-container {
+  margin-bottom: 24px;
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 4px 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+
+    // Ajuste para melhor indicação de campo ativo
+    &:focus-within {
+      border-color: #ff6600;
+      box-shadow: 0 0 0 1px rgba(255, 102, 0, 0.2);
+      background-color: rgba(255, 102, 0, 0.03);
+    }
+
+    ion-icon {
+      color: #ffffff;
+      font-size: 20px;
+      margin-right: 12px;
+      opacity: 0.7;
+    }
+
+    ion-input {
+      --color: #ffffff;
+      --placeholder-color: rgba(255, 255, 255, 0.5);
+      --placeholder-opacity: 1;
+      --padding-start: 0;
+      --padding-end: 0;
+      --highlight-color-focused: transparent;
+      --highlight-color-valid: transparent;
+      --highlight-color-invalid: transparent;
+      --highlight-height: 0;
+      font-size: 16px;
+      min-height: 52px;
+
+      // Garantir que o cursor seja visível
+      &::part(native) {
+        caret-color: #ff6600;
+      }
+
+      // Melhorar feedback visual no foco
+      &:focus {
+        --placeholder-color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    // Estilo de foco customizado usando a cor principal da aplicação
+    &:focus-within {
+      border-color: #ff6600;
+      box-shadow: 0 0 0 1px rgba(255, 102, 0, 0.1);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 16px;
+      cursor: pointer;
+      font-size: 22px;
+      opacity: 0.7;
+    }
+  }
+
+  .validation-error {
+    display: none; // Ocultando os erros de validação específicos
+  }
+}
+
+// Adicionar um indicador visual sutil para campos inválidos
+.invalid-input {
+  .input-wrapper {
+    border: 1px solid rgba(255, 73, 97, 0.5);
+
+    ion-icon:first-child {
+      color: rgba(255, 73, 97, 0.8);
+    }
+  }
+}
+
+// Estilo para mensagem de erro geral
+.error-message {
+  background-color: rgba(255, 73, 97, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+
+  ion-icon {
+    color: #ff4961;
+    font-size: 20px;
+    margin-right: 8px;
+  }
+
+  p {
+    color: #ff4961;
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.login-button {
+  --background: #ff6600;
+  --background-activated: #e65c00;
+  --border-radius: 8px;
+  --color: #ffffff;
+  margin-top: 24px;
+  height: 54px;
+  font-size: 18px;
+  font-weight: 600;
+
+  &:disabled {
+    --background: rgba(255, 102, 0, 0.5);
+    --opacity: 1;
+  }
+}
+
+.additional-options {
+  margin-top: 24px;
+  text-align: left;
+
+  .forgot-password {
+    margin-bottom: 16px;
+
+    a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 14px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .register {
+    color: #ffffff;
+    font-size: 14px;
+
+    .register-link {
+      color: #ff6600;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Ajustes para dispositivos menores
+@media (max-height: 600px) {
+  .login-header {
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .input-container {
+    margin-bottom: 16px;
+  }
+}
+
+// Substitua o ::ng-deep para melhor compatibilidade com versões futuras
+:host {
+  // Remover qualquer destaque padrão do Ionic
+  ::ng-deep ion-item.item-has-focus {
+    --highlight-background: transparent;
+    --highlight-height: 0;
+    --border-color: transparent;
+  }
+
+  // Garantir que o cursor seja visível em todos os inputs
+  ::ng-deep .native-input {
+    caret-color: #ff6600 !important;
+    opacity: 1 !important;
+  }
+
+  // Garantir que o texto do input tenha contraste adequado
+  ::ng-deep .native-input:focus {
+    color: #ffffff !important;
+  }
+
+  // Melhorar a visibilidade do cursor em modo escuro
+  ::ng-deep input.native-input:focus {
+    caret-color: #ff6600 !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+}
+
+// Adicionar uma animação sutil ao focar nos inputs
+@keyframes focusPulse {
+  0% {
+    border-color: rgba(255, 102, 0, 0.6);
+  }
+  50% {
+    border-color: rgba(255, 102, 0, 0.8);
+  }
+  100% {
+    border-color: rgba(255, 102, 0, 0.6);
+  }
+}
+
+.input-container {
+  // ...existing code...
+
+  // Adicionar um efeito de pulso na borda quando o input está focado
+  .input-wrapper:focus-within {
+    animation: focusPulse 2s infinite ease-in-out;
+  }
+}
+
+// Regra para sobrescrever qualquer destaque verde nos campos válidos
+:host ::ng-deep {
+  // Remover todos os destaques padrão do Ionic
+  .item-interactive.ion-valid,
+  .item-interactive.ion-invalid,
+  .item-interactive.item-has-focus {
+    --highlight-background: transparent;
+    --highlight-height: 0;
+    --border-color: transparent;
+    --full-highlight-height: 0;
+    box-shadow: none;
+  }
+
+  // Sobrescrever qualquer outro estilo interno que possa mostrar cores indesejadas
+  .native-input:focus,
+  .native-input.has-focus {
+    caret-color: #ff6600; // Cursor na cor da aplicação
+  }
+
+  // Garantir que não existam estilos de validação internos
+  .ion-touched.ion-valid,
+  .ion-dirty.ion-valid {
+    --highlight-background: transparent;
   }
 }

@@ -1,21 +1,81 @@
-<ion-content class="ion-padding">
+<ion-content class="login-content">
   <div class="back-button">
     <ion-button fill="clear" routerLink="/auth/welcome" color="light">
       <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </div>
 
-  <form>
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email"></ion-input>
-    </ion-item>
+  <div class="login-container">
+    <div class="login-header">
+      <h1>ESTÁS DE VOLTA! <span class="emoji">💪</span></h1>
+      <p>Pronto para mais um treino épico? <span class="emoji">🔥</span></p>
+    </div>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
+    <!-- Mensagem de erro geral - mostrada apenas quando necessário -->
+    <div class="error-message" *ngIf="loginError">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <p>{{ loginErrorMessage }}</p>
+    </div>
 
-    <ion-button expand="block" class="ion-margin-top" (click)="onLogin()">Entrar</ion-button>
-  </form>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div
+        class="input-container"
+        [class.invalid-input]="isFieldInvalid('email')"
+      >
+        <div class="input-wrapper">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-input
+            type="email"
+            formControlName="email"
+            placeholder="O teu email"
+            autocomplete="email"
+            inputmode="email"
+            aria-label="Email"
+          >
+          </ion-input>
+        </div>
+      </div>
+
+      <div
+        class="input-container"
+        [class.invalid-input]="isFieldInvalid('password')"
+      >
+        <div class="input-wrapper">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <ion-input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="A tua password"
+            aria-label="Password"
+          >
+          </ion-input>
+          <ion-icon
+            [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            tabindex="0"
+            role="button"
+            aria-label="Mostrar ou ocultar password"
+          >
+          </ion-icon>
+        </div>
+      </div>
+
+      <ion-button expand="block" type="submit" class="login-button">
+        ENTRAR
+      </ion-button>
+
+      <div class="additional-options">
+        <div class="forgot-password">
+          <a routerLink="/auth/forgot-password"
+            >Esqueceste-te da tua password?</a
+          >
+        </div>
+        <div class="register">
+          Não tens conta?
+          <a routerLink="/auth/register" class="register-link">Registar</a>
+        </div>
+      </div>
+    </form>
+  </div>
 </ion-content>

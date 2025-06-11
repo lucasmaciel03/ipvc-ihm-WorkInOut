@@ -1,8 +1,17 @@
 .back-button {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px; // Reduzido para ficar mais alinhado com os steps
+  left: 10px;
   z-index: 2;
+
+  ion-button {
+    --padding-start: 0;
+    --padding-end: 0;
+
+    ion-icon {
+      font-size: 24px;
+    }
+  }
 }
 
 form {
@@ -36,4 +45,506 @@ form {
     height: 48px;
     margin-top: 24px;
   }
+}
+
+ion-content {
+  --background: #151515;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+.back-button {
+  margin-top: 16px;
+  margin-bottom: 24px;
+
+  ion-button {
+    --padding-start: 0;
+    --padding-end: 0;
+
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+}
+
+.register-content {
+  --background: #151515;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  max-width: 450px;
+  margin: 0 auto;
+  width: 100%;
+
+  // Quando estiver no step 3, usar margens menores
+  &.step-3 {
+    .register-header {
+      margin-bottom: 24px; // Reduzido de 48px
+
+      h1 {
+        font-size: 32px; // Reduzido de 40px
+      }
+    }
+  }
+}
+
+// Estilos para o indicador de progresso
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px; // Adicionar margem superior para compensar o posicionamento do botão
+  margin-bottom: 32px;
+
+  .step {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: bold;
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: #ff6600;
+    }
+  }
+
+  .step-line {
+    height: 2px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+
+    &.active {
+      background-color: #ff6600;
+    }
+  }
+}
+
+// Estilos para o cabeçalho do registro (etapa 1 e 2)
+.register-header {
+  margin-bottom: 36px;
+  position: relative;
+
+  h1 {
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    .emoji {
+      font-size: 38px;
+    }
+  }
+
+  p {
+    color: #ffffff;
+    font-size: 22px;
+    margin: 0;
+    opacity: 0.9;
+    display: inline-block;
+
+    .emoji {
+      font-size: 20px;
+      margin-left: 2px;
+      display: inline;
+    }
+  }
+
+  .target-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+// Estilos para os cartões de objetivos
+.goals-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.goal-card {
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &.selected {
+    border-color: #ff6600;
+    background-color: rgba(255, 102, 0, 0.1);
+    box-shadow: 0 0 0 1px rgba(255, 102, 0, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .goal-content {
+    flex: 1;
+
+    h3 {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  .goal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .emoji {
+      font-size: 30px; // Aumentado de 32px para 40px
+    }
+  }
+}
+
+// Estilos para os inputs - ajustados para o design da imagem
+.input-container {
+  margin-bottom: 32px;
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 4px 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: border-color 0.2s ease;
+    height: 58px;
+
+    &.icon-start {
+      ion-icon:first-child {
+        margin-right: 16px;
+        font-size: 22px;
+        opacity: 0.8;
+      }
+    }
+
+    &:focus-within {
+      border-color: #ff6600 !important;
+      box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2) !important;
+      background-color: rgba(255, 102, 0, 0.05) !important;
+    }
+
+    ion-icon {
+      color: #ffffff;
+      font-size: 22px;
+      margin-right: 12px;
+      opacity: 0.7;
+    }
+
+    ion-input {
+      --color: #ffffff;
+      --placeholder-color: rgba(255, 255, 255, 0.7);
+      --placeholder-opacity: 1;
+      --padding-start: 0;
+      --padding-end: 0;
+      --highlight-color-focused: transparent;
+      --highlight-color-valid: transparent;
+      --highlight-color-invalid: transparent;
+      --highlight-height: 0;
+      font-size: 18px;
+      min-height: 52px;
+
+      &::part(native) {
+        caret-color: #ff6600 !important;
+        opacity: 1 !important;
+        -webkit-text-fill-color: #ffffff !important;
+        color: #ffffff !important;
+      }
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 16px;
+      cursor: pointer;
+      font-size: 22px;
+      opacity: 0.7;
+      z-index: 10; // Garantir que está acima do input
+      pointer-events: auto; // Garantir que recebe eventos de clique
+      transition: opacity 0.2s ease;
+
+      &:active {
+        opacity: 1; // Feedback visual ao clicar
+      }
+    }
+  }
+
+  label {
+    display: block;
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  // Menor espaçamento para o step 3
+  .step-3 & {
+    margin-bottom: 14px; // Espaçamento reduzido entre os campos
+
+    label {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .input-wrapper,
+    .select-wrapper {
+      height: 48px; // Altura reduzida dos inputs
+    }
+  }
+}
+
+// Título da etapa para etapas 2 e 3
+.step-title {
+  margin-bottom: 24px;
+
+  h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+// Estilos para items de etapas 2 e 3
+ion-item {
+  --background: transparent;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --highlight-color-focused: #ff6600;
+  --color: #ffffff;
+  margin-bottom: 16px;
+
+  ion-label {
+    --color: rgba(255, 255, 255, 0.7);
+  }
+
+  ion-input {
+    --color: #ffffff;
+    --placeholder-color: rgba(255, 255, 255, 0.5);
+  }
+
+  ion-select {
+    --color: #ffffff;
+    --placeholder-color: rgba(255, 255, 255, 0.5);
+  }
+
+  ion-checkbox {
+    --background-checked: #ff6600;
+    --border-color-checked: #ff6600;
+    --border-color: rgba(255, 255, 255, 0.3);
+    --checkmark-color: #ffffff;
+  }
+}
+
+ion-list {
+  background: transparent;
+
+  ion-list-header {
+    --background: transparent;
+    --color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// Navegação entre etapas
+.step-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+
+  ion-button {
+    --background: #ff6600;
+    --background-activated: #e65c00;
+    --border-radius: 8px;
+    --color: #ffffff;
+    height: 54px;
+    font-size: 16px;
+    font-weight: 600;
+
+    &[fill="outline"] {
+      --background: transparent;
+      --background-activated: transparent;
+      --border-color: #ff6600;
+      --color: #ff6600;
+    }
+
+    &.next-button,
+    &.submit-button {
+      flex: 1;
+    }
+  }
+
+  // Margens menores no step 3
+  .step-3 & {
+    margin-top: 20px; // Reduzido de 32px
+
+    ion-button {
+      height: 48px; // Reduzido de 54px
+    }
+  }
+}
+
+// Remover os estilos de layout em colunas que não serão mais usados
+.inputs-row {
+  display: none;
+}
+
+// Ajustes adicionais para telas pequenas
+@media (max-height: 640px) {
+  .register-container.step-3 {
+    .register-header {
+      margin-bottom: 16px;
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+
+    .input-container {
+      margin-bottom: 10px;
+    }
+
+    .step-navigation {
+      margin-top: 14px;
+    }
+  }
+}
+
+// Ajuste para dispositivos menores
+@media (max-height: 600px) {
+  .register-header {
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .input-container {
+    margin-bottom: 16px;
+  }
+}
+
+// Sobrescrever estilos Ionic
+:host ::ng-deep {
+  // Remover todos os destaques padrão do Ionic
+  .item-interactive.ion-valid,
+  .item-interactive.ion-invalid,
+  .item-interactive.item-has-focus {
+    --highlight-background: transparent;
+    --highlight-height: 0;
+    --border-color: transparent;
+  }
+
+  // Garantir que o cursor seja visível e tenha cor adequada
+  .native-input,
+  .native-input:focus,
+  .native-input.has-focus {
+    caret-color: #ff6600 !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  // Garantir que o cursor seja visível em diversos navegadores/plataformas
+  input.native-input,
+  input.native-input:focus,
+  input.native-input.has-focus,
+  textarea.native-textarea,
+  textarea.native-textarea:focus,
+  textarea.native-textarea.has-focus {
+    caret-color: #ff6600 !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  // Ajustar a opacidade de texto para maior contraste
+  .native-input::placeholder,
+  .native-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1 !important;
+  }
+
+  // Estilizar as opções do select
+  .action-sheet-button {
+    color: #ffffff !important;
+  }
+}
+
+// Adicionar um efeito de foco claro
+.input-wrapper:focus-within {
+  border-color: #ff6600 !important;
+  box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.2) !important;
+  background-color: rgba(255, 102, 0, 0.05) !important;
+}
+
+// Garantir que o cursor tenha animação para maior visibilidade
+@keyframes blink-caret {
+  from,
+  to {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+// Removendo os estilos anteriores do botão que não serão mais usados
+.eye-button {
+  display: none;
+}
+
+// Adicionar estilos para o ícone no select
+.select-wrapper {
+  // ...existing code...
+
+  .select-start-icon {
+    color: #ffffff;
+    font-size: 20px;
+    margin-right: 12px;
+    opacity: 0.7;
+  }
+
+  // ...existing code...
 }
