@@ -1,22 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { StatisticsPage } from './statistics.page';
-import { RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { IonicModule } from "@ionic/angular";
+import { RouterModule } from "@angular/router";
+import { StatisticsPage } from "./statistics.page";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: StatisticsPage
-      }
-    ])
+    RouterModule.forChild([{ path: "", component: StatisticsPage }]),
   ],
-  declarations: [StatisticsPage]
+  declarations: [StatisticsPage],
 })
 export class StatisticsPageModule {}

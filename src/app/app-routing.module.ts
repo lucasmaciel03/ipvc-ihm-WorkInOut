@@ -40,18 +40,8 @@ const routes: Routes = [
   },
   {
     path: "tabs",
-    children: [
-      {
-        path: "",
-        redirectTo: "home",
-        pathMatch: "full",
-      },
-      {
-        path: "home",
-        loadChildren: () =>
-          import("./features/home/home.module").then((m) => m.HomePageModule),
-      },
-    ],
+    loadChildren: () =>
+      import("./layout/tabs/tabs.module").then((m) => m.TabsPageModule),
   },
   {
     path: "**",

@@ -1,1 +1,13 @@
 // Estilos específicos da página de estatísticas serão adicionados aqui
+
+ion-content {
+  --background: #151515;
+  --color: #ffffff;
+}
+
+ion-header {
+  ion-toolbar {
+    --background: #151515;
+    --color: #ffffff;
+  }
+}

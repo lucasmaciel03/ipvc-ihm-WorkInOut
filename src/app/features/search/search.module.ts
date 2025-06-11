@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { SearchPage } from './search.page';
+import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { SearchPage } from './search.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: SearchPage
-      }
-    ])
+    RouterModule.forChild([{ path: '', component: SearchPage }])
   ],
   declarations: [SearchPage]
 })
