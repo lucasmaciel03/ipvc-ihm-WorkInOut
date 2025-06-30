@@ -5,10 +5,10 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Resumo</ion-title>
+    <ion-title>Resumo do Treino</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onMoreClick()">
-        <ion-icon name="ellipsis-horizontal"></ion-icon>
+        <ion-icon name="share-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -16,45 +16,65 @@
 
 <ion-content class="ion-padding">
   <!-- Hero Image and Title -->
-  <div class="hero-section">
-    <img src="assets/workout-bicep.jpg" alt="Bicep workout">
+  <div class="hero-section" *ngIf="currentWorkout">
+    <img src="assets/images/workout-complete.jpg" alt="Treino concluído">
     <div class="hero-content">
-      <h1>Bicep Program</h1>
-      <ion-button fill="clear" class="more-btn">More</ion-button>
+      <h1>{{ currentWorkout.programName }}</h1>
+      <div class="completion-date">{{ workoutDate }}</div>
     </div>
   </div>
 
   <!-- Stats Grid -->
-  <div class="stats-grid">
+  <div class="stats-grid" *ngIf="currentWorkout">
     <div class="stat-card">
       <ion-icon name="flame-outline" color="primary"></ion-icon>
-      <div class="stat-label">CALORIES</div>
-      <div class="stat-value">x{{ stats.calories }}</div>
+      <div class="stat-label">CALORIAS</div>
+      <div class="stat-value">{{ stats.calories }}</div>
     </div>
     <div class="stat-card">
       <ion-icon name="time-outline" color="primary"></ion-icon>
-      <div class="stat-label">TIME</div>
+      <div class="stat-label">TEMPO</div>
       <div class="stat-value">{{ stats.time }}<span>min</span></div>
     </div>
+    <div class="stat-card">
+      <ion-icon name="checkmark-circle-outline" color="primary"></ion-icon>
+      <div class="stat-label">CONCLUSÃO</div>
+      <div class="stat-value">{{ stats.completionRate }}<span>%</span></div>
+    </div>
+    <div class="stat-card">
+      <ion-icon name="barbell-outline" color="primary"></ion-icon>
+      <div class="stat-label">EXERCÍCIOS</div>
+      <div class="stat-value">{{ stats.exercisesCompleted }}/{{ stats.totalExercises }}</div>
+    </div>
+  </div>
+  
+  <!-- Mensagem se não houver treino -->
+  <div class="no-workout" *ngIf="!currentWorkout">
+    <ion-icon name="fitness-outline" size="large"></ion-icon>
+    <h2>Sem treinos concluídos</h2>
+    <p>Ainda não tens nenhum treino finalizado para mostrar.</p>
   </div>
 
   <!-- Recent Workouts Section -->
-  <div class="recent-section">
+  <div class="recent-section" *ngIf="recentWorkouts.length > 0">
     <div class="section-header">
-      <h2>Recent Bicep Programs</h2>
-      <ion-button fill="clear" class="see-all-btn">See All</ion-button>
+      <h2>Treinos Recentes</h2>
+      <ion-button fill="clear" class="see-all-btn" routerLink="/tabs/statistics">Ver Todos</ion-button>
     </div>
 
     <div class="workout-list">
       <div class="workout-card" *ngFor="let workout of recentWorkouts">
         <div class="workout-info">
-          <h3>Bicep Program</h3>
+          <h3>{{ workout.programName }}</h3>
           <div class="workout-meta">
             <span class="duration">
               <ion-icon name="time-outline"></ion-icon>
               {{ workout.duration }}
             </span>
-            <span class="sets">{{ workout.sets }}</span>
+            <span class="exercises">
+              <ion-icon name="barbell-outline"></ion-icon>
+              {{ workout.exercisesCompleted }}
+            </span>
           </div>
         </div>
 
@@ -64,12 +84,8 @@
             <span>{{ workout.calories }} Kcal</span>
           </div>
           <div class="stat">
-            <ion-icon name="heart-outline"></ion-icon>
-            <span>{{ workout.heartRate }} Bpm</span>
-          </div>
-          <div class="stat">
-            <ion-icon name="pulse-outline"></ion-icon>
-            <span>{{ workout.bpm }} Bpm</span>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span>{{ workout.completionRate }}%</span>
           </div>
         </div>
 

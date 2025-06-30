@@ -1,3 +1,10 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+
+  <!-- Custom Alert Component -->
+  <app-custom-alert
+    [isOpen]="(alertService.alert$ | async)?.isOpen || false"
+    [options]="(alertService.alert$ | async)?.options || null"
+    (dismiss)="alertService.dismiss()">
+  </app-custom-alert>
 </ion-app>

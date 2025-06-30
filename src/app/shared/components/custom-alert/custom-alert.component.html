@@ -1,0 +1,42 @@
+<div class="custom-alert-backdrop" [class.show]="isOpen" (click)="onBackdropClick()" *ngIf="isOpen">
+  <div class="custom-alert-container" (click)="$event.stopPropagation()">
+    <div class="alert-content" [ngClass]="options?.cssClass">
+      
+      <!-- Icon Section -->
+      <div class="alert-icon" *ngIf="options?.icon">
+        <ion-icon 
+          [name]="options?.icon || ''" 
+          [style.color]="options?.iconColor || 'var(--ion-color-primary)'">
+        </ion-icon>
+      </div>
+
+      <!-- Header -->
+      <div class="alert-header" *ngIf="options?.header">
+        <h2>{{ options?.header }}</h2>
+      </div>
+
+      <!-- Sub Header -->
+      <div class="alert-sub-header" *ngIf="options?.subHeader">
+        <h3>{{ options?.subHeader }}</h3>
+      </div>
+
+      <!-- Message -->
+      <div class="alert-message" *ngIf="options?.message">
+        <p [innerHTML]="options?.message"></p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="alert-buttons" *ngIf="options?.buttons?.length">
+        <ion-button
+          *ngFor="let button of options?.buttons || []"
+          [fill]="button.role === 'cancel' ? 'outline' : 'solid'"
+          [color]="button.role === 'destructive' ? 'danger' : 'primary'"
+          [class]="button.cssClass || ''"
+          (click)="onButtonClick(button)">
+          {{ button.text }}
+        </ion-button>
+      </div>
+
+    </div>
+  </div>
+</div>

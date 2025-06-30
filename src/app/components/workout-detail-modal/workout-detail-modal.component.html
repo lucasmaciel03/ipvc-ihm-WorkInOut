@@ -40,8 +40,12 @@
     <div class="workout-info">
       <div class="main-info">
         <div class="exercise-header">
-          <h1>{{ currentExercise?.nome }}</h1>
-          <div class="exercise-counter">
+          <h1>
+            {{ currentExercise?.nome }}
+            <ion-icon name="checkmark-circle" class="completed-icon" *ngIf="isExerciseCompleted(currentExercise?.nome)"></ion-icon>
+            <ion-icon name="time" class="in-progress-icon" *ngIf="isExerciseInProgress(currentExercise?.nome) && !isExerciseCompleted(currentExercise?.nome)"></ion-icon>
+          </h1>
+          <div class="exercise-counter" [ngClass]="{'completed': isExerciseCompleted(currentExercise?.nome), 'in-progress': isExerciseInProgress(currentExercise?.nome) && !isExerciseCompleted(currentExercise?.nome)}">
             {{ currentExerciseIndex + 1 }}/{{ program?.exercicios?.length }}
           </div>
         </div>
@@ -85,6 +89,28 @@
             </div>
           </div>
         </div>
+
+        <div class="workout-progress">
+          <h3 class="section-title">Progresso do treino</h3>
+          <div class="exercise-list">
+            <div *ngFor="let exercicio of program?.exercicios; let i = index" 
+                 class="exercise-item" 
+                 [ngClass]="{
+                   'completed': isExerciseCompleted(exercicio.nome),
+                   'in-progress': isExerciseInProgress(exercicio.nome) && !isExerciseCompleted(exercicio.nome),
+                   'current': i === currentExerciseIndex
+                 }"
+                 (click)="goToExercise(i)">
+              <div class="exercise-status">
+                <ion-icon name="checkmark-circle" *ngIf="isExerciseCompleted(exercicio.nome)"></ion-icon>
+                <ion-icon name="time" *ngIf="isExerciseInProgress(exercicio.nome) && !isExerciseCompleted(exercicio.nome)"></ion-icon>
+                <ion-icon name="ellipse-outline" *ngIf="!isExerciseCompleted(exercicio.nome) && !isExerciseInProgress(exercicio.nome)"></ion-icon>
+              </div>
+              <div class="exercise-name">{{ exercicio.nome }}</div>
+              <div class="exercise-number">{{ i + 1 }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>
@@ -103,7 +129,7 @@
 
 <app-workout-complete
   *ngIf="showComplete"
-  [workoutName]="'Treino de Bicep'"
+  [workoutName]="completedItemName"
   (continue)="onWorkoutContinue()"
   (finish)="onWorkoutFinish()"
 ></app-workout-complete>

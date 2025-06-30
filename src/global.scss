@@ -29,6 +29,89 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+/* Estilos personalizados para alertas */
+.workout-warning-alert {
+  --background: #1a1a1a;
+  --backdrop-opacity: 0.8;
+  --backdrop-filter: blur(4px);
+  
+  .alert-wrapper {
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1a1a1a;
+    overflow: hidden;
+    position: relative;
+    z-index: 100000; /* Garantir que fique acima de qualquer modal */
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6600, darken(#ff6600, 10%));
+    }
+  }
+  
+  .alert-head {
+    padding-top: 24px;
+    text-align: center;
+  }
+  
+  .alert-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .alert-sub-title {
+    font-size: 1rem;
+    color: #ff6600;
+    font-weight: 500;
+  }
+  
+  .alert-message {
+    color: #cccccc;
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 16px;
+    
+    strong {
+      color: #ff6600;
+    }
+  }
+  
+  .alert-button-group {
+    padding: 16px;
+    justify-content: space-between;
+  }
+  
+  .alert-button {
+    &.motivational-btn {
+      --background: #ff6600;
+      --color: white;
+      font-weight: 600;
+      --border-radius: 12px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+    }
+    
+    &.destructive-btn {
+      --background: transparent;
+      --color: #ff6600;
+      --border-color: #ff6600;
+      --border-style: solid;
+      --border-width: 1px;
+      font-weight: 500;
+      --border-radius: 12px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+    }
+  }
+}
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------

@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { WorkoutProgressService, WorkoutSession } from '../../core/services/workout-progress.service';
 
 @Component({
   selector: 'app-workout-summary',
@@ -9,42 +10,124 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [CommonModule, IonicModule]
 })
-export class WorkoutSummaryComponent {
+export class WorkoutSummaryComponent implements OnInit {
   @Output() dismiss = new EventEmitter<void>();
-  // Mock data
-  workoutDate: string = '15 Março 2024';
+  @Input() workoutId?: string;
+  
+  currentWorkout: WorkoutSession | null = null;
+  workoutDate: string = '';
   stats = {
-    calories: 138,
-    time: 47,
-    heartRate: 99,
-    bpm: 18,
-    sets: '3 x 12 reps'
+    calories: 0,
+    time: 0,
+    completionRate: 0,
+    exercisesCompleted: 0,
+    totalExercises: 0
   };
 
-  recentWorkouts = [
-    {
-      date: '15 Março 2024',
-      duration: '12min',
-      sets: '3 x 12 reps',
-      calories: 802,
-      heartRate: 99,
-      bpm: 18
-    },
-    {
-      date: '04 Março 2024',
-      duration: '32min',
-      sets: '3 x 12 reps',
-      calories: 750,
-      heartRate: 95,
-      bpm: 16
+  recentWorkouts: any[] = [];
+  
+  constructor(private workoutProgressService: WorkoutProgressService) {}
+  
+  ngOnInit() {
+    this.loadWorkoutData();
+    this.loadRecentWorkouts();
+  }
+  
+  /**
+   * Carrega os dados do treino atual para o resumo
+   */
+  private loadWorkoutData() {
+    // Se tiver um ID específico, buscar do histórico
+    if (this.workoutId) {
+      const history = this.workoutProgressService.getWorkoutHistory();
+      this.currentWorkout = history.find(w => w.id === this.workoutId) || null;
     }
-  ];
+    
+    // Se não encontrou por ID ou não tinha ID, usar o último treino finalizado
+    if (!this.currentWorkout) {
+      const history = this.workoutProgressService.getWorkoutHistory();
+      this.currentWorkout = history.length > 0 ? history[history.length - 1] : null;
+    }
+    
+    if (this.currentWorkout) {
+      // Formatar a data
+      const date = new Date(this.currentWorkout.endTime || this.currentWorkout.startTime);
+      this.workoutDate = this.formatDate(date);
+      
+      // Calcular estatísticas
+      this.stats = {
+        calories: this.currentWorkout.caloriesEstimated,
+        time: Math.floor(this.currentWorkout.duration / 60), // Converter segundos para minutos
+        completionRate: this.calculateCompletionRate(),
+        exercisesCompleted: this.currentWorkout.completedExercises,
+        totalExercises: this.currentWorkout.totalExercises
+      };
+    }
+  }
+  
+  /**
+   * Carrega os treinos recentes do histórico
+   */
+  private loadRecentWorkouts() {
+    const history = this.workoutProgressService.getWorkoutHistory();
+    
+    // Pegar os últimos 5 treinos (excluindo o atual se estiver no histórico)
+    this.recentWorkouts = history
+      .filter(w => !this.currentWorkout || w.id !== this.currentWorkout.id)
+      .slice(-5)
+      .reverse()
+      .map(workout => ({
+        date: this.formatDate(new Date(workout.endTime || workout.startTime)),
+        duration: `${Math.floor(workout.duration / 60)}min`,
+        programName: workout.programName,
+        calories: workout.caloriesEstimated,
+        completionRate: this.calculateCompletionRate(workout),
+        exercisesCompleted: `${workout.completedExercises}/${workout.totalExercises}`
+      }));
+  }
+  
+  /**
+   * Calcula a taxa de conclusão do treino
+   */
+  private calculateCompletionRate(workout?: WorkoutSession): number {
+    const w = workout || this.currentWorkout;
+    if (!w) return 0;
+    
+    return Math.round((w.completedExercises / w.totalExercises) * 100);
+  }
+  
+  /**
+   * Formata a data para exibição
+   */
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = this.getMonthName(date.getMonth());
+    const year = date.getFullYear();
+    
+    return `${day} ${month} ${year}`;
+  }
+  
+  /**
+   * Retorna o nome do mês em português
+   */
+  private getMonthName(monthIndex: number): string {
+    const months = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    
+    return months[monthIndex];
+  }
 
   onBackClick() {
     this.dismiss.emit();
   }
-
+  
+  /**
+   * Manipula o clique no botão de partilha
+   */
   onMoreClick() {
-    // Implementar ação de mais opções
+    // Implementação futura: partilhar o resumo do treino
+    console.log('Partilhar resumo do treino');
   }
 }

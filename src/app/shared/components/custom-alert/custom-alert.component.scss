@@ -1,0 +1,183 @@
+.custom-alert-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 99999; // Aumentado para garantir que fique acima de modais e outros elementos
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 16px;
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+.custom-alert-container {
+  width: 100%;
+  max-width: 320px;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+
+  .custom-alert-backdrop.show & {
+    transform: scale(1);
+  }
+}
+
+.alert-content {
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-secondary));
+  }
+
+  // Workout completion alert styling
+  &.workout-complete {
+    background: linear-gradient(135deg, #1a4d3a 0%, #1a1a1a 100%);
+    
+    &::before {
+      background: linear-gradient(90deg, #4CAF50, #81C784);
+    }
+  }
+
+  // Warning alert styling
+  &.workout-warning {
+    background: linear-gradient(135deg, #4d2a1a 0%, #1a1a1a 100%);
+    
+    &::before {
+      background: linear-gradient(90deg, #FF9800, #FFB74D);
+    }
+  }
+
+  // Motivational alert styling
+  &.motivational {
+    background: linear-gradient(135deg, #1a2d4d 0%, #1a1a1a 100%);
+    
+    &::before {
+      background: linear-gradient(90deg, #2196F3, #64B5F6);
+    }
+  }
+}
+
+.alert-icon {
+  margin-bottom: 16px;
+  
+  ion-icon {
+    font-size: 48px;
+    display: block;
+    margin: 0 auto;
+    animation: iconPulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.alert-header {
+  margin-bottom: 8px;
+
+  h2 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.alert-sub-header {
+  margin-bottom: 16px;
+
+  h3 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.alert-message {
+  margin-bottom: 24px;
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.alert-buttons {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  ion-button {
+    --border-radius: 12px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-weight: 600;
+    text-transform: none;
+    min-height: 48px;
+    flex: 1;
+
+    &[color="danger"] {
+      --background: linear-gradient(135deg, #d32f2f, #f44336);
+      --color: white;
+    }
+
+    &[fill="outline"] {
+      --border-color: rgba(255, 255, 255, 0.3);
+      --color: rgba(255, 255, 255, 0.8);
+      
+      &:hover {
+        --background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}
+
+// Specific button styling
+.motivational-btn {
+  --background: linear-gradient(135deg, #4CAF50, #66BB6A);
+  --color: white;
+}
+
+.warning-btn {
+  --background: linear-gradient(135deg, #FF9800, #FFB74D);
+  --color: white;
+}

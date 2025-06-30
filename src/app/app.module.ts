@@ -8,6 +8,7 @@ import { IonicModule, IonicRouteStrategy } from "@ionic/angular";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { CustomAlertComponent } from "./shared/components/custom-alert/custom-alert.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomAlertComponent,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
