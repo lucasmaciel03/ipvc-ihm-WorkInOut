@@ -1,0 +1,231 @@
+{
+  "Ficar em Forma": {
+    "descricao": "Programas voltados para condicionamento físico, resistência e bem-estar geral",
+    "Funcional Total": [
+      {
+        "nome_programa": "Treino Funcional Corpo Inteiro",
+        "imagem_programa": "/assets/images/funcional-corpo-inteiro.jpg",
+        "descricao": "Rotina funcional para melhorar mobilidade, resistência e força geral",
+        "tempo_total": "45 minutos",
+        "total_exercicios": 5,
+        "calorias_estimadas": 400,
+        "tags": [
+          "funcional",
+          "resistência",
+          "mobilidade"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Iniciante",
+          "equipamentos_necessarios": [
+            "Colchonete",
+            "Halter leve"
+          ],
+          "conhecimento_previo": [
+            "Alongamento dinâmico",
+            "Coordenação motora básica"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Agachamento com Peso Corporal",
+            "video": "https://www.youtube.com/watch?v=aclHkVaku9U",
+            "tempo_medio": "3 séries de 15 repetições",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Iniciante",
+            "avaliacao": "4.6",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Core"
+            ]
+          },
+          {
+            "nome": "Prancha com Toque de Ombros",
+            "video": "https://www.youtube.com/watch?v=9p0Q5oHgq1E",
+            "tempo_medio": "3 séries de 30 segundos",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.7",
+            "musculos_trabalhados": [
+              "Core",
+              "Ombros"
+            ]
+          },
+          {
+            "nome": "Subida no Step",
+            "video": "https://www.youtube.com/watch?v=dQqApCGd5Ss",
+            "tempo_medio": "3 séries de 12 repetições por perna",
+            "equipamentos": [
+              "Caixa/Step"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/step-box.jpg"
+            ],
+            "dificuldade": "Iniciante",
+            "avaliacao": "4.5",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Glúteos"
+            ]
+          }
+        ]
+      },
+      {
+        "nome_programa": "Circuito Funcional Dinâmico",
+        "imagem_programa": "/assets/images/circuito-dinamico.jpg",
+        "descricao": "Treino dinâmico com foco em resistência cardiovascular e força funcional",
+        "tempo_total": "40 minutos",
+        "total_exercicios": 5,
+        "calorias_estimadas": 420,
+        "tags": [
+          "funcional",
+          "cardio",
+          "corpo inteiro"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Intermédio",
+          "equipamentos_necessarios": [
+            "Colchonete",
+            "Halteres leves"
+          ],
+          "conhecimento_previo": [
+            "Postura correta",
+            "Boa execução de movimentos compostos"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Corrida no Lugar com Joelhos Altos",
+            "video": "https://www.youtube.com/watch?v=8XqVCVn2o3I",
+            "tempo_medio": "3 séries de 45 segundos",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.5",
+            "musculos_trabalhados": [
+              "Cardio",
+              "Pernas"
+            ]
+          },
+          {
+            "nome": "Agachamento com Elevação Frontal",
+            "video": "https://www.youtube.com/watch?v=3WnBsPxjEo4",
+            "tempo_medio": "3 séries de 12 repetições",
+            "equipamentos": [
+              "Halteres Leves"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/dumbbell.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.6",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Ombros",
+              "Core"
+            ]
+          }
+        ]
+      },
+      {
+        "nome_programa": "Desafio Funcional em Casa",
+        "imagem_programa": "/assets/images/funcional-casa.jpg",
+        "descricao": "Programa prático sem equipamentos para treinar em qualquer lugar",
+        "tempo_total": "35 minutos",
+        "total_exercicios": 4,
+        "calorias_estimadas": 350,
+        "tags": [
+          "casa",
+          "sem equipamentos",
+          "funcional",
+          "mobilidade"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Iniciante",
+          "equipamentos_necessarios": [
+            "Nenhum"
+          ],
+          "conhecimento_previo": [
+            "Noções básicas de movimento corporal"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Agachamento com Salto",
+            "video": "https://www.youtube.com/watch?v=U4s4mEQ5VqU",
+            "tempo_medio": "3 séries de 15 repetições",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.6",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Cardio"
+            ]
+          }
+        ]
+      },
+      {
+        "nome_programa": "Funcional com Core Ativo",
+        "imagem_programa": "/assets/images/core-funcional.jpg",
+        "descricao": "Foco na estabilidade e força do core com movimentos funcionais",
+        "tempo_total": "50 minutos",
+        "total_exercicios": 5,
+        "calorias_estimadas": 400,
+        "tags": [
+          "core",
+          "funcional",
+          "estabilidade"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Intermédio",
+          "equipamentos_necessarios": [
+            "Colchonete",
+            "Roda Abdominal"
+          ],
+          "conhecimento_previo": [
+            "Controle do core",
+            "Respiração durante esforço"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Prancha Lateral Alternada",
+            "video": "https://www.youtube.com/watch?v=_3z8P70gU8U",
+            "tempo_medio": "3 séries de 30 segundos por lado",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.7",
+            "musculos_trabalhados": [
+              "Oblíquos",
+              "Core",
+              "Estabilizadores"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -425,6 +425,103 @@ ion-list {
   display: none;
 }
 
+// Estilos para o modal de sucesso
+.success-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #1a1a1a;
+  padding: 24px;
+}
+
+.success-content {
+  background: #2a2a2a;
+  border: 2px solid #ff6600;
+  border-radius: 24px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+}
+
+.success-icon {
+  margin-bottom: 24px;
+
+  .wave-emoji {
+    font-size: 80px;
+    display: block;
+    animation: wave 2s ease-in-out infinite;
+  }
+}
+
+.success-title {
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.success-message {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0 0 32px;
+
+  .fire-emoji {
+    font-size: 20px;
+  }
+}
+
+.success-button {
+  --background: #ff6600;
+  --background-activated: #e65c00;
+  --border-radius: 12px;
+  --color: #ffffff;
+  height: 54px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+// Animação para o emoji de acenar
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+// Ajustes para dispositivos menores
+@media (max-width: 480px) {
+  .success-content {
+    padding: 32px 24px;
+  }
+
+  .success-icon .wave-emoji {
+    font-size: 64px;
+  }
+
+  .success-title {
+    font-size: 28px;
+  }
+
+  .success-message {
+    font-size: 16px;
+  }
+}
+
 // Ajustes adicionais para telas pequenas
 @media (max-height: 640px) {
   .register-container.step-3 {
@@ -509,6 +606,96 @@ ion-list {
   .action-sheet-button {
     color: #ffffff !important;
   }
+
+  // Estilo personalizado para toasts de erro
+  .error-toast {
+    --background: #ff4961;
+    --color: #ffffff;
+
+    .toast-message {
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  // Corrigir estilos do action sheet para o select de género
+  .action-sheet-wrapper {
+    --background: #1a1a1a;
+
+    .action-sheet-container {
+      --background: #1a1a1a;
+
+      .action-sheet-group {
+        --background: #1a1a1a;
+
+        .action-sheet-button {
+          --background: #1a1a1a;
+          --color: #ffffff !important;
+          color: #ffffff !important;
+
+          &:hover {
+            --background: rgba(255, 102, 0, 0.1);
+          }
+
+          &.action-sheet-selected {
+            --background: rgba(255, 102, 0, 0.2);
+            --color: #ff6600 !important;
+            color: #ff6600 !important;
+          }
+        }
+      }
+
+      .action-sheet-title {
+        --color: #ffffff;
+        color: #ffffff;
+      }
+
+      .action-sheet-cancel {
+        --background: #2a2a2a;
+        --color: #ffffff;
+        color: #ffffff;
+
+        &:hover {
+          --background: rgba(255, 102, 0, 0.1);
+        }
+      }
+    }
+  }
+
+  // Remover linha verde do select e corrigir cores
+  ion-select {
+    --highlight-color-focused: transparent !important;
+    --highlight-color-valid: transparent !important;
+    --highlight-color-invalid: transparent !important;
+    --highlight-height: 0 !important;
+    --border-color: transparent !important;
+    --ripple-color: transparent !important;
+
+    &::part(container) {
+      border: none !important;
+      outline: none !important;
+    }
+
+    &::part(text) {
+      color: #ffffff !important;
+    }
+
+    &::part(placeholder) {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+  }
+
+  // Garantir que não há bordas ou linhas indesejadas
+  .select-wrapper ion-select {
+    border: none !important;
+    outline: none !important;
+
+    &:focus {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
 }
 
 // Adicionar um efeito de foco claro
@@ -547,4 +734,212 @@ ion-list {
   }
 
   // ...existing code...
+}
+
+// Estilos específicos para o step 3 - Melhorado
+.step-3 {
+  .input-container {
+    margin-bottom: 20px;
+
+    label {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .input-wrapper {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      height: 56px;
+      padding: 4px 16px;
+      transition: all 0.3s ease;
+
+      &:focus-within {
+        border-color: #ff6600 !important;
+        box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.25) !important;
+        background-color: rgba(255, 102, 0, 0.08) !important;
+        transform: translateY(-1px);
+      }
+
+      ion-icon:first-child {
+        color: #ff6600;
+        font-size: 20px;
+        margin-right: 14px;
+        opacity: 0.9;
+      }
+
+      ion-input {
+        --color: #ffffff;
+        --placeholder-color: rgba(255, 255, 255, 0.6);
+        font-size: 16px;
+        font-weight: 500;
+
+        &::part(native) {
+          caret-color: #ff6600 !important;
+          color: #ffffff !important;
+        }
+      }
+    }
+
+    // Estilo especial para o select
+    .select-wrapper {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      height: 56px;
+      padding: 4px 16px;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      position: relative;
+
+      &:focus-within {
+        border-color: #ff6600 !important;
+        box-shadow: 0 0 0 2px rgba(255, 102, 0, 0.25) !important;
+        background-color: rgba(255, 102, 0, 0.08) !important;
+        transform: translateY(-1px);
+      }
+
+      .select-start-icon {
+        color: #ff6600;
+        font-size: 20px;
+        margin-right: 14px;
+        opacity: 0.9;
+      }
+
+      ion-select {
+        --placeholder-color: rgba(255, 255, 255, 0.6);
+        --color: #ffffff;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 500;
+
+        &::part(icon) {
+          display: none;
+        }
+      }
+
+      .select-icon {
+        position: absolute;
+        right: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 18px;
+        pointer-events: none;
+        transition: color 0.3s ease;
+      }
+
+      &:hover .select-icon,
+      &:focus-within .select-icon {
+        color: #ff6600;
+      }
+    }
+  }
+
+  .register-header {
+    margin-bottom: 32px;
+    text-align: center;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      .emoji {
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+// Grid layout para organizar melhor os campos no step 3
+.step-3 .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  .input-container {
+    margin-bottom: 0;
+  }
+
+  // Para o último campo (género) ocupar toda a largura
+  .full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+// Efeitos visuais melhorados
+.step-3 .input-container .input-wrapper,
+.step-3 .input-container .select-wrapper {
+  &:hover {
+    border-color: rgba(255, 102, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Animação sutil ao focar
+  &:focus-within {
+    animation: subtle-pulse 0.3s ease-out;
+  }
+}
+
+@keyframes subtle-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// Ajustes para telas pequenas no step 3
+@media (max-width: 576px) {
+  .step-3 .form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+
+    .full-width {
+      grid-column: 1;
+    }
+  }
+
+  .step-3 .input-container {
+    margin-bottom: 16px;
+  }
+}
+
+// Melhorar a navegação no step 3
+.step-3 .step-navigation {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  ion-button {
+    height: 50px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+
+    &.submit-button {
+      background: linear-gradient(45deg, #ff6600, #ff8533);
+      box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+      }
+    }
+  }
 }

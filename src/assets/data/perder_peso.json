@@ -1,0 +1,211 @@
+{
+  "Perder Peso": {
+    "descricao": "Programas focados em queima calórica e alta intensidade para emagrecimento eficaz",
+    "Cardio HIIT": [
+      {
+        "nome_programa": "HIIT Queima Total",
+        "imagem_programa": "/assets/images/hiit-queima-total.jpg",
+        "descricao": "Treino de alta intensidade com foco na queima rápida de gordura corporal",
+        "tempo_total": "30 minutos",
+        "total_exercicios": 5,
+        "calorias_estimadas": 600,
+        "tags": [
+          "cardio",
+          "hiit",
+          "intenso",
+          "perda de peso"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Intermédio",
+          "equipamentos_necessarios": [
+            "Colchonete"
+          ],
+          "conhecimento_previo": [
+            "Boa execução de movimentos rápidos"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Burpees",
+            "video": "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+            "tempo_medio": "3 séries de 15 repetições",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Avançado",
+            "avaliacao": "4.7",
+            "musculos_trabalhados": [
+              "Corpo Inteiro",
+              "Cardio"
+            ]
+          },
+          {
+            "nome": "Mountain Climbers",
+            "video": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+            "tempo_medio": "3 séries de 30 segundos",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.5",
+            "musculos_trabalhados": [
+              "Core",
+              "Cardio"
+            ]
+          },
+          {
+            "nome": "Polichinelos",
+            "video": "https://www.youtube.com/watch?v=c4DAnQ6DtF8",
+            "tempo_medio": "3 séries de 1 minuto",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Iniciante",
+            "avaliacao": "4.4",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Cardio"
+            ]
+          }
+        ]
+      },
+      {
+        "nome_programa": "Cardio Explosivo",
+        "imagem_programa": "/assets/images/cardio-explosivo.jpg",
+        "descricao": "Programa focado em queimar gordura com movimentos intensos e intervalos curtos",
+        "tempo_total": "35 minutos",
+        "total_exercicios": 5,
+        "calorias_estimadas": 550,
+        "tags": [
+          "cardio",
+          "intensidade",
+          "emagrecimento"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Intermédio",
+          "equipamentos_necessarios": [
+            "Colchonete",
+            "Cronómetro"
+          ],
+          "conhecimento_previo": [
+            "Intervalos HIIT",
+            "Controle respiratório"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Corrida Estacionária",
+            "video": "https://www.youtube.com/watch?v=sTYp2p0ZfV4",
+            "tempo_medio": "3 séries de 1 minuto",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Iniciante",
+            "avaliacao": "4.4",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Cardio"
+            ]
+          }
+        ]
+      },
+      {
+        "nome_programa": "Tabata Queima Rápida",
+        "imagem_programa": "/assets/images/tabata-queima.jpg",
+        "descricao": "Treino estilo Tabata para perda de peso com explosões de esforço curto",
+        "tempo_total": "20 minutos",
+        "total_exercicios": 4,
+        "calorias_estimadas": 400,
+        "tags": [
+          "tabata",
+          "curto",
+          "rápido",
+          "cardio"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Intermédio",
+          "equipamentos_necessarios": [
+            "Cronómetro"
+          ],
+          "conhecimento_previo": [
+            "Protocolo Tabata",
+            "Execução rápida"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Jump Squats",
+            "video": "https://www.youtube.com/watch?v=U4s4mEQ5VqU",
+            "tempo_medio": "20 segundos ON / 10 segundos OFF",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Avançado",
+            "avaliacao": "4.6",
+            "musculos_trabalhados": [
+              "Pernas",
+              "Glúteos",
+              "Cardio"
+            ]
+          }
+        ]
+      },
+      {
+        "nome_programa": "Queima Total com Peso Corporal",
+        "imagem_programa": "/assets/images/queima-corpo.jpg",
+        "descricao": "Programa de emagrecimento sem equipamento, ideal para treinar em casa",
+        "tempo_total": "30 minutos",
+        "total_exercicios": 5,
+        "calorias_estimadas": 500,
+        "tags": [
+          "sem equipamento",
+          "corpo inteiro",
+          "perda de peso"
+        ],
+        "pre_requisitos": {
+          "nivel_minimo": "Iniciante",
+          "equipamentos_necessarios": [
+            "Nenhum"
+          ],
+          "conhecimento_previo": [
+            "Movimentos básicos corporais"
+          ]
+        },
+        "exercicios": [
+          {
+            "nome": "Escalador",
+            "video": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+            "tempo_medio": "3 séries de 45 segundos",
+            "equipamentos": [
+              "Peso Corporal"
+            ],
+            "imagem_equipamentos": [
+              "/assets/images/bodyweight.jpg"
+            ],
+            "dificuldade": "Intermédio",
+            "avaliacao": "4.6",
+            "musculos_trabalhados": [
+              "Core",
+              "Cardio"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

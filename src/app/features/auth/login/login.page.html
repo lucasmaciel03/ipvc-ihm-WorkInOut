@@ -31,6 +31,7 @@
             autocomplete="email"
             inputmode="email"
             aria-label="Email"
+            (ionFocus)="clearErrors()"
           >
           </ion-input>
         </div>
@@ -47,6 +48,7 @@
             formControlName="password"
             placeholder="A tua password"
             aria-label="Password"
+            (ionFocus)="clearErrors()"
           >
           </ion-input>
           <ion-icon
@@ -61,7 +63,12 @@
         </div>
       </div>
 
-      <ion-button expand="block" type="submit" class="login-button">
+      <ion-button
+        expand="block"
+        type="submit"
+        class="login-button"
+        [disabled]="loginForm.invalid"
+      >
         ENTRAR
       </ion-button>
 

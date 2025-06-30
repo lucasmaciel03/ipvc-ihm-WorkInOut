@@ -146,75 +146,77 @@
       </form>
     </div>
 
-    <!-- Etapa 3: Condição Física - Layout vertical -->
+    <!-- Etapa 3: Condição Física - Layout melhorado -->
     <div *ngIf="currentStep === 3" class="step-3">
       <div class="register-header">
         <h1>Fala-nos sobre ti <span class="emoji">🧍</span></h1>
       </div>
 
       <form [formGroup]="registerForm">
-        <div class="input-container">
-          <label>Altura</label>
-          <div class="input-wrapper icon-start">
-            <ion-icon name="resize-outline"></ion-icon>
-            <ion-input
-              type="number"
-              formControlName="height"
-              placeholder="cm"
-              inputmode="numeric"
-            ></ion-input>
+        <div class="form-grid">
+          <div class="input-container">
+            <label>Altura</label>
+            <div class="input-wrapper icon-start">
+              <ion-icon name="resize-outline"></ion-icon>
+              <ion-input
+                type="number"
+                formControlName="height"
+                placeholder="cm"
+                inputmode="numeric"
+              ></ion-input>
+            </div>
           </div>
-        </div>
 
-        <div class="input-container">
-          <label>Peso</label>
-          <div class="input-wrapper icon-start">
-            <ion-icon name="scale-outline"></ion-icon>
-            <ion-input
-              type="number"
-              formControlName="weight"
-              placeholder="kg"
-              inputmode="numeric"
-            ></ion-input>
+          <div class="input-container">
+            <label>Peso</label>
+            <div class="input-wrapper icon-start">
+              <ion-icon name="scale-outline"></ion-icon>
+              <ion-input
+                type="number"
+                formControlName="weight"
+                placeholder="kg"
+                inputmode="numeric"
+              ></ion-input>
+            </div>
           </div>
-        </div>
 
-        <div class="input-container">
-          <label>Idade</label>
-          <div class="input-wrapper icon-start">
-            <ion-icon name="calendar-outline"></ion-icon>
-            <ion-input
-              type="number"
-              formControlName="age"
-              placeholder="Anos"
-              inputmode="numeric"
-            ></ion-input>
+          <div class="input-container">
+            <label>Idade</label>
+            <div class="input-wrapper icon-start">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <ion-input
+                type="number"
+                formControlName="age"
+                placeholder="Anos"
+                inputmode="numeric"
+              ></ion-input>
+            </div>
           </div>
-        </div>
 
-        <div class="input-container">
-          <label>Género</label>
-          <div class="select-wrapper">
-            <ion-icon
-              name="person-circle-outline"
-              class="select-start-icon"
-            ></ion-icon>
-            <ion-select
-              formControlName="gender"
-              placeholder="Selecionar"
-              interface="action-sheet"
-            >
-              <ion-select-option value="male">Masculino</ion-select-option>
-              <ion-select-option value="female">Feminino</ion-select-option>
-              <ion-select-option value="other">Outro</ion-select-option>
-              <ion-select-option value="prefer_not_to_say"
-                >Prefiro não dizer</ion-select-option
+          <div class="input-container full-width">
+            <label>Género</label>
+            <div class="select-wrapper">
+              <ion-icon
+                name="person-circle-outline"
+                class="select-start-icon"
+              ></ion-icon>
+              <ion-select
+                formControlName="gender"
+                placeholder="Selecionar"
+                interface="action-sheet"
               >
-            </ion-select>
-            <ion-icon
-              name="chevron-down-outline"
-              class="select-icon"
-            ></ion-icon>
+                <ion-select-option value="male">Masculino</ion-select-option>
+                <ion-select-option value="female">Feminino</ion-select-option>
+                <ion-select-option value="other">Outro</ion-select-option>
+                <ion-select-option value="prefer_not_to_say"
+                  >Prefiro não dizer</ion-select-option
+                >
+              </ion-select>
+              <ion-icon
+                name="chevron-down-outline"
+                class="select-icon"
+              ></ion-icon>
+            </div>
           </div>
         </div>
       </form>
@@ -249,4 +251,32 @@
       </ion-button>
     </div>
   </div>
+
+  <!-- Modal de Sucesso -->
+  <ion-modal [isOpen]="showSuccessModal" (didDismiss)="closeSuccessModal()">
+    <ng-template>
+      <div class="success-modal">
+        <div class="success-content">
+          <div class="success-icon">
+            <span class="wave-emoji">👋</span>
+          </div>
+
+          <h1 class="success-title">TUDO PRONTO!</h1>
+
+          <p class="success-message">
+            Agora é só fazer login e começar a treinar com tudo
+            <span class="fire-emoji">🔥</span>
+          </p>
+
+          <ion-button
+            expand="block"
+            class="success-button"
+            (click)="closeSuccessModal()"
+          >
+            LOGIN
+          </ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { LoadingController, ToastController } from "@ionic/angular";
+import { AuthService } from "../../../core/services/auth.service";
 
 @Component({
   selector: "app-login",
@@ -13,101 +14,153 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   showPassword = false;
   loginError = false;
-  loginErrorMessage =
-    "Não foi possível fazer login. Por favor verifique os seus dados.";
+  loginErrorMessage = "";
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private loadingController: LoadingController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private authService: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required]],
+      password: ["", [Validators.required]], // Remover validação de minLength para login
     });
   }
 
   ngOnInit() {
-    // Reset do estado de erro ao inicializar
-    this.loginError = false;
-
-    // Adicionar um campo oculto ao formulário para controlar o estado de submissão
-    if (!this.loginForm.get("_submitted")) {
-      this.loginForm.addControl("_submitted", this.formBuilder.control(false));
+    // Verificar se o usuário já está logado
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(["/tabs/home"]);
     }
   }
 
   /**
-   * Verifica se um campo específico é inválido após tentativa de envio
-   * @param controlName Nome do controle de formulário a ser verificado
-   * @returns Verdadeiro se o campo for inválido e formulário submetido
-   */
-  isFieldInvalid(controlName: string): boolean {
-    const control = this.loginForm.get(controlName);
-    return !!(
-      control &&
-      control.invalid &&
-      (control.touched || this.loginForm.get("_submitted")?.value)
-    );
-  }
-
-  /**
-   * Alterna a visibilidade da senha entre texto simples e oculto
+   * Alterna a visibilidade da password
    */
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   /**
-   * Manipula o envio do formulário de login
-   * Implementa feedback visual genérico para manter a segurança
+   * Verifica se um campo está inválido para mostrar feedback visual
+   */
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.loginForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
+  }
+
+  /**
+   * Limpa mensagens de erro
+   */
+  clearErrors() {
+    this.loginError = false;
+    this.loginErrorMessage = "";
+  }
+
+  /**
+   * Exibe mensagem de erro específica
+   */
+  showError(message: string) {
+    this.loginError = true;
+    this.loginErrorMessage = message;
+  }
+
+  /**
+   * Valida os campos do formulário
+   */
+  validateForm(): boolean {
+    const emailControl = this.loginForm.get("email");
+    const passwordControl = this.loginForm.get("password");
+
+    // Marcar campos como touched para mostrar erros
+    emailControl?.markAsTouched();
+    passwordControl?.markAsTouched();
+
+    // Verificar email
+    if (!emailControl?.value || emailControl.value.trim() === "") {
+      this.showError("O email é obrigatório.");
+      return false;
+    }
+
+    if (emailControl.invalid) {
+      this.showError("Por favor, insira um email válido.");
+      return false;
+    }
+
+    // Verificar password - apenas se não está vazia
+    if (!passwordControl?.value || passwordControl.value.trim() === "") {
+      this.showError("A password é obrigatória.");
+      return false;
+    }
+
+    // Remover validação de comprimento mínimo para login
+    // O AuthService irá verificar se as credenciais estão corretas
+
+    return true;
+  }
+
+  /**
+   * Processa o login do usuário
    */
   async onLogin() {
-    // Marcar o formulário como submetido para ativar validações visuais
-    this.loginForm.patchValue({ _submitted: true });
+    // Limpar erros anteriores
+    this.clearErrors();
 
-    // Resetar erro anterior se existir
-    this.loginError = false;
-
-    if (this.loginForm.invalid) {
-      // Apenas exibe feedback genérico
-      this.loginError = true;
+    // Validar formulário
+    if (!this.validateForm()) {
       return;
     }
 
     const loading = await this.loadingController.create({
-      message: "A autenticar...",
+      message: "A fazer login...",
       spinner: "crescent",
-      duration: 2000,
     });
 
     await loading.present();
 
-    // Simula processo de login com atraso para demonstração
-    setTimeout(async () => {
+    try {
+      const email = this.loginForm.get("email")?.value.trim().toLowerCase();
+      const password = this.loginForm.get("password")?.value;
+
+      // Tentar fazer login através do AuthService
+      this.authService.login(email, password).subscribe(async (result) => {
+        await loading.dismiss();
+
+        if (result.success) {
+          // Login bem-sucedido
+          const toast = await this.toastController.create({
+            message: `Bem-vindo de volta!`,
+            duration: 2000,
+            position: "bottom",
+            color: "success",
+          });
+          await toast.present();
+
+          // Navegar para a página principal
+          this.router.navigate(["/tabs/home"]);
+        } else {
+          // Erro no login
+          this.showError(result.message);
+        }
+      });
+    } catch (error) {
       await loading.dismiss();
+      this.showError("Ocorreu um erro inesperado. Tente novamente.");
+    }
+  }
 
-      // TODO: Implementar autenticação real via serviço
-      // Simulação de login bem-sucedido (em produção, este seria o retorno do serviço de auth)
-      const loginSuccess = true;
-
-      if (loginSuccess) {
-        // Navegação para página principal após login bem-sucedido
-        this.router.navigate(["/tabs/home"]);
-
-        const toast = await this.toastController.create({
-          message: `Bem-vindo de volta!`,
-          duration: 2000,
-          position: "bottom",
-          color: "success",
-        });
-
-        await toast.present();
-      } else {
-        // Feedback genérico de erro - não revela se o problema foi email ou senha
-        this.loginError = true;
-      }
-    }, 2000);
+  /**
+   * Exibe toast com mensagem específica (método auxiliar)
+   */
+  async showToast(message: string, color: string = "danger") {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: "bottom",
+      color: color,
+    });
+    await toast.present();
   }
 }
