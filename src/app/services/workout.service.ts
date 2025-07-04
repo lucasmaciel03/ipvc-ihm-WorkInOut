@@ -170,4 +170,77 @@ export class WorkoutService {
       })
     );
   }
+  
+  // Chave para armazenar programas salvos no localStorage
+  private readonly SAVED_PROGRAMS_KEY = 'savedWorkoutPrograms';
+  
+  /**
+   * Salva um programa como favorito
+   * @param program Programa a ser salvo
+   * @returns true se o programa foi salvo com sucesso, false se já existia
+   */
+  saveProgram(program: WorkoutProgram): boolean {
+    const savedPrograms = this.getSavedPrograms();
+    
+    // Verificar se o programa já está salvo
+    const alreadySaved = savedPrograms.some(p => 
+      p.nome_programa === program.nome_programa && 
+      p.descricao === program.descricao
+    );
+    
+    if (alreadySaved) {
+      return false;
+    }
+    
+    // Adicionar programa à lista e salvar
+    savedPrograms.push(program);
+    localStorage.setItem(this.SAVED_PROGRAMS_KEY, JSON.stringify(savedPrograms));
+    return true;
+  }
+  
+  /**
+   * Remove um programa dos favoritos
+   * @param program Programa a ser removido
+   * @returns true se o programa foi removido com sucesso, false se não existia
+   */
+  removeProgram(program: WorkoutProgram): boolean {
+    const savedPrograms = this.getSavedPrograms();
+    
+    // Encontrar o índice do programa
+    const index = savedPrograms.findIndex(p => 
+      p.nome_programa === program.nome_programa && 
+      p.descricao === program.descricao
+    );
+    
+    if (index === -1) {
+      return false;
+    }
+    
+    // Remover programa e salvar
+    savedPrograms.splice(index, 1);
+    localStorage.setItem(this.SAVED_PROGRAMS_KEY, JSON.stringify(savedPrograms));
+    return true;
+  }
+  
+  /**
+   * Verifica se um programa está salvo como favorito
+   * @param program Programa a verificar
+   * @returns true se o programa está salvo, false caso contrário
+   */
+  isProgramSaved(program: WorkoutProgram): boolean {
+    const savedPrograms = this.getSavedPrograms();
+    return savedPrograms.some(p => 
+      p.nome_programa === program.nome_programa && 
+      p.descricao === program.descricao
+    );
+  }
+  
+  /**
+   * Obtém todos os programas salvos
+   * @returns Array com os programas salvos
+   */
+  getSavedPrograms(): WorkoutProgram[] {
+    const savedData = localStorage.getItem(this.SAVED_PROGRAMS_KEY);
+    return savedData ? JSON.parse(savedData) : [];
+  }
 }

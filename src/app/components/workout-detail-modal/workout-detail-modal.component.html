@@ -7,6 +7,9 @@
     </ion-buttons>
     <ion-title>{{ program?.nome_programa }}</ion-title>
     <ion-buttons slot="end">
+      <ion-button (click)="toggleSaveProgram()">
+        <ion-icon [name]="isProgramSaved ? 'bookmark' : 'bookmark-outline'" [color]="isProgramSaved ? 'primary' : ''"></ion-icon>
+      </ion-button>
       <ion-button>
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>
@@ -18,6 +21,11 @@
   <ng-container *ngIf="!showTimer">
     <div class="video-container">
       <div class="youtube-container">
+        <!-- Imagem de fundo que aparece quando o vídeo não está a ser reproduzido -->
+        <div class="video-poster" *ngIf="!isPlaying">
+          <img [src]="getVideoPoster()" alt="Imagem do programa" />
+        </div>
+        
         <div class="video-loading" *ngIf="isLoading">
           <ion-spinner name="crescent" color="light"></ion-spinner>
           <span>A carregar vídeo...</span>
@@ -26,7 +34,6 @@
         <video #videoPlayer [src]="sanitizeVideoUrl(currentExercise?.video)" 
                preload="metadata"
                playsinline
-               [poster]="getVideoPoster()"
                (timeupdate)="updateProgress($event)" 
                (ended)="onVideoEnded()" 
                (loadstart)="isLoading = true" 

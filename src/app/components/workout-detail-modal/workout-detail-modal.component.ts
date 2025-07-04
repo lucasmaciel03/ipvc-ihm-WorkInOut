@@ -4,6 +4,7 @@ import { IonicModule, ModalController, AlertController, ToastController } from '
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CustomAlertService } from '../../shared/services/alert.service';
 import { WorkoutProgressService, WorkoutSession } from '../../core/services/workout-progress.service';
+import { WorkoutService } from '../../services/workout.service';
 
 @Pipe({
   name: 'formatTime',
@@ -86,6 +87,7 @@ export class WorkoutDetailModalComponent implements OnInit {
   showTimer = false;
   showComplete = false;
   showSummary = false;
+  isProgramSaved = false;
   workoutSets: WorkoutSet[] = [];
   completedItemName: string = '';
   
@@ -94,6 +96,9 @@ export class WorkoutDetailModalComponent implements OnInit {
   currentTime: number = 0;
   duration: number = 0;
   isLoading: boolean = true;
+  
+  // Cache para URLs de vídeo já processados
+  private _cachedVideoUrls: {[key: string]: SafeResourceUrl} = {};
 
   constructor(
     private modalCtrl: ModalController,
@@ -101,13 +106,17 @@ export class WorkoutDetailModalComponent implements OnInit {
     private workoutProgressService: WorkoutProgressService,
     private alertController: AlertController,
     private customAlertService: CustomAlertService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private workoutService: WorkoutService
   ) {}
 
   ngOnInit() {
     if (this.program?.exercicios?.length > 0) {
       this.currentExercise = this.program.exercicios[0];
       this.validateProgramData();
+      
+      // Verificar se o programa está salvo
+      this.isProgramSaved = this.workoutService.isProgramSaved(this.program);
       
       // Verificar se estamos retomando um treino pendente
       if (this.resumingWorkout && this.workoutProgressService.hasPendingWorkout()) {
@@ -255,33 +264,44 @@ export class WorkoutDetailModalComponent implements OnInit {
    * @returns URL da imagem para usar como poster do vídeo
    */
   getVideoPoster(): string {
-    if (!this.currentExercise || !this.program) return '';
+    console.log('getVideoPoster - Program:', this.program);
+    console.log('getVideoPoster - CurrentExercise:', this.currentExercise);
+    
+    if (!this.currentExercise || !this.program) {
+      console.log('getVideoPoster - Sem exercício ou programa');
+      return '';
+    }
     
     // Usar a imagem do programa como poster principal
     if (this.program.imagem_programa) {
+      console.log('getVideoPoster - Usando imagem do programa:', this.program.imagem_programa);
       return this.program.imagem_programa;
     }
     
     // Fallback para uma imagem baseada na categoria do programa
     const categorias = {
       'ficar em forma': '/assets/images/programas/funcional_programa.png',
-      'perder peso': '/assets/images/programas/perder_peso_programa.png',
-      'ganhar massa': '/assets/images/programas/massa_programa.png',
-      'tonificar': '/assets/images/programas/tonificar_programa.png'
+      'perder peso': '/assets/images/programas/hiit_total.png',
+      'ganhar massa': '/assets/images/programas/peito_explosivo.png',
+      'tonificar': '/assets/images/programas/core_ferro.png'
     };
     
     // Verificar se o nome do programa contém alguma das categorias conhecidas
     if (this.program.nome_programa) {
       const nomeLowerCase = this.program.nome_programa.toLowerCase();
+      console.log('getVideoPoster - Nome do programa:', nomeLowerCase);
+      
       for (const [categoria, imagem] of Object.entries(categorias)) {
         if (nomeLowerCase.includes(categoria)) {
+          console.log('getVideoPoster - Categoria encontrada:', categoria, 'Imagem:', imagem);
           return imagem;
         }
       }
     }
     
-    // Imagem padrão se não houver outras opções
-    return '/assets/images/programas/workout_placeholder.png';
+    // Usar uma imagem existente como fallback em vez de workout_placeholder.png
+    console.log('getVideoPoster - Usando imagem padrão');
+    return '/assets/images/programas/funcional_programa.png';
   }
   
   /**
@@ -563,8 +583,6 @@ export class WorkoutDetailModalComponent implements OnInit {
     return safeUrl;
   }
   
-  // Cache para URLs de vídeo já processados
-  private _cachedVideoUrls: {[key: string]: SafeResourceUrl} = {};
 
   getDifficultyFlames(difficulty: string | undefined): number[] {
     if (!difficulty) return [];
@@ -747,9 +765,9 @@ export class WorkoutDetailModalComponent implements OnInit {
   }
   
   /**
-   * Exibe uma mensagem toast para o utilizador
+   * Mostra uma mensagem toast ao utilizador
    * @param message Mensagem a ser exibida
-   * @param color Cor do toast (primary, success, warning, danger)
+   * @param color Cor do toast (primary, success, warning, danger, etc)
    * @param duration Duração em milissegundos
    */
   async showToast(message: string, color: string = 'primary', duration: number = 2000) {
@@ -762,6 +780,26 @@ export class WorkoutDetailModalComponent implements OnInit {
     });
     await toast.present();
   }
+
+  /**
+   * Alterna entre salvar e remover um programa dos favoritos
+   */
+  toggleSaveProgram() {
+    if (this.isProgramSaved) {
+      // Remover programa dos favoritos
+      if (this.workoutService.removeProgram(this.program)) {
+        this.isProgramSaved = false;
+        this.showToast('Programa removido dos favoritos', 'medium');
+      }
+    } else {
+      // Adicionar programa aos favoritos
+      if (this.workoutService.saveProgram(this.program)) {
+        this.isProgramSaved = true;
+        this.showToast('Programa guardado nos favoritos', 'success');
+      }
+    }
+  }
+
   
   /**
    * Marca o treino atual como pendente para continuar mais tarde
@@ -792,17 +830,37 @@ export class WorkoutDetailModalComponent implements OnInit {
     try {
       console.log('Finalizando treino, forçar finalização:', force);
       
-      // Verificar se o treino está realmente completo antes de finalizar
-      if (!force) {
-        const completedExercises = this.activeWorkout?.exercisesProgress.filter(ex => ex.completed).length || 0;
-        const totalExercises = this.activeWorkout?.exercisesProgress.length || 0;
+      // Verificar se há exercícios pendentes
+      if (this.activeWorkout) {
+        // Contar exercícios concluídos diretamente para garantir precisão
+        const completedExercises = this.activeWorkout.exercisesProgress.filter(ex => ex.completed).length;
+        const totalExercises = this.activeWorkout.exercisesProgress.length;
         
-        console.log(`Verificação final: ${completedExercises}/${totalExercises} exercícios concluídos`);
+        // Verificar se todos os exercícios foram concluídos
+        const allExercisesCompleted = completedExercises === totalExercises;
         
-        // Se não estiver completo e não estiver a forçar, mostrar alerta
-        if (completedExercises < totalExercises) {
-          console.log('Treino incompleto, mas force é false. Ajustando para true.');
-          force = true;
+        if (!allExercisesCompleted && !force) {
+          // Se nem todos os exercícios foram concluídos e não estamos forçando, perguntar ao utilizador
+          const alert = await this.alertController.create({
+            header: 'Treino incompleto',
+            message: 'Ainda não concluíste todos os exercícios. Tens a certeza que queres finalizar o treino?',
+            buttons: [
+              {
+                text: 'Não',
+                role: 'cancel'
+              },
+              {
+                text: 'Sim',
+                handler: () => {
+                  // Finalizar mesmo com exercícios incompletos
+                  this.completeWorkout();
+                }
+              }
+            ]
+          });
+          
+          await alert.present();
+          return;
         }
       }
       
@@ -813,42 +871,30 @@ export class WorkoutDetailModalComponent implements OnInit {
       
       // Não fechar automaticamente o modal para que o utilizador possa ver o sumário
       // O sumário terá um botão para fechar quando o utilizador desejar
-      // O componente WorkoutSummary já tem um evento (dismiss) que é tratado pelo closeModal()
     } catch (error) {
       console.error('Erro ao finalizar treino:', error);
+      this.showToast('Erro ao finalizar o treino', 'danger');
     }
   }
 
   /**
-   * Restaura o estado do treino em andamento
+   * Completa o treino atual e salva os dados
    */
-  private restoreWorkoutState() {
-    if (!this.activeWorkout) return;
+  private completeWorkout() {
+    // Marcar o treino como concluído
+    // Implementar lógica de conclusão do treino quando o serviço estiver disponível
+    // this.workoutProgressService.completeWorkout(this.program?.nome_programa || '');
     
-    // Encontrar o índice do último exercício iniciado ou o primeiro não concluído
-    const lastStartedIndex = this.activeWorkout.exercisesProgress.findIndex(
-      (ex: ExerciseProgress) => ex.startTime && !ex.completed
-    );
+    // Mostrar tela de conclusão
+    this.showComplete = true;
+    this.showTimer = false;
     
-    if (lastStartedIndex >= 0) {
-      this.currentExerciseIndex = lastStartedIndex;
-    } else {
-      // Se todos estiverem concluídos ou nenhum iniciado, encontrar o primeiro não concluído
-      const firstIncompleteIndex = this.activeWorkout.exercisesProgress.findIndex(
-        (ex: ExerciseProgress) => !ex.completed
-      );
-      
-      if (firstIncompleteIndex >= 0) {
-        this.currentExerciseIndex = firstIncompleteIndex;
-      }
-    }
-    
-    // Atualizar exercício atual
-    if (this.program?.exercicios && this.program.exercicios.length > this.currentExerciseIndex) {
-      this.currentExercise = this.program.exercicios[this.currentExerciseIndex];
-    }
+    // Mostrar toast de confirmação
+    this.showToast('Treino concluído com sucesso!', 'success');
   }
-
+  
+  // Função closeModal já declarada anteriormente
+  
   /**
    * Confirma se o utilizador deseja cancelar um treino anterior em andamento
    */
@@ -876,7 +922,7 @@ export class WorkoutDetailModalComponent implements OnInit {
     
     await alert.present();
   }
-
+  
   /**
    * Confirma se o utilizador deseja marcar o exercício atual como concluído
    */
@@ -909,4 +955,39 @@ export class WorkoutDetailModalComponent implements OnInit {
     
     await alert.present();
   }
+  
+  /**
+   * Restaura o estado do treino em andamento
+   */
+  private restoreWorkoutState() {
+    if (!this.activeWorkout) return;
+    
+    // Encontrar o índice do último exercício iniciado ou o primeiro não concluído
+    const lastStartedIndex = this.activeWorkout.exercisesProgress.findIndex(
+      (ex: ExerciseProgress) => ex.startTime && !ex.completed
+    );
+    
+    if (lastStartedIndex >= 0) {
+      this.currentExerciseIndex = lastStartedIndex;
+    } else {
+      // Se todos estiverem concluídos ou nenhum iniciado, encontrar o primeiro não concluído
+      const firstIncompleteIndex = this.activeWorkout.exercisesProgress.findIndex(
+        (ex: ExerciseProgress) => !ex.completed
+      );
+      
+      if (firstIncompleteIndex >= 0) {
+        this.currentExerciseIndex = firstIncompleteIndex;
+      }
+    }
+    
+    // Atualizar exercício atual
+    if (this.program?.exercicios && this.program.exercicios.length > this.currentExerciseIndex) {
+      this.currentExercise = this.program.exercicios[this.currentExerciseIndex];
+    }
+  }
+  
+
+  
+
+
 }

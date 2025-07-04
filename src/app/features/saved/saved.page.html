@@ -1,10 +1,100 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Salvos</ion-title>
+    <div class="header-content">
+      <h1 class="header-title">Os teus favoritos 🔖</h1>
+      <p class="header-subtitle">Programas de treino guardados</p>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h1>Treinos Salvos</h1>
-  <p>Em desenvolvimento...</p>
+<ion-content [fullscreen]="true" class="saved-content ion-padding">
+  <!-- Searchbar para filtrar programas guardados -->
+  <ion-searchbar
+    placeholder="Procurar nos favoritos"
+    [(ngModel)]="searchTerm"
+    (ionInput)="filterPrograms()"
+    (ionClear)="clearSearch()"
+    class="custom-searchbar"
+    animated="true"
+    showCancelButton="focus"
+  ></ion-searchbar>
+
+  <!-- Estado de carregamento -->
+  <div class="loading-container" *ngIf="isLoading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>A carregar programas guardados...</p>
+  </div>
+
+  <!-- Estado vazio -->
+  <div class="empty-state" *ngIf="!isLoading && isEmpty">
+    <ion-icon name="bookmark-outline" class="empty-icon"></ion-icon>
+    <h3>Nenhum programa guardado</h3>
+    <p>Os programas que guardares como favoritos aparecerão aqui.</p>
+    <ion-button routerLink="/tabs/search" expand="block" fill="outline">
+      <ion-icon name="search-outline" slot="start"></ion-icon>
+      Descobrir programas
+    </ion-button>
+  </div>
+
+  <!-- Lista de programas guardados -->
+  <div class="saved-programs" *ngIf="!isLoading && !isEmpty">
+    <div class="programs-grid">
+      <ion-card 
+        *ngFor="let program of filteredPrograms" 
+        class="program-card" 
+        (click)="openProgramDetails(program)"
+      >
+        <div class="card-header">
+          <div class="program-image">
+            <img [src]="program.imagem_programa || 'assets/images/programas/funcional_programa.png'" alt="{{ program.nome_programa }}">
+            <div class="program-overlay">
+              <div class="program-stats">
+                <div class="stat">
+                  <ion-icon name="barbell-outline"></ion-icon>
+                  <span>{{ program.exercicios?.length || 0 }} exercícios</span>
+                </div>
+                <div class="stat">
+                  <ion-icon name="flame-outline"></ion-icon>
+                  <span>{{ program.calorias_estimadas || 0 }} kcal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ion-card-content>
+          <div class="program-info">
+            <h3 class="program-title">{{ program.nome_programa }}</h3>
+            <p class="program-description">{{ program.descricao }}</p>
+          </div>
+          
+          <div class="program-tags" *ngIf="program.tags && program.tags.length > 0">
+            <ion-chip *ngFor="let tag of program.tags.slice(0, 2)" class="tag-chip" size="small">
+              {{ tag }}
+            </ion-chip>
+            <ion-chip *ngIf="program.tags.length > 2" class="tag-chip more-tag" size="small">
+              +{{ program.tags.length - 2 }}
+            </ion-chip>
+          </div>
+          
+          <div class="program-actions">
+            <ion-button fill="clear" class="action-button" (click)="removeProgram(program, $event)">
+              <ion-icon name="trash-outline" slot="icon-only" color="danger"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Resultados de pesquisa vazios -->
+  <div class="empty-search" *ngIf="!isLoading && !isEmpty && filteredPrograms.length === 0 && searchTerm">
+    <ion-icon name="search-outline" class="empty-icon"></ion-icon>
+    <h3>Nenhum resultado encontrado</h3>
+    <p>Tenta com outros termos de pesquisa.</p>
+    <ion-button (click)="clearSearch()" expand="block" fill="outline">
+      <ion-icon name="refresh-outline" slot="start"></ion-icon>
+      Limpar pesquisa
+    </ion-button>
+  </div>
 </ion-content>
