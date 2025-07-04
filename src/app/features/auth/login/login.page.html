@@ -51,15 +51,18 @@
             (ionFocus)="clearErrors()"
           >
           </ion-input>
-          <ion-icon
-            [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
-            class="toggle-password"
+          <ion-button
+            fill="clear"
+            class="toggle-password-btn"
             (click)="togglePasswordVisibility()"
             tabindex="0"
-            role="button"
             aria-label="Mostrar ou ocultar password"
           >
-          </ion-icon>
+            <ion-icon
+              [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+              class="toggle-password"
+            ></ion-icon>
+          </ion-button>
         </div>
       </div>
 

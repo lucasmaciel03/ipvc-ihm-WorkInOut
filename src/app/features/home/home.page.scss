@@ -17,6 +17,15 @@ ion-content {
     ion-avatar {
       width: 48px;
       height: 48px;
+      overflow: hidden;
+      
+      img {
+        object-fit: cover;
+        object-position: center -5%; /* Move a imagem para baixo */
+        transform: scale(1.2); /* Dá um zoom de 20% na imagem */
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .welcome-text {
@@ -36,9 +45,46 @@ ion-content {
     }
   }
 
-  .notifications-btn {
-    --color: #ffffff;
-    font-size: 24px;
+  .header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    .notifications-btn,
+    .logout-btn {
+      --padding-start: 8px;
+      --padding-end: 8px;
+      --padding-top: 8px;
+      --padding-bottom: 8px;
+      --border-radius: 50%;
+      --background: rgba(255, 255, 255, 0.05);
+      --background-hover: rgba(255, 255, 255, 0.1);
+      --background-activated: rgba(255, 255, 255, 0.15);
+      --box-shadow: none;
+      --ripple-color: rgba(255, 255, 255, 0.2);
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      
+      ion-icon {
+        font-size: 20px;
+        color: #ffffff;
+      }
+    }
+    
+    .logout-btn {
+      ion-icon {
+        color: #ff6600;
+      }
+      
+      &:hover {
+        --background: rgba(255, 102, 0, 0.1);
+      }
+      
+      &:active {
+        --background: rgba(255, 102, 0, 0.2);
+      }
+    }
   }
 }
 

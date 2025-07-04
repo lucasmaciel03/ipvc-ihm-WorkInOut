@@ -116,12 +116,32 @@
       box-shadow: 0 0 0 1px rgba(255, 102, 0, 0.1);
     }
 
-    .toggle-password {
+    .toggle-password-btn {
       position: absolute;
-      right: 16px;
-      cursor: pointer;
-      font-size: 22px;
-      opacity: 0.7;
+      right: 8px;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      --padding-top: 8px;
+      --padding-bottom: 8px;
+      --background: transparent;
+      --background-hover: rgba(255, 255, 255, 0.1);
+      --background-activated: rgba(255, 255, 255, 0.2);
+      --box-shadow: none;
+      --ripple-color: rgba(255, 255, 255, 0.1);
+      height: 36px;
+      margin: 0;
+      z-index: 10;
+      
+      .toggle-password {
+        font-size: 22px;
+        color: #ffffff;
+        opacity: 0.8;
+        transition: all 0.2s ease;
+      }
+      
+      &:hover .toggle-password {
+        opacity: 1;
+      }
     }
   }
 

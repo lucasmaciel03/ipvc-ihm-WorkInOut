@@ -114,6 +114,49 @@ export class WorkoutService {
       })
     );
   }
+  
+  /**
+   * Obtém todos os programas de todos os objetivos (ficheiros JSON)
+   * @returns Observable com todos os programas de treino
+   */
+  getAllPrograms(): Observable<WorkoutProgram[]> {
+    // Lista de todos os ficheiros JSON
+    const files = ['ganhar_musculo.json', 'perder_peso.json', 'ficar_em_forma.json'];
+    
+    // Criar um array de observables, um para cada ficheiro
+    const observables = files.map(file => 
+      this.http.get<WorkoutData>(`/assets/data/${file}`).pipe(
+        map(data => {
+          // Para cada ficheiro, extrair todos os programas de todos os grupos musculares
+          const category = Object.keys(data)[0]; // Primeira categoria no ficheiro (ex: "Ganhar Músculo")
+          return Object.keys(data[category])
+            .filter(key => key !== 'descricao')
+            .reduce((acc, key) => acc.concat(data[category][key]), [] as WorkoutProgram[]);
+        })
+      )
+    );
+    
+    // Combinar todos os observables em um único observable que emite um array com todos os programas
+    return new Observable<WorkoutProgram[]>(observer => {
+      let allPrograms: WorkoutProgram[] = [];
+      let completed = 0;
+      
+      observables.forEach(obs => {
+        obs.subscribe({
+          next: (programs) => {
+            allPrograms = [...allPrograms, ...programs];
+            completed++;
+            
+            if (completed === files.length) {
+              observer.next(allPrograms);
+              observer.complete();
+            }
+          },
+          error: (err) => observer.error(err)
+        });
+      });
+    });
+  }
 
   /**
    * Obtém todos os grupos musculares disponíveis

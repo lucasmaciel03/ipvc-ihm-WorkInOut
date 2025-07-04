@@ -1,10 +1,16 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-title>Pesquisar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="filter-button" (click)="toggleFilters()">
+        <ion-icon name="options-outline"></ion-icon>
+        <ion-badge *ngIf="activeFilters > 0" class="filter-badge">{{ activeFilters }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="search-content">
   <div class="search-container">
     <!-- Searchbar -->
     <ion-searchbar
@@ -12,22 +18,93 @@
       [(ngModel)]="searchTerm"
       (ionInput)="filterPrograms()"
       class="custom-searchbar"
+      animated="true"
+      showCancelButton="never"
     ></ion-searchbar>
 
-    <div class="results-count" *ngIf="filteredPrograms.length > 0">
+    <!-- Painel de filtros -->
+    <div class="filters-panel" [class.show-filters]="showFilters">
+      <div class="filters-header">
+        <h3>Filtros</h3>
+        <ion-button fill="clear" size="small" (click)="clearFilters()">
+          <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+          Limpar
+        </ion-button>
+      </div>
+      
+      <!-- Filtros de grupo muscular -->
+      <div class="filter-section">
+        <h4>Grupo Muscular</h4>
+        <div class="filter-chips">
+          <ion-chip 
+            *ngFor="let group of muscleGroups" 
+            [class.active]="group.active"
+            (click)="toggleFilter(group, 'muscle')"
+          >
+            {{ group.label }}
+          </ion-chip>
+        </div>
+      </div>
+      
+      <!-- Filtros de dificuldade -->
+      <div class="filter-section">
+        <h4>Nível de Dificuldade</h4>
+        <div class="filter-chips">
+          <ion-chip 
+            *ngFor="let level of difficultyLevels" 
+            [class.active]="level.active"
+            (click)="toggleFilter(level, 'difficulty')"
+          >
+            {{ level.label }}
+          </ion-chip>
+        </div>
+      </div>
+      
+      <!-- Filtros de objetivo -->
+      <div class="filter-section">
+        <h4>Objetivo</h4>
+        <div class="filter-chips">
+          <ion-chip 
+            *ngFor="let goal of workoutGoals" 
+            [class.active]="goal.active"
+            (click)="toggleFilter(goal, 'goal')"
+          >
+            {{ goal.label }}
+          </ion-chip>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador de carregamento -->
+    <div class="loading-container" *ngIf="isLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>A carregar exercícios...</p>
+    </div>
+
+    <!-- Contador de resultados -->
+    <div class="results-count" *ngIf="filteredPrograms.length > 0 && !isLoading">
       {{ filteredPrograms.length }} resultados encontrados
     </div>
 
+    <!-- Mensagem sem resultados -->
+    <div class="no-results" *ngIf="filteredPrograms.length === 0 && !isLoading">
+      <ion-icon name="search-outline"></ion-icon>
+      <h3>Sem resultados</h3>
+      <p>Tenta ajustar os filtros ou usar outros termos de pesquisa</p>
+    </div>
+
     <!-- Grid de resultados -->
-    <ion-grid>
+    <ion-grid *ngIf="filteredPrograms.length > 0 && !isLoading">
       <ion-row>
         <ion-col size="6" *ngFor="let workout of filteredPrograms">
           <div class="program-card" [style.background-image]="'url(' + workout.imagem_programa + ')'">
             <div class="card-overlay">
-              <ion-chip class="chip-time">
-                <ion-icon name="stopwatch-outline"></ion-icon>
-                <span>{{ workout.tempo_total }}</span>
-              </ion-chip>
+              <div class="card-header">
+                <ion-chip class="chip-time">
+                  <ion-icon name="stopwatch-outline"></ion-icon>
+                  <span>{{ workout.tempo_total }}</span>
+                </ion-chip>
+              </div>
               <div class="text-content">
                 <h3>{{ workout.nome_programa }}</h3>
                 <p>{{ workout.descricao }}</p>

@@ -5,21 +5,28 @@
       <ion-avatar>
         <img
           alt="Profile"
-          src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&h=120&q=80"
+          src="/assets/images/default_avatar.png"
         />
       </ion-avatar>
       <div class="welcome-text">
         <p class="greeting">Vamos Continuar 💪</p>
-        <h2 class="name">André Lucas Pedro</h2>
+        <h2 class="name">{{ currentUser?.name || 'Utilizador' }}</h2>
       </div>
     </div>
-    <ion-button fill="clear" class="notifications-btn" size="small">
-      <ion-icon
-        slot="icon-only"
-        name="notifications-outline"
-        size="small"
-      ></ion-icon>
-    </ion-button>
+    <div class="header-buttons">
+      <ion-button class="notifications-btn" fill="clear">
+        <ion-icon
+          slot="icon-only"
+          name="notifications-outline"
+        ></ion-icon>
+      </ion-button>
+      <ion-button class="logout-btn" fill="clear" (click)="showLogoutConfirmation()">
+        <ion-icon
+          slot="icon-only"
+          name="log-out-outline"
+        ></ion-icon>
+      </ion-button>
+    </div>
   </div>
 
   <!-- Search Bar -->

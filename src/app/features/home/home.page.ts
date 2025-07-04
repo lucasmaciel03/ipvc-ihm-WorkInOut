@@ -8,6 +8,7 @@ import { WorkoutDetailModalComponent } from "../../components/workout-detail-mod
 import { WorkoutProgressService, WorkoutSession } from "../../core/services/workout-progress.service";
 import { PendingWorkoutCardComponent } from "../../components/pending-workout-card/pending-workout-card.component";
 import { ActiveWorkoutCardComponent } from '../../components/active-workout-card/active-workout-card.component';
+import { AuthService, User } from "../../core/services/auth.service";
 
 register();
 
@@ -36,21 +37,79 @@ export class HomePage implements OnInit {
   pendingWorkout: WorkoutSession | null = null;
   hasActiveWorkout = false;
   activeWorkout: WorkoutSession | null = null;
+  
+  // Utilizador atual
+  currentUser: User | null = null;
 
   constructor(
     private workoutService: WorkoutService,
     private modalCtrl: ModalController,
     private workoutProgressService: WorkoutProgressService,
     private alertController: AlertController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.loadCurrentUser();
     this.loadMuscleGroups();
     this.loadPrograms("all"); // Começar mostrando todos os programas
     this.loadAllProgramsForSearch();
     this.checkPendingWorkout();
     this.checkActiveWorkout();
+  }
+
+  ionViewWillEnter() {
+    this.loadCurrentUser();
+    this.checkPendingWorkout();
+    this.checkActiveWorkout();
+  }
+  
+  /**
+   * Carrega o utilizador atual do serviço de autenticação
+   */
+  loadCurrentUser() {
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
+  
+  /**
+   * Exibe um diálogo de confirmação antes de fazer logout
+   */
+  async showLogoutConfirmation() {
+    const alert = await this.alertController.create({
+      header: 'Terminar sessão',
+      message: 'Tens a certeza que queres sair da tua conta?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        },
+        {
+          text: 'Sair',
+          handler: () => {
+            this.logout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
+  /**
+   * Realiza o logout do utilizador e redireciona para a página de login
+   */
+  logout() {
+    this.authService.logout();
+    
+    // Mostrar toast de confirmação
+    this.showToast('Sessão terminada com sucesso', 'success');
+    
+    // Redirecionar para a página de login
+    window.location.href = '/login';
   }
 
   private loadMuscleGroups() {
