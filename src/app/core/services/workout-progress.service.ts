@@ -66,6 +66,22 @@ export class WorkoutProgressService {
   private saveWorkoutHistory(history: WorkoutSession[]): void {
     localStorage.setItem(this.WORKOUT_HISTORY_KEY, JSON.stringify(history));
   }
+  
+  /**
+   * Limpa todo o histórico de treinos
+   */
+  clearWorkoutHistory(): void {
+    localStorage.removeItem(this.WORKOUT_HISTORY_KEY);
+  }
+  
+  /**
+   * Salva um treino diretamente no histórico
+   */
+  saveWorkoutToHistory(workout: WorkoutSession): void {
+    const history = this.getWorkoutHistory();
+    history.push(workout);
+    this.saveWorkoutHistory(history);
+  }
 
   /**
    * Inicia um novo treino
@@ -252,12 +268,18 @@ export class WorkoutProgressService {
     const endTime = new Date();
     const duration = Math.floor((endTime.getTime() - new Date(currentWorkout.startTime).getTime()) / 1000);
     
+    // Calcular calorias com base na duração e exercícios completados
+    // Fórmula: (duração em minutos * 4) + (exercícios completados * 15)
+    const durationMinutes = Math.floor(duration / 60);
+    const caloriesEstimated = (durationMinutes * 4) + (currentWorkout.completedExercises * 15);
+    
     const finishedWorkout: WorkoutSession = {
       ...currentWorkout,
       endTime,
       completed: true,
       isPending: false,
       duration,
+      caloriesEstimated,
       lastUpdated: endTime
     };
 

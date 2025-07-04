@@ -11,7 +11,8 @@ import { StatisticsPage } from "./statistics.page";
     FormsModule,
     IonicModule,
     RouterModule.forChild([{ path: "", component: StatisticsPage }]),
+    StatisticsPage // Importar o componente standalone em vez de declará-lo
   ],
-  declarations: [StatisticsPage],
+  // Remover declarations já que o componente é standalone
 })
 export class StatisticsPageModule {}

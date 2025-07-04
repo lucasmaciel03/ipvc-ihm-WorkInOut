@@ -1,13 +1,330 @@
-// Estilos específicos da página de estatísticas serão adicionados aqui
+// Variáveis de cores
+$primary-color: #ff6600;
+$dark-bg: #151515;
+$card-bg: #1e1e1e;
+$text-light: #ffffff;
+$text-muted: #8e8e93;
+$border-radius: 16px;
 
+// Estilos gerais
 ion-content {
-  --background: #151515;
-  --color: #ffffff;
+  --background: #{$dark-bg};
+  --color: #{$text-light};
 }
 
 ion-header {
   ion-toolbar {
-    --background: #151515;
-    --color: #ffffff;
+    --background: #{$dark-bg};
+    --color: #{$text-light};
+    padding: 8px 16px;
+  }
+  
+  .header-content {
+    padding: 8px 0;
+    
+    .header-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: $text-light;
+    }
+    
+    .header-subtitle {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: $text-muted;
+      font-weight: 400;
+    }
+  }
+}
+
+// Abas de métricas
+.metric-tabs {
+  display: flex;
+  background-color: $card-bg;
+  border-radius: $border-radius;
+  margin: 16px;
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    color: $text-muted;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 4px;
+    
+    &.active {
+      background-color: $primary-color;
+      color: $text-light;
+      box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+      
+      .tab-content {
+        .tab-name, .tab-value {
+          color: $text-light;
+        }
+      }
+    }
+    
+    ion-icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+    
+    .tab-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      
+      .tab-name {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        color: $text-muted;
+      }
+      
+      .tab-value {
+        font-size: 14px;
+        font-weight: 700;
+        color: $text-light;
+      }
+    }
+  }
+}
+
+// Área do gráfico
+.chart-area {
+  padding: 0 16px;
+  margin-bottom: 24px;
+}
+
+.chart-container {
+  background-color: $card-bg;
+  border-radius: $border-radius;
+  padding: 16px;
+  
+  .chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: $text-light;
+    }
+    
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      
+      .legend-item {
+        display: flex;
+        align-items: center;
+        
+        .legend-color {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin-right: 6px;
+        }
+        
+        .legend-text {
+          font-size: 12px;
+          color: $text-muted;
+        }
+      }
+    }
+  }
+  
+  // Gráfico de demonstração
+  .demo-chart {
+    height: 200px;
+    
+    .chart-bars {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 160px;
+      
+      .chart-bar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding: 0 4px;
+        
+        .bar-value {
+          width: 100%;
+          max-width: 20px;
+          background-color: $primary-color;
+          border-radius: 4px 4px 0 0;
+          transition: height 0.3s ease;
+        }
+        
+        .bar-label {
+          margin-top: 8px;
+          font-size: 12px;
+          color: $text-muted;
+        }
+      }
+    }
+  }
+}
+
+// Mensagem sem treinos
+.no-workouts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $card-bg;
+  border-radius: $border-radius;
+  padding: 32px 16px;
+  margin-bottom: 16px;
+  text-align: center;
+  
+  ion-icon {
+    font-size: 48px;
+    color: $text-muted;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: $text-light;
+    
+    &.hint {
+      margin-top: 8px;
+      font-size: 14px;
+      color: $text-muted;
+    }
+  }
+}
+
+// Seção de treinos recentes
+.recent-workouts-section {
+  padding: 0 16px 24px;
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: $text-light;
+    }
+    
+    .see-all {
+      color: $primary-color;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+  }
+}
+
+// Card de histórico de treino
+.workout-history-card {
+  background-color: $card-bg;
+  border-radius: $border-radius;
+  padding: 16px;
+  margin-bottom: 16px;
+  
+  .workout-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: $text-light;
+    }
+  }
+  
+  .workout-date {
+    color: $text-muted;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  
+  .workout-meta {
+    display: flex;
+    gap: 12px;
+    color: $text-muted;
+    font-size: 14px;
+    
+    .time, .sets {
+      display: flex;
+      align-items: center;
+      
+      ion-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+  
+  .workout-metrics {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+    
+    .metric {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+      ion-icon {
+        font-size: 24px;
+        margin-bottom: 4px;
+        
+        &.calories-icon {
+          color: $primary-color;
+        }
+        
+        &.heart-icon {
+          color: #ff375f;
+        }
+        
+        &.bpm-icon {
+          color: #5ac8fa;
+        }
+      }
+      
+      .metric-label {
+        font-size: 12px;
+        color: $text-muted;
+        margin-bottom: 2px;
+      }
+      
+      .metric-value {
+        font-size: 16px;
+        font-weight: 600;
+        color: $text-light;
+      }
+    }
   }
 }

@@ -1,10 +1,110 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Estatísticas</ion-title>
+    <div class="header-content">
+      <h1 class="header-title">Estatísticas 📈</h1>
+      <p class="header-subtitle">Acompanha o teu progresso</p>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h1>Página de Estatísticas</h1>
-  <p>Em desenvolvimento...</p>
+<ion-content [fullscreen]="true" class="statistics-content">
+  <!-- Abas de métricas -->
+  <div class="metric-tabs">
+    <div 
+      *ngFor="let tab of metricTabs" 
+      class="tab" 
+      [class.active]="tab.active"
+      (click)="selectMetricTab(tab)"
+    >
+      <ion-icon [name]="tab.icon"></ion-icon>
+      <div class="tab-content">
+        <div class="tab-name">{{ tab.name }}</div>
+        <div class="tab-value">{{ tab.value || 0 }} {{ tab.unit || '' }}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Área do gráfico -->
+  <div class="chart-area">
+    <div class="chart-container">
+      <!-- Cabeçalho do gráfico -->
+      <div class="chart-header">
+        <h3>Progresso Semanal</h3>
+        <div class="chart-legend">
+          <span class="legend-item">
+            <span class="legend-color" style="background-color: #ff6600;"></span>
+            <span class="legend-text">
+              <ng-container *ngFor="let tab of metricTabs">
+                <ng-container *ngIf="tab.active">
+                  {{ tab.name }} ({{ tab.value || 0 }} {{ tab.unit || '' }} total)
+                </ng-container>
+              </ng-container>
+            </span>
+          </span>
+        </div>
+      </div>
+      
+      <!-- Gráfico simples para demonstração -->
+      <div class="demo-chart">
+        <div class="chart-bars">
+          <div class="chart-bar" *ngFor="let value of chartValues; let i = index">
+            <div class="bar-value" [style.height.%]="value"></div>
+            <div class="bar-label">{{ weekDays[i] }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Treinos recentes -->
+  <div class="recent-workouts-section">
+    <div class="section-header">
+      <h2>Treinos Recentes</h2>
+      <a (click)="viewAllHistory()" class="see-all">Ver Todos</a>
+    </div>
+    
+    <!-- Mensagem sem treinos -->
+    <div class="no-workouts" *ngIf="workoutHistory.length === 0">
+      <ion-icon name="fitness-outline"></ion-icon>
+      <p>Ainda não tens treinos registados</p>
+      <p class="hint">Completa o teu primeiro treino para ver estatísticas</p>
+    </div>
+    
+    <!-- Cards de treino -->
+    <ng-container *ngFor="let workout of workoutHistory.slice(0, 5)">
+      <div class="workout-history-card">
+        <div class="workout-info">
+          <h3>{{ workout.programName }}</h3>
+          <div class="workout-meta">
+            <span class="time"><ion-icon name="time-outline"></ion-icon> {{ formatDuration(workout.duration) }}</span>
+            <span class="sets" *ngIf="workout.sets">{{ workout.sets }}</span>
+          </div>
+        </div>
+        <div class="workout-date">
+          <ng-container *ngIf="workout.endTime">
+            {{ workout.endTime | date:'d MMMM yyyy' }}
+          </ng-container>
+        </div>
+        
+        <!-- Métricas do treino -->
+        <div class="workout-metrics">
+          <div class="metric">
+            <ion-icon name="flame-outline" class="calories-icon"></ion-icon>
+            <span class="metric-label">Calorias</span>
+            <span class="metric-value">{{ workout.calories || 0 }} Kcal</span>
+          </div>
+          <div class="metric">
+            <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+            <span class="metric-label">Freq. Cardíaca</span>
+            <span class="metric-value">{{ workout.heartRate || 0 }} Bpm</span>
+          </div>
+          <div class="metric">
+            <ion-icon name="pulse-outline" class="bpm-icon"></ion-icon>
+            <span class="metric-label">Ritmo</span>
+            <span class="metric-value">{{ workout.bpm || 0 }} Bpm</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </ion-content>
