@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ModalController } from "@ionic/angular";
 import { WorkoutService, WorkoutProgram } from "../../services/workout.service";
+import { WorkoutDetailModalComponent } from "../../components/workout-detail-modal/workout-detail-modal.component";
 
 interface FilterOption {
   id: string;
@@ -50,7 +52,10 @@ export class SearchPage implements OnInit {
   activeFilters: number = 0;
   isLoading: boolean = true;
 
-  constructor(private workoutService: WorkoutService) {}
+  constructor(
+    private workoutService: WorkoutService,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     this.loadAllPrograms();
@@ -171,6 +176,24 @@ export class SearchPage implements OnInit {
     this.filteredPrograms = [...this.allPrograms];
   }
   
+  /**
+   * Abre o modal de detalhes do treino
+   * @param program Programa de treino selecionado
+   */
+  async openWorkoutDetail(program: WorkoutProgram) {
+    const modal = await this.modalCtrl.create({
+      component: WorkoutDetailModalComponent,
+      componentProps: {
+        program: program,
+      },
+      breakpoints: [0, 1],
+      initialBreakpoint: 1,
+      cssClass: "workout-detail-modal",
+    });
+
+    await modal.present();
+  }
+
   /**
    * Alterna a visibilidade do painel de filtros
    */

@@ -134,13 +134,14 @@ export class HomePage implements OnInit {
   }
 
   /**
-   * Carrega todos os programas disponíveis para a funcionalidade de pesquisa
+   * Carrega todos os programas disponíveis para a funcionalidade de pesquisa e retomada de treinos
    */
   private loadAllProgramsForSearch() {
     this.workoutService
-      .getProgramsByMuscleGroup("all")
+      .getAllPrograms()
       .subscribe((programs) => {
         this.allPrograms = programs;
+        console.log('Todos os programas carregados:', this.allPrograms.length);
       });
   }
 
@@ -423,6 +424,21 @@ export class HomePage implements OnInit {
   async resumePendingWorkout(workout: WorkoutSession) {
     console.log('Retomando treino pendente:', workout);
     try {
+      // Verificar se temos programas carregados
+      if (!this.allPrograms || this.allPrograms.length === 0) {
+        console.error('Nenhum programa carregado. Recarregando programas...');
+        await new Promise<void>((resolve) => {
+          this.workoutService.getAllPrograms().subscribe(programs => {
+            this.allPrograms = programs;
+            console.log('Programas recarregados:', this.allPrograms.length);
+            resolve();
+          });
+        });
+      }
+      
+      console.log('Procurando programa com nome:', workout.programName);
+      console.log('Programas disponíveis:', this.allPrograms.map(p => p.nome_programa));
+      
       // Buscar o programa completo baseado no nome do programa pendente
       const program = this.allPrograms.find(p => p.nome_programa === workout.programName);
       
@@ -465,6 +481,21 @@ export class HomePage implements OnInit {
   async continueActiveWorkout(workout: WorkoutSession) {
     console.log('Continuando treino em andamento:', workout);
     try {
+      // Verificar se temos programas carregados
+      if (!this.allPrograms || this.allPrograms.length === 0) {
+        console.error('Nenhum programa carregado. Recarregando programas...');
+        await new Promise<void>((resolve) => {
+          this.workoutService.getAllPrograms().subscribe(programs => {
+            this.allPrograms = programs;
+            console.log('Programas recarregados:', this.allPrograms.length);
+            resolve();
+          });
+        });
+      }
+      
+      console.log('Procurando programa com nome:', workout.programName);
+      console.log('Programas disponíveis:', this.allPrograms.map(p => p.nome_programa));
+      
       // Buscar o programa completo baseado no nome do programa
       const program = this.allPrograms.find(p => p.nome_programa === workout.programName);
       

@@ -11,16 +11,54 @@ ion-header {
   ion-toolbar {
     --background: #{$dark-bg};
     --color: #{$text-light};
-    
-    ion-title {
-      font-weight: 600;
-      font-size: 18px;
-    }
+    padding: 8px 16px;
   }
   
+  .header-content {
+    padding: 8px 0;
+    
+    .header-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      color: $text-light;
+    }
+    
+    .header-subtitle {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: $text-muted;
+      font-weight: 400;
+    }
+  }
+}
+
+.search-content {
+  --background: #{$dark-bg};
+  color: $text-light;
+}
+
+.search-container {
+  padding: 12px;
+}
+
+// Container da barra de pesquisa com filtro
+.search-filter-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  
   .filter-button {
+    --background: #{$card-bg};
+    --background-activated: #{$card-bg};
+    --background-focused: #{$card-bg};
+    --background-hover: #{$card-bg};
+    --box-shadow: none;
+    --border-radius: #{$border-radius};
+    height: 48px;
+    width: 48px;
+    margin: 0 0 0 8px;
     position: relative;
-    margin-right: 8px;
     
     ion-icon {
       font-size: 22px;
@@ -29,8 +67,8 @@ ion-header {
     
     .filter-badge {
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 6px;
+      right: 6px;
       --background: #{$primary-color};
       --color: #{$text-light};
       font-size: 10px;
@@ -44,15 +82,6 @@ ion-header {
   }
 }
 
-.search-content {
-  --background: #{$dark-bg};
-  color: $text-light;
-}
-
-.search-container {
-  padding: 16px;
-}
-
 // Barra de pesquisa personalizada
 .custom-searchbar {
   --background: #{$card-bg};
@@ -61,7 +90,8 @@ ion-header {
   --icon-color: #{$text-muted};
   --border-radius: #{$border-radius};
   --box-shadow: none;
-  margin-bottom: 16px;
+  margin: 0;
+  flex: 1;
   
   &::part(icon) {
     color: $text-muted;
@@ -203,14 +233,12 @@ ion-header {
 }
 
 // Cartões de programas
-.program-card {
+.program-card, .workout-card {
   position: relative;
-  height: 220px;
-  background-size: cover;
-  background-position: center;
+  height: 200px;
   border-radius: $border-radius;
   overflow: hidden;
-  margin: 8px 0;
+  margin: 6px 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
   
@@ -218,6 +246,7 @@ ion-header {
     transform: scale(0.98);
   }
 
+  // Estilo para o card-overlay (usado no program-card)
   .card-overlay {
     position: absolute;
     inset: 0;
@@ -227,6 +256,40 @@ ion-header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+  
+  // Estilo para o card-content (usado no workout-card)
+  .card-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    
+    .card-header, .text-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .card-header {
+      padding: 12px;
+    }
+    
+    .text-content {
+      margin-top: auto;
+      padding: 12px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5) 80%, transparent);
+      color: $text-light;
+    }
   }
   
   .card-header {
@@ -289,9 +352,17 @@ ion-header {
   }
 }
 
+// Contador de resultados
+.results-count {
+  font-size: 14px;
+  color: $text-muted;
+  margin-bottom: 8px;
+}
+
 // Ajustes de grid
 ion-grid {
   --ion-grid-padding: 0;
+  margin-top: 4px;
 }
 
 ion-row {
