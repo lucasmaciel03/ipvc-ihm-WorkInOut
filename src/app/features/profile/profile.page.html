@@ -1,10 +1,162 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Perfil</ion-title>
+    <div class="header-content">
+      <h1 class="header-title">O teu perfil</h1>
+      <p class="header-subtitle">Personaliza a tua experiência</p>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="editProfile()">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button (click)="openSettings()">
+        <ion-icon name="settings-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h1>Perfil do Usuário</h1>
-  <p>Em desenvolvimento...</p>
+<ion-content [fullscreen]="true" class="profile-content ion-padding">
+  <!-- Perfil do utilizador -->
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <div class="avatar-container">
+        <div class="avatar-placeholder">
+          <span>{{ getUserInitials() }}</span>
+        </div>
+      </div>
+      <ion-button fill="clear" class="change-photo-btn" (click)="changePhoto()">
+        <ion-icon name="camera-outline"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <div class="profile-info">
+      <h2>{{ user?.name || 'Utilizador' }}</h2>
+      <p class="email">{{ user?.email || 'email@exemplo.com' }}</p>
+      
+      <div class="profile-stats">
+        <div class="stat">
+          <span class="value">{{ completedWorkouts }}</span>
+          <span class="label">Treinos</span>
+        </div>
+        <div class="stat">
+          <span class="value">{{ totalCaloriesBurned }}</span>
+          <span class="label">Calorias</span>
+        </div>
+        <div class="stat">
+          <span class="value">{{ totalMinutesWorkedOut }}</span>
+          <span class="label">Minutos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Objetivo principal -->
+  <ion-card class="main-goal-card">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="trophy-outline"></ion-icon>
+        Objetivo principal
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div class="goal-content" *ngIf="user?.primaryGoal">
+        <div class="goal-icon" [ngClass]="getGoalClass(user?.primaryGoal || '')">
+          <ion-icon [name]="getGoalIcon(user?.primaryGoal || '')"></ion-icon>
+        </div>
+        <div class="goal-details">
+          <h3>{{ getGoalName(user?.primaryGoal || '') }}</h3>
+          <p>{{ getGoalDescription(user?.primaryGoal || '') }}</p>
+          <ion-button fill="outline" size="small" (click)="changeGoal()">
+            Alterar objetivo
+          </ion-button>
+        </div>
+      </div>
+      
+      <div class="no-goal" *ngIf="!user?.primaryGoal">
+        <ion-icon name="flag-outline"></ion-icon>
+        <p>Ainda não definiste um objetivo principal</p>
+        <ion-button expand="block" (click)="changeGoal()">
+          Definir objetivo
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- Atividade recente -->
+  <ion-card class="recent-activity-card">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="time-outline"></ion-icon>
+        Atividade recente
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div class="activity-list" *ngIf="recentWorkouts.length > 0">
+        <div class="activity-item" *ngFor="let workout of recentWorkouts">
+          <div class="activity-icon">
+            <ion-icon name="barbell-outline"></ion-icon>
+          </div>
+          <div class="activity-details">
+            <h4>{{ workout.programName }}</h4>
+            <p class="activity-date">{{ workout.endTime | date:'dd/MM/yyyy HH:mm' }}</p>
+            <div class="activity-stats">
+              <span>
+                <ion-icon name="flame-outline"></ion-icon>
+                {{ workout.caloriesEstimated }} kcal
+              </span>
+              <span>
+                <ion-icon name="time-outline"></ion-icon>
+                {{ formatDuration(workout.duration) }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="no-activity" *ngIf="recentWorkouts.length === 0">
+        <ion-icon name="fitness-outline"></ion-icon>
+        <p>Ainda não tens atividades registadas</p>
+        <ion-button expand="block" routerLink="/tabs/search">
+          Descobrir treinos
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- Informações físicas -->
+  <ion-card class="physical-info-card">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="body-outline"></ion-icon>
+        Informações físicas
+      </ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Idade</span>
+          <span class="info-value">{{ user?.age || '-' }} anos</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Altura</span>
+          <span class="info-value">{{ user?.height || '-' }} cm</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Peso</span>
+          <span class="info-value">{{ user?.weight || '-' }} kg</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">IMC</span>
+          <span class="info-value">{{ calculateBMI() || '-' }}</span>
+        </div>
+      </div>
+      
+      <ion-button expand="block" fill="outline" (click)="updatePhysicalInfo()">
+        Atualizar informações
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
