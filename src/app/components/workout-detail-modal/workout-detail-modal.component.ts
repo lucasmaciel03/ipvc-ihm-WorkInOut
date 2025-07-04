@@ -1,9 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ModalController, AlertController } from '@ionic/angular';
+import { IonicModule, ModalController, AlertController, ToastController } from '@ionic/angular';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CustomAlertService } from '../../shared/services/alert.service';
 import { WorkoutProgressService, WorkoutSession } from '../../core/services/workout-progress.service';
+
+@Pipe({
+  name: 'formatTime',
+  standalone: true
+})
+export class FormatTimePipe implements PipeTransform {
+  transform(value: number): string {
+    if (!value) return '00:00';
+    
+    const minutes: number = Math.floor(value / 60);
+    const seconds: number = Math.floor(value % 60);
+    
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+}
 
 // Interface para o progresso de um exercício
 interface ExerciseProgress {
@@ -40,7 +55,7 @@ import { WorkoutSummaryComponent } from '../workout-summary/workout-summary.comp
   templateUrl: './workout-detail-modal.component.html',
   styleUrls: ['./workout-detail-modal.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, WorkoutTimerComponent, WorkoutSetInputComponent, WorkoutCompleteComponent, WorkoutSummaryComponent]
+  imports: [CommonModule, IonicModule, WorkoutTimerComponent, WorkoutSetInputComponent, WorkoutCompleteComponent, WorkoutSummaryComponent, FormatTimePipe]
 })
 export class WorkoutDetailModalComponent implements OnInit {
   @ViewChild('videoPlayer') videoPlayer: any;
@@ -51,6 +66,7 @@ export class WorkoutDetailModalComponent implements OnInit {
   currentExerciseIndex = 0;
   currentExercise: Exercise | null = null;
   activeWorkout: WorkoutSession | null = null;
+  resumingWorkout = false;
 
   private difficultyMap: { [key: string]: number } = {
     'Iniciante': 1,
@@ -72,13 +88,20 @@ export class WorkoutDetailModalComponent implements OnInit {
   showSummary = false;
   workoutSets: WorkoutSet[] = [];
   completedItemName: string = '';
+  
+  // Variáveis para controlo do vídeo
+  videoProgress: number = 0;
+  currentTime: number = 0;
+  duration: number = 0;
+  isLoading: boolean = true;
 
   constructor(
     private modalCtrl: ModalController,
     private sanitizer: DomSanitizer,
     private workoutProgressService: WorkoutProgressService,
     private alertController: AlertController,
-    private customAlertService: CustomAlertService
+    private customAlertService: CustomAlertService,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
@@ -86,8 +109,17 @@ export class WorkoutDetailModalComponent implements OnInit {
       this.currentExercise = this.program.exercicios[0];
       this.validateProgramData();
       
-      // Verificar se já existe um treino em andamento
-      if (this.workoutProgressService.hasActiveWorkout()) {
+      // Verificar se estamos retomando um treino pendente
+      if (this.resumingWorkout && this.workoutProgressService.hasPendingWorkout()) {
+        this.activeWorkout = this.workoutProgressService.getCurrentWorkout();
+        // Restaurar o estado do treino pendente
+        if (this.activeWorkout && this.activeWorkout.programId === this.program.nome_programa) {
+          this.restoreWorkoutState();
+          this.showToast('Treino retomado com sucesso!');
+        }
+      }
+      // Verificar se já existe um treino em andamento (não pendente)
+      else if (this.workoutProgressService.hasActiveWorkout()) {
         this.activeWorkout = this.workoutProgressService.getCurrentWorkout();
         
         // Se o treino em andamento for do mesmo programa, restaurar o estado
@@ -101,14 +133,191 @@ export class WorkoutDetailModalComponent implements OnInit {
     }
   }
 
+  /**
+   * Alterna entre reproduzir e pausar o vídeo
+   * @param videoElement Elemento de vídeo HTML
+   */
   toggleVideo(videoElement: HTMLVideoElement) {
     if (videoElement.paused) {
-      videoElement.play();
-      this.isPlaying = true;
+      videoElement.play()
+        .then(() => {
+          this.isPlaying = true;
+          this.duration = videoElement.duration;
+        })
+        .catch(err => {
+          console.error('Erro ao reproduzir vídeo:', err);
+          this.showToast('Não foi possível reproduzir o vídeo', 'danger');
+        });
     } else {
       videoElement.pause();
       this.isPlaying = false;
     }
+  }
+  
+  /**
+   * Atualiza o progresso do vídeo
+   * @param event Evento de atualização de tempo
+   */
+  updateProgress(event: Event) {
+    const video = event.target as HTMLVideoElement;
+    if (video) {
+      this.currentTime = video.currentTime;
+      this.duration = video.duration || 0;
+      this.videoProgress = (this.currentTime / this.duration) * 100 || 0;
+    }
+  }
+  
+  /**
+   * Alterna entre modo normal e tela cheia
+   * @param videoElement Elemento de vídeo HTML
+   */
+  toggleFullscreen(videoElement: HTMLVideoElement) {
+    if (!document.fullscreenElement) {
+      videoElement.requestFullscreen().catch(err => {
+        console.error('Erro ao entrar em tela cheia:', err);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  }
+  
+  /**
+   * Manipula o evento de fim do vídeo
+   */
+  onVideoEnded() {
+    this.isPlaying = false;
+    this.videoProgress = 100;
+    // O vídeo terminou, mas não mostramos nenhuma mensagem
+  }
+  
+  /**
+   * Permite ao utilizador navegar para um ponto específico do vídeo clicando na barra de progresso
+   * @param event Evento de clique
+   * @param videoElement Elemento de vídeo HTML
+   */
+  seekVideo(event: MouseEvent, videoElement: HTMLVideoElement) {
+    if (!videoElement || !videoElement.duration) return;
+    
+    const progressContainer = event.currentTarget as HTMLElement;
+    const rect = progressContainer.getBoundingClientRect();
+    const clickPosition = (event.clientX - rect.left) / rect.width;
+    
+    // Calcular o novo tempo com base na posição do clique
+    const newTime = videoElement.duration * clickPosition;
+    
+    // Definir o novo tempo do vídeo
+    videoElement.currentTime = newTime;
+    
+    // Atualizar as variáveis de controlo
+    this.currentTime = newTime;
+    this.videoProgress = (newTime / videoElement.duration) * 100;
+  }
+  
+  /**
+   * Lida com erros de carregamento do vídeo
+   * @param event Evento de erro
+   */
+  handleVideoError(event: Event) {
+    this.isLoading = false;
+    console.error('Erro ao carregar vídeo:', event);
+    
+    // Verificar se o vídeo é do YouTube e tentar carregar como fallback
+    if (this.currentExercise?.video?.includes('youtube')) {
+      this.showToast('A tentar carregar o vídeo...', 'warning');
+    } else {
+      this.showToast('Não foi possível carregar o vídeo. Tenta novamente mais tarde.', 'danger');
+    }
+  }
+  
+  /**
+   * Manipula o evento de carregamento dos metadados do vídeo
+   * @param event Evento de carregamento de metadados
+   */
+  handleMetadataLoaded(event: Event) {
+    const video = event.target as HTMLVideoElement;
+    if (video) {
+      this.duration = video.duration || 0;
+      this.isLoading = false;
+      
+      // Reduzir o tempo de carregamento definindo a qualidade inicial mais baixa
+      if (video.readyState >= 1) {
+        // Definir o tempo de início para 0 para pré-carregar o início do vídeo
+        video.currentTime = 0;
+        
+        // Otimizar o carregamento do vídeo
+        this.optimizeVideoPlayback(video);
+      }
+    }
+  }
+  
+  /**
+   * Retorna o URL do poster para o vídeo atual
+   * @returns URL da imagem para usar como poster do vídeo
+   */
+  getVideoPoster(): string {
+    if (!this.currentExercise || !this.program) return '';
+    
+    // Usar a imagem do programa como poster principal
+    if (this.program.imagem_programa) {
+      return this.program.imagem_programa;
+    }
+    
+    // Fallback para uma imagem baseada na categoria do programa
+    const categorias = {
+      'ficar em forma': '/assets/images/programas/funcional_programa.png',
+      'perder peso': '/assets/images/programas/perder_peso_programa.png',
+      'ganhar massa': '/assets/images/programas/massa_programa.png',
+      'tonificar': '/assets/images/programas/tonificar_programa.png'
+    };
+    
+    // Verificar se o nome do programa contém alguma das categorias conhecidas
+    if (this.program.nome_programa) {
+      const nomeLowerCase = this.program.nome_programa.toLowerCase();
+      for (const [categoria, imagem] of Object.entries(categorias)) {
+        if (nomeLowerCase.includes(categoria)) {
+          return imagem;
+        }
+      }
+    }
+    
+    // Imagem padrão se não houver outras opções
+    return '/assets/images/programas/workout_placeholder.png';
+  }
+  
+  /**
+   * Otimiza a reprodução do vídeo para melhorar o desempenho
+   * @param videoElement Elemento de vídeo HTML
+   */
+  private optimizeVideoPlayback(videoElement: HTMLVideoElement) {
+    // Definir atributos para otimizar o carregamento
+    videoElement.muted = true; // Permite autoplay em mais navegadores
+    
+    // Usar playbackRate mais baixo inicialmente para permitir buffering mais rápido
+    videoElement.playbackRate = 0.5;
+    
+    // Pré-carregar o início do vídeo para exibição imediata
+    setTimeout(() => {
+      // Restaurar a taxa de reprodução normal após o carregamento inicial
+      videoElement.playbackRate = 1.0;
+      videoElement.muted = false;
+      
+      // Tentar carregar mais do vídeo em segundo plano
+      try {
+        // Verificar se a API NetworkInformation está disponível
+        const connection = (navigator as any).connection;
+        
+        if (connection && connection.effectiveType && connection.effectiveType !== 'slow-2g') {
+          // Se a conexão for razoável, pré-carregar mais do vídeo
+          videoElement.preload = 'auto';
+        } else {
+          // Para conexões mais lentas, manter apenas os metadados
+          videoElement.preload = 'metadata';
+        }
+      } catch (e) {
+        // Fallback se a API não estiver disponível
+        videoElement.preload = 'metadata';
+      }
+    }, 1000);
   }
 
   async startWorkout() {
@@ -194,7 +403,6 @@ export class WorkoutDetailModalComponent implements OnInit {
     
     // Verificar se há realmente exercícios pendentes
     if (completedExercises < totalExercises) {
-      // Mostrar confirmação com alerta personalizado se nem todos os exercícios foram concluídos
       const exercisesRemaining = totalExercises - completedExercises;
       
       console.log('Exercícios restantes:', exercisesRemaining);
@@ -206,7 +414,7 @@ export class WorkoutDetailModalComponent implements OnInit {
       this.customAlertService.show({
         header: '⚠️ Terminar Treino?',
         subHeader: `Ainda tens ${exercisesRemaining} exercício${exercisesRemaining > 1 ? 's' : ''} por completar`,
-        message: 'Tens a certeza que queres sair? O teu progresso não será guardado.',
+        message: 'O que desejas fazer com este treino?',
         icon: 'warning-outline',
         iconColor: '#FF9800',
         cssClass: 'workout-warning',
@@ -221,7 +429,15 @@ export class WorkoutDetailModalComponent implements OnInit {
             }
           },
           {
-            text: 'Sair Mesmo Assim',
+            text: 'Continuar Mais Tarde',
+            cssClass: 'pending-btn',
+            handler: () => {
+              console.log('Marcando treino como pendente');
+              this.markWorkoutAsPending();
+            }
+          },
+          {
+            text: 'Terminar mesmo assim',
             cssClass: 'destructive-btn',
             handler: () => {
               console.log('Finalizando treino com exercícios pendentes');
@@ -313,19 +529,42 @@ export class WorkoutDetailModalComponent implements OnInit {
     return exerciseProgress?.startTime != null && !exerciseProgress?.completed;
   }
 
-  getYouTubeEmbedUrl(url: string | undefined): SafeResourceUrl {
+  /**
+   * Sanitiza o URL do vídeo para garantir que seja seguro para exibição
+   * @param url Caminho do vídeo (local ou YouTube)
+   * @returns SafeResourceUrl para o vídeo
+   */
+  sanitizeVideoUrl(url: string | undefined): SafeResourceUrl {
     if (!url) return this.sanitizer.bypassSecurityTrustResourceUrl('');
     
-    const videoId = this.getYouTubeVideoId(url);
-    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    // Cache para evitar reprocessamento de URLs já sanitizados
+    if (this._cachedVideoUrls && this._cachedVideoUrls[url]) {
+      return this._cachedVideoUrls[url];
+    }
+    
+    let safeUrl: SafeResourceUrl;
+    
+    // Se for um vídeo do YouTube, extrair o ID e gerar o URL de incorporação
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      const videoId = (match && match[2].length === 11) ? match[2] : '';
+      const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+    } else {
+      // Se for um vídeo local, sanitizar o caminho
+      safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    
+    // Guardar no cache
+    if (!this._cachedVideoUrls) this._cachedVideoUrls = {};
+    this._cachedVideoUrls[url] = safeUrl;
+    
+    return safeUrl;
   }
-
-  private getYouTubeVideoId(url: string): string {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : '';
-  }
+  
+  // Cache para URLs de vídeo já processados
+  private _cachedVideoUrls: {[key: string]: SafeResourceUrl} = {};
 
   getDifficultyFlames(difficulty: string | undefined): number[] {
     if (!difficulty) return [];
@@ -357,9 +596,43 @@ export class WorkoutDetailModalComponent implements OnInit {
       this.currentExerciseIndex++;
       this.currentExercise = this.program.exercicios[this.currentExerciseIndex];
       this.resetState();
+      
+      // Pré-carregar o próximo exercício se existir
+      this.preloadNextExercise();
     }
   }
-
+  
+  /**
+   * Pré-carrega o vídeo do próximo exercício para melhorar a experiência do utilizador
+   */
+  private preloadNextExercise() {
+    if (this.hasNextExercise) {
+      const nextExerciseIndex = this.currentExerciseIndex + 1;
+      const nextExercise = this.program.exercicios[nextExerciseIndex];
+      
+      if (nextExercise?.video) {
+        // Pré-processar o URL do vídeo para o cache
+        this.sanitizeVideoUrl(nextExercise.video);
+        
+        // Criar um elemento de vídeo oculto para pré-carregar
+        const preloadVideo = document.createElement('video');
+        preloadVideo.style.display = 'none';
+        preloadVideo.preload = 'metadata';
+        preloadVideo.src = nextExercise.video;
+        
+        // Remover o elemento após carregar os metadados
+        preloadVideo.onloadedmetadata = () => {
+          if (preloadVideo.parentNode) {
+            preloadVideo.parentNode.removeChild(preloadVideo);
+          }
+        };
+        
+        // Adicionar temporariamente ao DOM
+        document.body.appendChild(preloadVideo);
+      }
+    }
+  }
+  
   /**
    * Navega para o exercício anterior
    */
@@ -377,12 +650,15 @@ export class WorkoutDetailModalComponent implements OnInit {
         }
       }
       
+      // Mostrar indicador de carregamento antes de mudar de exercício
+      this.isLoading = true;
+      
       this.currentExerciseIndex--;
       this.currentExercise = this.program.exercicios[this.currentExerciseIndex];
       this.resetState();
     }
   }
-  
+
   /**
    * Navega diretamente para um exercício específico pelo seu índice
    * @param index Índice do exercício na lista de exercícios
@@ -409,18 +685,36 @@ export class WorkoutDetailModalComponent implements OnInit {
   }
   
   /**
-   * Reinicia o estado da interface para o exercício atual
+   * Reinicia o estado do componente e otimiza o carregamento do vídeo
    */
   private resetState() {
+    this.showTimer = false;
     this.showComplete = false;
     this.showSummary = false;
     this.workoutSets = [];
-    if (this.videoPlayer) {
-      this.videoPlayer.nativeElement.pause();
-      this.videoPlayer.nativeElement.currentTime = 0;
-    }
+    this.videoProgress = 0;
+    this.currentTime = 0;
+    this.duration = 0;
+    this.isLoading = true;
+    
+    // Otimizar o carregamento do vídeo atual
+    setTimeout(() => {
+      const videoElement = this.videoPlayer?.nativeElement;
+      if (videoElement) {
+        // Reiniciar o vídeo
+        videoElement.pause();
+        videoElement.currentTime = 0;
+        
+        // Definir atributos para otimizar o carregamento
+        videoElement.muted = true; // Permite autoplay em mais navegadores
+        videoElement.playbackRate = 1.0; // Taxa de reprodução normal
+        videoElement.volume = 1.0; // Volume máximo quando desmutado
+        
+        // Pré-carregar apenas os metadados para acelerar o carregamento inicial
+        videoElement.preload = 'metadata';
+      }
+    }, 100);
   }
-
   onSetDismissed() {
     console.log('Set input dismissed');
   }
@@ -453,15 +747,53 @@ export class WorkoutDetailModalComponent implements OnInit {
   }
   
   /**
-   * Finaliza o treino atual
-   * @param forceFinish Se verdadeiro, força a finalização mesmo com exercícios incompletos
+   * Exibe uma mensagem toast para o utilizador
+   * @param message Mensagem a ser exibida
+   * @param color Cor do toast (primary, success, warning, danger)
+   * @param duration Duração em milissegundos
    */
-  private finalizeWorkout(forceFinish: boolean) {
+  async showToast(message: string, color: string = 'primary', duration: number = 2000) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: duration,
+      position: 'bottom',
+      color: color,
+      cssClass: 'custom-toast'
+    });
+    await toast.present();
+  }
+  
+  /**
+   * Marca o treino atual como pendente para continuar mais tarde
+   */
+  async markWorkoutAsPending() {
     try {
-      console.log('Finalizando treino, forçar finalização:', forceFinish);
+      // Marcar o treino como pendente usando o serviço
+      const pendingWorkout = this.workoutProgressService.markWorkoutAsPending();
+      console.log('Treino marcado como pendente:', pendingWorkout);
+      
+      // Mostrar toast de confirmação
+      this.showToast('Treino guardado para continuar mais tarde', 'warning');
+      
+      // Fechar o modal
+      this.closeModal();
+    } catch (error) {
+      console.error('Erro ao marcar treino como pendente:', error);
+      // Mostrar mensagem de erro
+      this.showToast('Erro ao guardar o treino', 'danger');
+    }
+  }
+
+  /**
+   * Finaliza o treino atual
+   * @param force Se verdadeiro, força a finalização mesmo com exercícios incompletos
+   */
+  async finalizeWorkout(force: boolean = false) {
+    try {
+      console.log('Finalizando treino, forçar finalização:', force);
       
       // Verificar se o treino está realmente completo antes de finalizar
-      if (!forceFinish) {
+      if (!force) {
         const completedExercises = this.activeWorkout?.exercisesProgress.filter(ex => ex.completed).length || 0;
         const totalExercises = this.activeWorkout?.exercisesProgress.length || 0;
         
@@ -469,23 +801,19 @@ export class WorkoutDetailModalComponent implements OnInit {
         
         // Se não estiver completo e não estiver a forçar, mostrar alerta
         if (completedExercises < totalExercises) {
-          console.log('Treino incompleto, mas forceFinish é false. Ajustando para true.');
-          forceFinish = true;
+          console.log('Treino incompleto, mas force é false. Ajustando para true.');
+          force = true;
         }
       }
       
       // Finalizar o treino
-      const finishedWorkout = this.workoutProgressService.finishWorkout(forceFinish);
+      const finishedWorkout = this.workoutProgressService.finishWorkout(force);
       this.activeWorkout = finishedWorkout;
       this.showSummary = true;
       
-      // Fechar o modal após um breve atraso para mostrar o sumário
-      setTimeout(() => {
-        this.modalCtrl.dismiss({
-          completed: true,
-          workout: finishedWorkout
-        });
-      }, 500);
+      // Não fechar automaticamente o modal para que o utilizador possa ver o sumário
+      // O sumário terá um botão para fechar quando o utilizador desejar
+      // O componente WorkoutSummary já tem um evento (dismiss) que é tratado pelo closeModal()
     } catch (error) {
       console.error('Erro ao finalizar treino:', error);
     }

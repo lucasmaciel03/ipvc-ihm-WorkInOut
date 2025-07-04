@@ -18,12 +18,44 @@
   <ng-container *ngIf="!showTimer">
     <div class="video-container">
       <div class="youtube-container">
-        <iframe
-          [src]="getYouTubeEmbedUrl(currentExercise?.video)"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <div class="video-loading" *ngIf="isLoading">
+          <ion-spinner name="crescent" color="light"></ion-spinner>
+          <span>A carregar vídeo...</span>
+        </div>
+        
+        <video #videoPlayer [src]="sanitizeVideoUrl(currentExercise?.video)" 
+               preload="metadata"
+               playsinline
+               [poster]="getVideoPoster()"
+               (timeupdate)="updateProgress($event)" 
+               (ended)="onVideoEnded()" 
+               (loadstart)="isLoading = true" 
+               (loadedmetadata)="handleMetadataLoaded($event)"
+               (canplay)="isLoading = false"
+               (error)="handleVideoError($event)">
+          O teu navegador não suporta a reprodução de vídeos.
+        </video>
+        
+        <!-- Controlos personalizados -->
+        <div class="video-controls">
+          <div class="progress-container" (click)="seekVideo($event, videoPlayer)">
+            <div class="progress-bar" [style.width.%]="videoProgress"></div>
+          </div>
+          
+          <div class="controls-row">
+            <ion-button fill="clear" class="control-btn" (click)="toggleVideo(videoPlayer)">
+              <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+            </ion-button>
+            
+            <div class="time-display">
+              <span>{{ currentTime | formatTime }}</span> / <span>{{ duration | formatTime }}</span>
+            </div>
+            
+            <ion-button fill="clear" class="control-btn" (click)="toggleFullscreen(videoPlayer)">
+              <ion-icon name="expand-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
       </div>
       
       <!-- Botões de navegação -->

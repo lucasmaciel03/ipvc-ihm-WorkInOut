@@ -4,7 +4,7 @@
     "Funcional Total": [
       {
         "nome_programa": "Treino Funcional Corpo Inteiro",
-        "imagem_programa": "/assets/images/funcional-corpo-inteiro.jpg",
+        "imagem_programa": "/assets/images/programas/funcional_programa.png",
         "descricao": "Rotina funcional para melhorar mobilidade, resistência e força geral",
         "tempo_total": "45 minutos",
         "total_exercicios": 5,
@@ -28,13 +28,13 @@
         "exercicios": [
           {
             "nome": "Agachamento com Peso Corporal",
-            "video": "https://www.youtube.com/watch?v=aclHkVaku9U",
+            "video": "/assets/videos/ficar_em_forma/agachamento_peso_corporal.mp4",
             "tempo_medio": "3 séries de 15 repetições",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Iniciante",
             "avaliacao": "4.6",
@@ -45,13 +45,13 @@
           },
           {
             "nome": "Prancha com Toque de Ombros",
-            "video": "https://www.youtube.com/watch?v=9p0Q5oHgq1E",
+            "video": "/assets/videos/ficar_em_forma/prancha.mp4",
             "tempo_medio": "3 séries de 30 segundos",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.7",
@@ -62,13 +62,13 @@
           },
           {
             "nome": "Subida no Step",
-            "video": "https://www.youtube.com/watch?v=dQqApCGd5Ss",
+            "video": "/assets/videos/ficar_em_forma/subida_step.mp4",
             "tempo_medio": "3 séries de 12 repetições por perna",
             "equipamentos": [
               "Caixa/Step"
             ],
             "imagem_equipamentos": [
-              "/assets/images/step-box.jpg"
+              "/assets/images/equipamento/step.png"
             ],
             "dificuldade": "Iniciante",
             "avaliacao": "4.5",
@@ -81,7 +81,7 @@
       },
       {
         "nome_programa": "Circuito Funcional Dinâmico",
-        "imagem_programa": "/assets/images/circuito-dinamico.jpg",
+        "imagem_programa": "/assets/images/programas/circuito_programa.png",
         "descricao": "Treino dinâmico com foco em resistência cardiovascular e força funcional",
         "tempo_total": "40 minutos",
         "total_exercicios": 5,
@@ -105,13 +105,13 @@
         "exercicios": [
           {
             "nome": "Corrida no Lugar com Joelhos Altos",
-            "video": "https://www.youtube.com/watch?v=8XqVCVn2o3I",
+            "video": "/assets/videos/ficar_em_forma/joelhos_altos.mp4",
             "tempo_medio": "3 séries de 45 segundos",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.5",
@@ -122,13 +122,13 @@
           },
           {
             "nome": "Agachamento com Elevação Frontal",
-            "video": "https://www.youtube.com/watch?v=3WnBsPxjEo4",
+            "video": "/assets/videos/ficar_em_forma/agachamento_frontal.mp4",
             "tempo_medio": "3 séries de 12 repetições",
             "equipamentos": [
               "Halteres Leves"
             ],
             "imagem_equipamentos": [
-              "/assets/images/dumbbell.jpg"
+              "/assets/images/equipamento/haltere.jpg"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.6",
@@ -142,7 +142,7 @@
       },
       {
         "nome_programa": "Desafio Funcional em Casa",
-        "imagem_programa": "/assets/images/funcional-casa.jpg",
+        "imagem_programa": "/assets/images/programas/funcional_casa_programa.png",
         "descricao": "Programa prático sem equipamentos para treinar em qualquer lugar",
         "tempo_total": "35 minutos",
         "total_exercicios": 4,
@@ -165,13 +165,13 @@
         "exercicios": [
           {
             "nome": "Agachamento com Salto",
-            "video": "https://www.youtube.com/watch?v=U4s4mEQ5VqU",
+            "video": "/assets/videos/ficar_em_forma/agachamento_salto.mp4",
             "tempo_medio": "3 séries de 15 repetições",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.6",
@@ -184,7 +184,7 @@
       },
       {
         "nome_programa": "Funcional com Core Ativo",
-        "imagem_programa": "/assets/images/core-funcional.jpg",
+        "imagem_programa": "/assets/images/programas/funcional_core_programa.png",
         "descricao": "Foco na estabilidade e força do core com movimentos funcionais",
         "tempo_total": "50 minutos",
         "total_exercicios": 5,
@@ -208,13 +208,13 @@
         "exercicios": [
           {
             "nome": "Prancha Lateral Alternada",
-            "video": "https://www.youtube.com/watch?v=_3z8P70gU8U",
+            "video": "/assets/videos/ficar_em_forma/prancha_lateral.mp4",
             "tempo_medio": "3 séries de 30 segundos por lado",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.7",

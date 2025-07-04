@@ -1,0 +1,40 @@
+<div class="pending-workout-card">
+  <div class="card-content">
+    <div class="workout-info">
+      <div class="workout-header">
+        <h3>{{ workout.programName }}</h3>
+        <span class="pending-badge">Pendente</span>
+      </div>
+      
+      <div class="workout-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width]="(workout.completedExercises / workout.totalExercises * 100) + '%'"></div>
+        </div>
+        <div class="progress-text">
+          {{ workout.completedExercises }}/{{ workout.totalExercises }} exercícios
+        </div>
+      </div>
+      
+      <div class="workout-meta">
+        <div class="meta-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ formatDuration(workout.duration) }}</span>
+        </div>
+        <div class="meta-item">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ getLastUpdatedText() }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="workout-actions">
+      <ion-button fill="solid" color="warning" (click)="onResumeClick($event)" class="resume-btn">
+        <ion-icon name="play" slot="start"></ion-icon>
+        Continuar
+      </ion-button>
+      <ion-button fill="clear" color="medium" (click)="onDeleteClick($event)" class="delete-btn">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
     "Cardio HIIT": [
       {
         "nome_programa": "HIIT Queima Total",
-        "imagem_programa": "/assets/images/hiit-queima-total.jpg",
+        "imagem_programa": "/assets/images/programas/hiit_total.png",
         "descricao": "Treino de alta intensidade com foco na queima rápida de gordura corporal",
         "tempo_total": "30 minutos",
         "total_exercicios": 5,
@@ -27,13 +27,13 @@
         "exercicios": [
           {
             "nome": "Burpees",
-            "video": "https://www.youtube.com/watch?v=TU8QYVW0gDU",
+            "video": "/assets/videos/perder_peso/burpees.mp4",
             "tempo_medio": "3 séries de 15 repetições",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Avançado",
             "avaliacao": "4.7",
@@ -44,13 +44,13 @@
           },
           {
             "nome": "Mountain Climbers",
-            "video": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+            "video": "/assets/videos/perder_peso/mountain_climbers.mp4",
             "tempo_medio": "3 séries de 30 segundos",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.5",
@@ -61,13 +61,13 @@
           },
           {
             "nome": "Polichinelos",
-            "video": "https://www.youtube.com/watch?v=c4DAnQ6DtF8",
+            "video": "/assets/videos/perder_peso/polichinelos.mp4",
             "tempo_medio": "3 séries de 1 minuto",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Iniciante",
             "avaliacao": "4.4",
@@ -80,7 +80,7 @@
       },
       {
         "nome_programa": "Cardio Explosivo",
-        "imagem_programa": "/assets/images/cardio-explosivo.jpg",
+        "imagem_programa": "/assets/images/programas/cardio_explosivo.png",
         "descricao": "Programa focado em queimar gordura com movimentos intensos e intervalos curtos",
         "tempo_total": "35 minutos",
         "total_exercicios": 5,
@@ -104,13 +104,13 @@
         "exercicios": [
           {
             "nome": "Corrida Estacionária",
-            "video": "https://www.youtube.com/watch?v=sTYp2p0ZfV4",
+            "video": "/assets/videos/perder_peso/running_in_place.mp4",
             "tempo_medio": "3 séries de 1 minuto",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Iniciante",
             "avaliacao": "4.4",
@@ -123,7 +123,7 @@
       },
       {
         "nome_programa": "Tabata Queima Rápida",
-        "imagem_programa": "/assets/images/tabata-queima.jpg",
+        "imagem_programa": "/assets/images/programas/tabata_queima_rapido.png",
         "descricao": "Treino estilo Tabata para perda de peso com explosões de esforço curto",
         "tempo_total": "20 minutos",
         "total_exercicios": 4,
@@ -147,13 +147,13 @@
         "exercicios": [
           {
             "nome": "Jump Squats",
-            "video": "https://www.youtube.com/watch?v=U4s4mEQ5VqU",
+            "video": "/assets/videos/perder_peso/jump_squats.mp4",
             "tempo_medio": "20 segundos ON / 10 segundos OFF",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Avançado",
             "avaliacao": "4.6",
@@ -167,7 +167,7 @@
       },
       {
         "nome_programa": "Queima Total com Peso Corporal",
-        "imagem_programa": "/assets/images/queima-corpo.jpg",
+        "imagem_programa": "/assets/images/programas/queima_total.png",
         "descricao": "Programa de emagrecimento sem equipamento, ideal para treinar em casa",
         "tempo_total": "30 minutos",
         "total_exercicios": 5,
@@ -189,13 +189,13 @@
         "exercicios": [
           {
             "nome": "Escalador",
-            "video": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+            "video": "/assets/videos/perder_peso/mountain_climbers_2.mp4",
             "tempo_medio": "3 séries de 45 segundos",
             "equipamentos": [
               "Peso Corporal"
             ],
             "imagem_equipamentos": [
-              "/assets/images/bodyweight.jpg"
+              "/assets/images/equipamento/peso_corporal.png"
             ],
             "dificuldade": "Intermédio",
             "avaliacao": "4.6",

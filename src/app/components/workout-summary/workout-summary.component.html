@@ -17,7 +17,7 @@
 <ion-content class="ion-padding">
   <!-- Hero Image and Title -->
   <div class="hero-section" *ngIf="currentWorkout">
-    <img src="assets/images/workout-complete.jpg" alt="Treino concluído">
+    <img [src]="getProgramImage()" alt="Treino concluído">
     <div class="hero-content">
       <h1>{{ currentWorkout.programName }}</h1>
       <div class="completion-date">{{ workoutDate }}</div>
@@ -94,3 +94,12 @@
     </div>
   </div>
 </ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button expand="block" (click)="onDismiss()" class="close-btn">
+      <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+      Fechar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

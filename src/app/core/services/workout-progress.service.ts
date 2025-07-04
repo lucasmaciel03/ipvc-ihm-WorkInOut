@@ -13,14 +13,17 @@ export interface WorkoutSession {
   id: string;
   programId: string;
   programName: string;
+  programImage?: string; // Imagem do programa
   startTime: Date;
   endTime?: Date;
   completed: boolean;
+  isPending: boolean; // Novo campo para indicar se o treino está pendente
   exercisesProgress: ExerciseProgress[];
   totalExercises: number;
   completedExercises: number;
   caloriesEstimated: number;
   duration: number; // em segundos
+  lastUpdated?: Date; // Data da última atualização do treino pendente
 }
 
 @Injectable({
@@ -69,28 +72,28 @@ export class WorkoutProgressService {
    */
   startWorkout(program: WorkoutProgram): WorkoutSession {
     // Verificar se já existe um treino em andamento
-    if (this.currentWorkoutSubject.value) {
-      throw new Error('Já existe um treino em andamento. Termine-o antes de iniciar outro.');
+    if (this.hasActiveWorkout()) {
+      throw new Error('Já existe um treino em andamento.');
     }
-
-    // Criar exercícios para acompanhamento
-    const exercisesProgress: ExerciseProgress[] = program.exercicios.map(ex => ({
-      nome: ex.nome,
-      completed: false
-    }));
-
-    // Criar nova sessão de treino
+    
+    // Criar novo treino
     const newWorkout: WorkoutSession = {
       id: this.generateWorkoutId(),
       programId: program.nome_programa,
       programName: program.nome_programa,
+      programImage: program.imagem_programa, // Guardar a imagem do programa
       startTime: new Date(),
       completed: false,
-      exercisesProgress: exercisesProgress,
+      isPending: false, // Inicialmente não está pendente
+      exercisesProgress: program.exercicios.map(ex => ({
+        nome: ex.nome,
+        completed: false
+      })),
       totalExercises: program.exercicios.length,
       completedExercises: 0,
-      caloriesEstimated: program.calorias_estimadas,
-      duration: 0
+      caloriesEstimated: 0,
+      duration: 0,
+      lastUpdated: new Date()
     };
 
     // Salvar no localStorage e atualizar o subject
@@ -167,6 +170,71 @@ export class WorkoutProgressService {
   /**
    * Finaliza o treino atual
    */
+  /**
+   * Marca um treino como pendente para continuar mais tarde
+   * @returns O treino marcado como pendente
+   */
+  markWorkoutAsPending(): WorkoutSession {
+    const currentWorkout = this.currentWorkoutSubject.value;
+    if (!currentWorkout) {
+      throw new Error('Nenhum treino em andamento para marcar como pendente.');
+    }
+    
+    // Calcular a duração até o momento
+    const now = new Date();
+    const duration = Math.floor((now.getTime() - new Date(currentWorkout.startTime).getTime()) / 1000);
+    
+    // Atualizar o treino como pendente
+    const pendingWorkout: WorkoutSession = {
+      ...currentWorkout,
+      isPending: true,
+      duration,
+      lastUpdated: now
+    };
+    
+    // Salvar no localStorage
+    localStorage.setItem(this.CURRENT_WORKOUT_KEY, JSON.stringify(pendingWorkout));
+    this.currentWorkoutSubject.next(pendingWorkout);
+    
+    return pendingWorkout;
+  }
+  
+  /**
+   * Verifica se há um treino pendente
+   */
+  hasPendingWorkout(): boolean {
+    const currentWorkout = this.currentWorkoutSubject.value;
+    return !!currentWorkout && currentWorkout.isPending;
+  }
+  
+  /**
+   * Retoma um treino pendente
+   */
+  resumePendingWorkout(): WorkoutSession {
+    const currentWorkout = this.currentWorkoutSubject.value;
+    if (!currentWorkout || !currentWorkout.isPending) {
+      throw new Error('Não há treino pendente para retomar.');
+    }
+    
+    // Marcar o treino como não pendente e atualizar a hora
+    const resumedWorkout: WorkoutSession = {
+      ...currentWorkout,
+      isPending: false,
+      lastUpdated: new Date()
+    };
+    
+    // Salvar no localStorage
+    localStorage.setItem(this.CURRENT_WORKOUT_KEY, JSON.stringify(resumedWorkout));
+    this.currentWorkoutSubject.next(resumedWorkout);
+    
+    return resumedWorkout;
+  }
+  
+  /**
+   * Finaliza o treino atual
+   * @param forceFinish Se verdadeiro, força a finalização mesmo com exercícios incompletos
+   * @returns O treino finalizado
+   */
   finishWorkout(forceFinish: boolean = false): WorkoutSession {
     const currentWorkout = this.currentWorkoutSubject.value;
     if (!currentWorkout) {
@@ -188,7 +256,9 @@ export class WorkoutProgressService {
       ...currentWorkout,
       endTime,
       completed: true,
-      duration
+      isPending: false,
+      duration,
+      lastUpdated: endTime
     };
 
     // Adicionar ao histórico

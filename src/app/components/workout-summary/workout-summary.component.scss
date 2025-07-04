@@ -230,3 +230,18 @@ ion-header {
     }
   }
 }
+
+ion-footer {
+  padding: 0 16px 16px;
+  
+  .close-btn {
+    --background: #ff6600;
+    --background-activated: #e65c00;
+    --background-focused: #e65c00;
+    --background-hover: #e65c00;
+    --color: #ffffff;
+    font-weight: 500;
+    height: 48px;
+    margin: 0;
+  }
+}

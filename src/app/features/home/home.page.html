@@ -9,7 +9,7 @@
         />
       </ion-avatar>
       <div class="welcome-text">
-        <p class="greeting">Let's Get Back 💪</p>
+        <p class="greeting">Vamos Continuar 💪</p>
         <h2 class="name">André Lucas Pedro</h2>
       </div>
     </div>
@@ -83,10 +83,38 @@
   <!-- Hero Section (hide when searching) -->
   <div class="hero-section" *ngIf="!searchTerm || searchTerm.length <= 1">
     <div class="hero-content">
-      <h1>Stronger every rep<br />every step.</h1>
+      <h1>Mais forte a cada rep<br />a cada passo.</h1>
       <ion-button class="start-workout-btn" (click)="startWorkoutGuide()">
-        Start Workout 🔥
+        Iniciar Treino 🔥
       </ion-button>
+    </div>
+  </div>
+  
+  <!-- Active Workout Section (hide when searching) -->
+  <div class="section" *ngIf="hasActiveWorkout && (!searchTerm || searchTerm.length <= 1)">
+    <div class="section-header">
+      <h2>Treino em Andamento</h2>
+    </div>
+    <div *ngIf="activeWorkout">
+      <app-active-workout-card
+        [workout]="activeWorkout"
+        (continueWorkout)="continueActiveWorkout($event)"
+        (cancelWorkout)="confirmCancelActiveWorkout($event)"
+      ></app-active-workout-card>
+    </div>
+  </div>
+
+  <!-- Pending Workout Section (hide when searching) -->
+  <div class="section" *ngIf="hasPendingWorkout && (!searchTerm || searchTerm.length <= 1)">
+    <div class="section-header">
+      <h2>Treino Pendente</h2>
+    </div>
+    <div *ngIf="pendingWorkout">
+      <app-pending-workout-card
+        [workout]="pendingWorkout"
+        (resumeWorkout)="resumePendingWorkout($event)"
+        (deleteWorkout)="confirmDeletePendingWorkout($event)"
+      ></app-pending-workout-card>
     </div>
   </div>
 
@@ -98,9 +126,9 @@
     *ngIf="!searchTerm || searchTerm.length <= 1"
   >
     <div class="section-header">
-      <h2>Daily Program</h2>
+      <h2>Programa Diário</h2>
       <ion-button fill="clear" class="see-all-btn" color="primary"
-        >See All</ion-button
+        >Ver Todos</ion-button
       >
     </div>
 

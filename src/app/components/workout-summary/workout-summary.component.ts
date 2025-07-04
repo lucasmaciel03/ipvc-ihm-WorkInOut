@@ -130,4 +130,42 @@ export class WorkoutSummaryComponent implements OnInit {
     // Implementação futura: partilhar o resumo do treino
     console.log('Partilhar resumo do treino');
   }
+  
+  /**
+   * Fecha o resumo do treino
+   */
+  onDismiss() {
+    this.dismiss.emit();
+  }
+
+  /**
+   * Retorna a imagem do programa ou uma imagem padrão caso não exista
+   * @returns URL da imagem para usar como fundo do resumo
+   */
+  getProgramImage(): string {
+    if (this.currentWorkout?.programImage) {
+      return this.currentWorkout.programImage;
+    }
+    
+    // Imagens padrão baseadas em categorias comuns
+    const defaultImages = {
+      'ficar em forma': '/assets/images/programas/funcional_programa.png',
+      'perder peso': '/assets/images/programas/perder_peso_programa.png',
+      'ganhar massa': '/assets/images/programas/massa_programa.png',
+      'tonificar': '/assets/images/programas/tonificar_programa.png'
+    };
+    
+    // Verificar se o nome do programa contém alguma das categorias conhecidas
+    if (this.currentWorkout?.programName) {
+      const nomeLowerCase = this.currentWorkout.programName.toLowerCase();
+      for (const [categoria, imagem] of Object.entries(defaultImages)) {
+        if (nomeLowerCase.includes(categoria)) {
+          return imagem;
+        }
+      }
+    }
+    
+    // Imagem padrão se não houver outras opções
+    return '/assets/images/workout-complete.jpg';
+  }
 }

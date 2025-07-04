@@ -1,0 +1,102 @@
+.pending-workout-card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #ff6600;
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    
+    h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    
+    .pending-badge {
+      background-color: #ff6600;
+      color: white;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+  }
+  
+  .workout-progress {
+    margin-bottom: 12px;
+    
+    .progress-bar {
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 6px;
+      
+      .progress-fill {
+        height: 100%;
+        background-color: #ff6600;
+        border-radius: 3px;
+        transition: width 0.3s ease;
+      }
+    }
+    
+    .progress-text {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+  
+  .workout-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      
+      ion-icon {
+        color: #ff6600;
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .workout-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .resume-btn {
+      --background: #ff6600;
+      --background-hover: #e65c00;
+      --color: white;
+      --border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      height: 36px;
+    }
+    
+    .delete-btn {
+      --color: rgba(255, 255, 255, 0.6);
+      --color-hover: white;
+      font-size: 18px;
+    }
+  }
+}

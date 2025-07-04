@@ -1,8 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { Component, OnInit, ViewChild, ElementRef, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { ModalController, AlertController, ToastController, IonicModule } from "@ionic/angular";
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { register } from "swiper/element/bundle";
 import { WorkoutService, WorkoutProgram } from "../../services/workout.service";
 import { WorkoutDetailModalComponent } from "../../components/workout-detail-modal/workout-detail-modal.component";
+import { WorkoutProgressService, WorkoutSession } from "../../core/services/workout-progress.service";
+import { PendingWorkoutCardComponent } from "../../components/pending-workout-card/pending-workout-card.component";
+import { ActiveWorkoutCardComponent } from '../../components/active-workout-card/active-workout-card.component';
 
 register();
 
@@ -10,7 +15,9 @@ register();
   selector: "app-home",
   templateUrl: "./home.page.html",
   styleUrls: ["./home.page.scss"],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, IonicModule, FormsModule, PendingWorkoutCardComponent, ActiveWorkoutCardComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePage implements OnInit {
   selectedSegment = "all";
@@ -23,16 +30,27 @@ export class HomePage implements OnInit {
   searchTerm: string = "";
   filteredPrograms: WorkoutProgram[] = [];
   allPrograms: WorkoutProgram[] = []; // Armazenar todos os programas para pesquisa
+  
+  // Propriedades para gerenciar treinos pendentes
+  hasPendingWorkout = false;
+  pendingWorkout: WorkoutSession | null = null;
+  hasActiveWorkout = false;
+  activeWorkout: WorkoutSession | null = null;
 
   constructor(
     private workoutService: WorkoutService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private workoutProgressService: WorkoutProgressService,
+    private alertController: AlertController,
+    private toastCtrl: ToastController
   ) {}
 
   ngOnInit() {
     this.loadMuscleGroups();
     this.loadPrograms("all"); // Começar mostrando todos os programas
     this.loadAllProgramsForSearch();
+    this.checkPendingWorkout();
+    this.checkActiveWorkout();
   }
 
   private loadMuscleGroups() {
@@ -46,7 +64,7 @@ export class HomePage implements OnInit {
     this.loadPrograms(muscleGroup);
   }
 
-  private loadPrograms(muscleGroup: string) {
+  private loadPrograms(muscleGroup: string = "all") {
     this.loading = true;
     this.workoutService
       .getProgramsByMuscleGroup(muscleGroup)
@@ -316,5 +334,185 @@ export class HomePage implements OnInit {
         }
       }
     }, 500); // Pequeno atraso para garantir que a rolagem já começou
+  }
+  
+  /**
+   * Verifica se existe um treino pendente e carrega seus dados
+   */
+  private checkPendingWorkout() {
+    this.hasPendingWorkout = this.workoutProgressService.hasPendingWorkout();
+    if (this.hasPendingWorkout) {
+      this.pendingWorkout = this.workoutProgressService.getCurrentWorkout();
+      console.log('Treino pendente encontrado:', this.pendingWorkout);
+    }
+  }
+  
+  checkActiveWorkout() {
+    // Verificar se há um treino em andamento (não pendente)
+    const currentWorkout = this.workoutProgressService.getCurrentWorkout();
+    this.hasActiveWorkout = !!currentWorkout && !currentWorkout.isPending;
+    if (this.hasActiveWorkout) {
+      this.activeWorkout = currentWorkout;
+      console.log('Treino em andamento encontrado:', this.activeWorkout);
+    }
+  }
+  
+  /**
+   * Retoma um treino pendente
+   * @param workout Treino pendente a ser retomado
+   */
+  async resumePendingWorkout(workout: WorkoutSession) {
+    console.log('Retomando treino pendente:', workout);
+    try {
+      // Buscar o programa completo baseado no nome do programa pendente
+      const program = this.allPrograms.find(p => p.nome_programa === workout.programName);
+      
+      if (!program) {
+        console.error('Programa não encontrado:', workout.programName);
+        await this.showToast('Não foi possível encontrar o programa deste treino.');
+        return;
+      }
+      
+      console.log('Programa encontrado:', program);
+      
+      // Retoma o treino pendente no serviço
+      this.workoutProgressService.resumePendingWorkout();
+      
+      // Abrir o modal com o programa e indicar que estamos retomando um treino
+      const modal = await this.modalCtrl.create({
+        component: WorkoutDetailModalComponent,
+        componentProps: {
+          program: program,
+          resumingWorkout: true
+        },
+        breakpoints: [0, 1],
+        initialBreakpoint: 1,
+        cssClass: "workout-detail-modal",
+      });
+      
+      await modal.present();
+      
+      // Atualizar a lista de treinos pendentes após o fechamento do modal
+      modal.onDidDismiss().then(() => {
+        this.checkPendingWorkout();
+        this.checkActiveWorkout();
+      });
+    } catch (error) {
+      console.error('Erro ao retomar treino:', error);
+      await this.showToast('Ocorreu um erro ao retomar o treino.');
+    }
+  }
+  
+  async continueActiveWorkout(workout: WorkoutSession) {
+    console.log('Continuando treino em andamento:', workout);
+    try {
+      // Buscar o programa completo baseado no nome do programa
+      const program = this.allPrograms.find(p => p.nome_programa === workout.programName);
+      
+      if (!program) {
+        console.error('Programa não encontrado:', workout.programName);
+        await this.showToast('Não foi possível encontrar o programa deste treino.');
+        return;
+      }
+      
+      console.log('Programa encontrado:', program);
+      
+      // Abrir o modal com o programa e indicar que estamos continuando um treino em andamento
+      const modal = await this.modalCtrl.create({
+        component: WorkoutDetailModalComponent,
+        componentProps: {
+          program: program,
+          continuingWorkout: true
+        },
+        breakpoints: [0, 1],
+        initialBreakpoint: 1,
+        cssClass: "workout-detail-modal",
+      });
+      
+      await modal.present();
+      
+      // Atualizar a lista de treinos em andamento após o fechamento do modal
+      modal.onDidDismiss().then(() => {
+        this.checkActiveWorkout();
+        this.checkPendingWorkout();
+      });
+    } catch (error) {
+      console.error('Erro ao continuar treino:', error);
+      await this.showToast('Ocorreu um erro ao continuar o treino.');
+    }
+  }
+  
+  async confirmDeletePendingWorkout(workout: WorkoutSession) {
+    const alert = await this.alertController.create({
+      header: 'Eliminar treino pendente',
+      message: 'Tens a certeza que queres eliminar este treino pendente? Esta ação não pode ser desfeita.',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        },
+        {
+          text: 'Sim, eliminar',
+          role: 'destructive',
+          handler: () => {
+            this.deletePendingWorkout();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
+  async confirmCancelActiveWorkout(workout: WorkoutSession) {
+    const alert = await this.alertController.create({
+      header: 'Cancelar treino em andamento',
+      message: 'Tens a certeza que queres cancelar este treino? O progresso será perdido.',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        },
+        {
+          text: 'Sim, cancelar',
+          role: 'destructive',
+          handler: () => {
+            this.cancelActiveWorkout();
+          }
+        }
+      ]
+    });
+    
+    await alert.present();
+  }
+  
+  /**
+   * Elimina um treino pendente
+   */
+  private async deletePendingWorkout() {
+    // Finaliza o treino atual (o que efetivamente remove o estado pendente)
+    this.workoutProgressService.finishWorkout(true);
+    this.checkPendingWorkout();
+    await this.showToast('Treino pendente eliminado com sucesso.');
+  }
+  
+  async cancelActiveWorkout() {
+    // Finaliza o treino atual
+    this.workoutProgressService.finishWorkout(true);
+    this.checkActiveWorkout();
+    await this.showToast('Treino em andamento cancelado com sucesso.');
+  }
+  
+  /**
+   * Exibe uma mensagem toast para o utilizador
+   */
+  private async showToast(message: string, color: string = 'success', duration: number = 2000): Promise<void> {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration,
+      position: 'bottom',
+      color
+    });
+    await toast.present();
   }
 }

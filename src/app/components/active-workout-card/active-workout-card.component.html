@@ -1,0 +1,41 @@
+<div class="active-workout-card">
+  <div class="card-content">
+    <div class="workout-info">
+      <div class="workout-header">
+        <h3>{{ workout.programName }}</h3>
+        <span class="active-badge">Em Andamento</span>
+      </div>
+      
+      <div class="workout-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width]="(workout.completedExercises / workout.totalExercises * 100) + '%'"></div>
+        </div>
+        <div class="progress-text">
+          {{ workout.completedExercises }}/{{ workout.totalExercises }} exercícios
+        </div>
+      </div>
+      
+      <div class="workout-meta">
+        <div class="meta-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ formatDuration(workout.duration) }}</span>
+        </div>
+        <div class="meta-item">
+          <ion-icon name="play-outline"></ion-icon>
+          <span>Iniciado {{ getStartedTimeText() }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="workout-actions">
+      <ion-button fill="solid" color="warning" (click)="onContinueClick($event)" class="continue-btn">
+        <ion-icon name="play" slot="start"></ion-icon>
+        Continuar
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="onCancelClick($event)" class="cancel-btn">
+        <ion-icon name="close-outline"></ion-icon>
+        Cancelar
+      </ion-button>
+    </div>
+  </div>
+</div>

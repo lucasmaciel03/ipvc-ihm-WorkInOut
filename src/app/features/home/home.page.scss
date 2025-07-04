@@ -123,6 +123,24 @@ ion-content {
 .section {
   margin-bottom: 32px;
 
+  &.pending-workouts-section {
+    background: rgba(26, 26, 26, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 24px;
+    border-left: 3px solid #ff6600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    .pending-badge {
+      background-color: #ff6600;
+      color: white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+  }
+
   .section-header {
     display: flex;
     justify-content: space-between;
@@ -140,6 +158,72 @@ ion-content {
       --color: #ff6600;
       font-weight: 500;
       text-transform: none;
+    }
+  }
+}
+
+.active-workout-section {
+  background: rgba(26, 26, 26, 0.5);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 16px;
+  margin-top: 24px;
+  border-left: 3px solid #ff6600; // Laranja conforme preferência do utilizador
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    h2 {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .active-badge {
+      background-color: #ff6600; // Laranja conforme preferência do utilizador
+      color: white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+.pending-workout-section {
+  background: rgba(26, 26, 26, 0.5);
+  border-radius: 16px;
+  padding: 16px;
+  margin: 16px;
+  margin-top: 16px;
+  border-left: 3px solid #ff6600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    
+    h2 {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .pending-badge {
+      background-color: #ff6600;
+      color: white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
     }
   }
 }

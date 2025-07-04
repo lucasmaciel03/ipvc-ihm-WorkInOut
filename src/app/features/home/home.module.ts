@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
+import { PendingWorkoutCardComponent } from '../../components/pending-workout-card/pending-workout-card.component';
 
 @NgModule({
   imports: [
@@ -13,9 +14,10 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HomePage
   ],
-  declarations: [HomePage],
+  declarations: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}
