@@ -22,8 +22,13 @@
     <div class="video-container">
       <div class="youtube-container">
         <!-- Imagem de fundo que aparece quando o vídeo não está a ser reproduzido -->
-        <div class="video-poster" *ngIf="!isPlaying">
+        <div class="video-poster" *ngIf="!isPlaying && !isLoading" [class.hidden]="isPlaying">
           <img [src]="getVideoPoster()" alt="Imagem do programa" />
+        </div>
+        
+        <!-- Botão de play central -->
+        <div class="play-button" *ngIf="!isPlaying && !isLoading" (click)="toggleVideo(videoPlayer)">
+          <ion-icon name="play" class="play-icon"></ion-icon>
         </div>
         
         <div class="video-loading" *ngIf="isLoading">
@@ -31,14 +36,17 @@
           <span>A carregar vídeo...</span>
         </div>
         
-        <video #videoPlayer [src]="sanitizeVideoUrl(currentExercise?.video)" 
+        <video #videoPlayer [src]="getVideoUrl(currentExercise?.video)" 
                preload="metadata"
                playsinline
+               [poster]="getVideoPoster()"
                (timeupdate)="updateProgress($event)" 
                (ended)="onVideoEnded()" 
-               (loadstart)="isLoading = true" 
+               (loadstart)="onVideoLoadStart()" 
                (loadedmetadata)="handleMetadataLoaded($event)"
-               (canplay)="isLoading = false"
+               (canplay)="onVideoCanPlay()"
+               (play)="onVideoPlay()"
+               (pause)="onVideoPause()"
                (error)="handleVideoError($event)">
           O teu navegador não suporta a reprodução de vídeos.
         </video>

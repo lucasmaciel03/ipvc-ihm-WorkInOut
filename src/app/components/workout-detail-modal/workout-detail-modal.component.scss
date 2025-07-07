@@ -37,6 +37,13 @@ ion-header {
       align-items: center;
       overflow: hidden;
       border-radius: 12px;
+      transition: opacity 0.3s ease;
+      
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
       
       img {
         width: 100%;
@@ -128,6 +135,7 @@ ion-header {
       height: 100%;
       border-radius: 12px;
       object-fit: cover;
+      z-index: 2;
     }
     
     .video-controls {
@@ -226,6 +234,8 @@ ion-header {
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s ease;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(255, 102, 0, 0.4);
 
     &:hover {
       transform: translate(-50%, -50%) scale(1.1);

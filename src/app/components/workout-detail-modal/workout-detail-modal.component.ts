@@ -111,6 +111,9 @@ export class WorkoutDetailModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Inicializar o estado do componente
+    this.resetState();
+    
     if (this.program?.exercicios?.length > 0) {
       this.currentExercise = this.program.exercicios[0];
       this.validateProgramData();
@@ -147,19 +150,24 @@ export class WorkoutDetailModalComponent implements OnInit {
    * @param videoElement Elemento de vídeo HTML
    */
   toggleVideo(videoElement: HTMLVideoElement) {
+    if (!videoElement) return;
+    
     if (videoElement.paused) {
       videoElement.play()
         .then(() => {
           this.isPlaying = true;
           this.duration = videoElement.duration;
+          console.log('Vídeo iniciado com sucesso');
         })
         .catch(err => {
           console.error('Erro ao reproduzir vídeo:', err);
           this.showToast('Não foi possível reproduzir o vídeo', 'danger');
+          this.isPlaying = false;
         });
     } else {
       videoElement.pause();
       this.isPlaying = false;
+      console.log('Vídeo pausado');
     }
   }
   
@@ -228,13 +236,23 @@ export class WorkoutDetailModalComponent implements OnInit {
    */
   handleVideoError(event: Event) {
     this.isLoading = false;
-    console.error('Erro ao carregar vídeo:', event);
+    this.isPlaying = false;
+    
+    const video = event.target as HTMLVideoElement;
+    const error = video?.error;
+    
+    console.error('Erro ao carregar vídeo:', {
+      event,
+      error,
+      src: video?.src,
+      currentExercise: this.currentExercise
+    });
     
     // Verificar se o vídeo é do YouTube e tentar carregar como fallback
     if (this.currentExercise?.video?.includes('youtube')) {
-      this.showToast('A tentar carregar o vídeo...', 'warning');
+      this.showToast('Vídeos do YouTube não são suportados diretamente. A usar imagem de apoio.', 'warning');
     } else {
-      this.showToast('Não foi possível carregar o vídeo. Tenta novamente mais tarde.', 'danger');
+      this.showToast('Não foi possível carregar o vídeo. A usar imagem de apoio.', 'warning');
     }
   }
   
@@ -247,6 +265,12 @@ export class WorkoutDetailModalComponent implements OnInit {
     if (video) {
       this.duration = video.duration || 0;
       this.isLoading = false;
+      
+      console.log('Metadados do vídeo carregados:', {
+        duration: this.duration,
+        src: video.src,
+        readyState: video.readyState
+      });
       
       // Reduzir o tempo de carregamento definindo a qualidade inicial mais baixa
       if (video.readyState >= 1) {
@@ -714,6 +738,7 @@ export class WorkoutDetailModalComponent implements OnInit {
     this.currentTime = 0;
     this.duration = 0;
     this.isLoading = true;
+    this.isPlaying = false; // Garantir que o vídeo não está marcado como reproduzindo
     
     // Otimizar o carregamento do vídeo atual
     setTimeout(() => {
@@ -985,9 +1010,54 @@ export class WorkoutDetailModalComponent implements OnInit {
       this.currentExercise = this.program.exercicios[this.currentExerciseIndex];
     }
   }
+
+  /**
+   * Retorna o URL do vídeo atual para o elemento de vídeo
+   * @param url URL do vídeo
+   * @returns String URL para o elemento video
+   */
+  getVideoUrl(url: string | undefined): string {
+    if (!url) return '';
+    
+    // Para vídeos locais, retornar o URL diretamente
+    if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
+      return url;
+    }
+    
+    // Para vídeos do YouTube, usar um método diferente ou retornar vazio
+    // já que o elemento <video> não suporta URLs do YouTube diretamente
+    console.warn('URLs do YouTube não são suportados pelo elemento <video>');
+    return '';
+  }
   
-
+  /**
+   * Manipula o evento de início de carregamento do vídeo
+   */
+  onVideoLoadStart() {
+    this.isLoading = true;
+    this.isPlaying = false;
+  }
   
+  /**
+   * Manipula o evento quando o vídeo pode começar a ser reproduzido
+   */
+  onVideoCanPlay() {
+    this.isLoading = false;
+  }
+  
+  /**
+   * Manipula o evento quando o vídeo começa a ser reproduzido
+   */
+  onVideoPlay() {
+    this.isPlaying = true;
+  }
+  
+  /**
+   * Manipula o evento quando o vídeo é pausado
+   */
+  onVideoPause() {
+    this.isPlaying = false;
+  }
 
-
+  // ...existing code...
 }
