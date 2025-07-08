@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Escolhe o teu objetivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="goal-selection-container">
+    <div class="register-header">
+      <h1>OBJETIVO <span class="emoji">🎯</span></h1>
+      <p>O que queres alcançar? <span class="emoji">💪</span></p>
+    </div>
+    
+    <div class="goals-container">
+      <div
+        class="goal-card"
+        [class.selected]="selectedGoalId === 'lose_weight'"
+        (click)="selectGoal('lose_weight')"
+      >
+        <div class="goal-content">
+          <h3>Perder Peso</h3>
+          <p>Queimar Calorias e Tonificar o Corpo</p>
+        </div>
+        <div class="goal-icon">
+          <span class="emoji">🔥</span>
+        </div>
+      </div>
+
+      <div
+        class="goal-card"
+        [class.selected]="selectedGoalId === 'gain_muscle'"
+        (click)="selectGoal('gain_muscle')"
+      >
+        <div class="goal-content">
+          <h3>Ganhar Músculo</h3>
+          <p>Aumentar massa e força</p>
+        </div>
+        <div class="goal-icon">
+          <span class="emoji">🏋️</span>
+        </div>
+      </div>
+
+      <div
+        class="goal-card"
+        [class.selected]="selectedGoalId === 'improve_fitness'"
+        (click)="selectGoal('improve_fitness')"
+      >
+        <div class="goal-content">
+          <h3>Ficar em Forma</h3>
+          <p>Sentir-te mais saudável</p>
+        </div>
+        <div class="goal-icon">
+          <span class="emoji">🧘</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <ion-button expand="block" (click)="confirmSelection()" [disabled]="!selectedGoalId">
+        Confirmar
+      </ion-button>
+      <ion-button expand="block" fill="outline" (click)="cancel()">
+        Cancelar
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

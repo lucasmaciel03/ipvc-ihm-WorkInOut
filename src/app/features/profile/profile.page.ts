@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AlertController, ModalController, ToastController } from "@ionic/angular";
 import { AuthService, User } from "../../core/services/auth.service";
 import { WorkoutProgressService, WorkoutSession } from "../../core/services/workout-progress.service";
+import { GoalSelectionModalComponent } from '../../components/goal-selection-modal/goal-selection-modal.component';
 
 @Component({
   selector: "app-profile",
@@ -262,57 +263,66 @@ export class ProfilePage implements OnInit {
   }
   
   /**
-   * Abre o modal para alterar o objetivo principal
+   * Abre o alerta para alterar o objetivo principal
    */
   async changeGoal() {
-    const alert = await this.alertController.create({
-      header: 'Escolhe o teu objetivo',
-      inputs: [
-        {
-          name: 'goal',
-          type: 'radio',
-          label: 'Ganhar Músculo',
-          value: 'gain_muscle',
-          checked: this.user?.primaryGoal === 'gain_muscle'
-        },
-        {
-          name: 'goal',
-          type: 'radio',
-          label: 'Perder Peso',
-          value: 'lose_weight',
-          checked: this.user?.primaryGoal === 'lose_weight'
-        },
-        {
-          name: 'goal',
-          type: 'radio',
-          label: 'Melhorar Condição Física',
-          value: 'improve_fitness',
-          checked: this.user?.primaryGoal === 'improve_fitness'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            if (this.user && data) {
-              const updatedUser = {
-                ...this.user,
-                primaryGoal: data
-              };
-              
-              this.authService.updateUser(updatedUser);
-              this.showToast('Objetivo atualizado com sucesso!');
+    try {
+      console.log('Abrindo alerta de seleção de objetivo');
+      console.log('Objetivo atual:', this.user?.primaryGoal);
+      
+      const alert = await this.alertController.create({
+        header: 'Escolhe o teu objetivo',
+        cssClass: 'custom-alert',
+        inputs: [
+          {
+            name: 'lose_weight',
+            type: 'radio',
+            label: 'Perder Peso',
+            value: 'lose_weight',
+            checked: this.user?.primaryGoal === 'lose_weight'
+          },
+          {
+            name: 'gain_muscle',
+            type: 'radio',
+            label: 'Ganhar Músculo',
+            value: 'gain_muscle',
+            checked: this.user?.primaryGoal === 'gain_muscle'
+          },
+          {
+            name: 'improve_fitness',
+            type: 'radio',
+            label: 'Ficar em Forma',
+            value: 'improve_fitness',
+            checked: this.user?.primaryGoal === 'improve_fitness'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel'
+          },
+          {
+            text: 'Confirmar',
+            handler: (goalId) => {
+              if (goalId && this.user) {
+                const updatedUser = {
+                  ...this.user,
+                  primaryGoal: goalId
+                };
+                
+                this.authService.updateUser(updatedUser);
+                this.showToast('Objetivo atualizado com sucesso!');
+              }
             }
           }
-        }
-      ]
-    });
-    
-    await alert.present();
+        ]
+      });
+
+      await alert.present();
+    } catch (error) {
+      console.error('Erro ao abrir alerta:', error);
+      this.showToast('Ocorreu um erro ao abrir o alerta de seleção de objetivo.');
+    }
   }
   
   /**

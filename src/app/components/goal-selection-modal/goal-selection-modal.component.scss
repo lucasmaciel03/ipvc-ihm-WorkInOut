@@ -1,0 +1,134 @@
+:host {
+  --ion-background-color: #000000;
+  --ion-text-color: #ffffff;
+}
+
+ion-content {
+  --background: #000000;
+  --color: #ffffff;
+}
+
+ion-header {
+  ion-toolbar {
+    --background: #000000;
+    --color: #ffffff;
+    
+    ion-title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    
+    ion-button {
+      --color: #ffffff;
+    }
+  }
+}
+
+.goal-selection-container {
+  padding: 16px 0;
+}
+
+.register-header {
+  margin-bottom: 32px;
+  text-align: center;
+  
+  h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+    font-family: var(--font-title);
+  }
+  
+  p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    margin: 8px 0 0;
+  }
+  
+  .emoji {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+}
+
+.goals-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.goal-card {
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &.selected {
+    border-color: #ff6600;
+    background-color: rgba(255, 102, 0, 0.1);
+    box-shadow: 0 0 0 1px rgba(255, 102, 0, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .goal-content {
+    flex: 1;
+
+    h3 {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  .goal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .emoji {
+      font-size: 30px;
+    }
+  }
+}
+
+.action-buttons {
+  margin-top: 32px;
+  
+  ion-button {
+    margin-bottom: 12px;
+    height: 48px;
+    font-weight: 600;
+    font-size: 16px;
+    --border-radius: 12px;
+    
+    &:first-child {
+      --background: #ff6600;
+      --background-activated: #e65c00;
+      --background-focused: #e65c00;
+      --background-hover: #ff7733;
+    }
+    
+    &[fill="outline"] {
+      --border-color: rgba(255, 255, 255, 0.3);
+      --color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}

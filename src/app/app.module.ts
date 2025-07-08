@@ -9,6 +9,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { CustomAlertComponent } from "./shared/components/custom-alert/custom-alert.component";
+import { GoalSelectionModalComponent } from "./components/goal-selection-modal/goal-selection-modal.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { CustomAlertComponent } from "./shared/components/custom-alert/custom-al
     FormsModule,
     ReactiveFormsModule,
     CustomAlertComponent,
+    GoalSelectionModalComponent,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
